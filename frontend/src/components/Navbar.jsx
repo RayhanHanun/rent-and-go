@@ -5,7 +5,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
+    <nav className="sticky top-0 z-50 bg-white/70 backdrop-blur-md border-b border-gray-100 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 w-full">
           <div className="flex-shrink-0 flex items-center">
@@ -13,10 +13,22 @@ const Navbar = () => {
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#fleet" className="text-slate-600 hover:text-blue-600 font-medium transition-colors">Fleet</a>
-            <a href="#locations" className="text-slate-600 hover:text-blue-600 font-medium transition-colors">Locations</a>
-            <a href="#how-it-works" className="text-slate-600 hover:text-blue-600 font-medium transition-colors">How It Works</a>
-            <a href="#offers" className="text-slate-600 hover:text-blue-600 font-medium transition-colors">Offers</a>
+            <a href="#fleet" className="relative group text-slate-600 hover:text-blue-600 font-medium transition-colors">
+              Fleet
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#locations" className="relative group text-slate-600 hover:text-blue-600 font-medium transition-colors">
+              Locations
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#how-it-works" className="relative group text-slate-600 hover:text-blue-600 font-medium transition-colors">
+              How It Works
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#offers" className="relative group text-slate-600 hover:text-blue-600 font-medium transition-colors">
+              Offers
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+            </a>
           </div>
 
           <div className="hidden md:flex items-center space-x-4">

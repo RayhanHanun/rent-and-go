@@ -38,11 +38,11 @@ const Testimonials = () => {
           {testimonials.map((testimonial, idx) => (
             <motion.div 
               key={idx}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1, duration: 0.5 }}
-              className="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-lg transition-all hover:-translate-y-1"
+              className="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-900/5 transition-all duration-300 ease-in-out"
             >
               <div className="flex gap-1 mb-6">
                 {[1, 2, 3, 4, 5].map(star => (

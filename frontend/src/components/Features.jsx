@@ -60,7 +60,7 @@ const Features = () => {
             <motion.div 
               key={index} 
               variants={itemVariants}
-              className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow"
+              className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-900/5 transition-all duration-300 ease-in-out"
             >
               <div className="w-16 h-16 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
                 {feature.icon}

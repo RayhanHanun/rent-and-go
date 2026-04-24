@@ -77,10 +77,10 @@ const CarList = () => {
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-colors ${
+              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                 activeCategory === category 
                   ? "bg-blue-600 text-white shadow-md shadow-blue-600/20" 
-                  : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                  : "bg-slate-100 text-slate-600 hover:bg-blue-50 hover:text-blue-600"
               }`}
             >
               {category}
@@ -89,7 +89,16 @@ const CarList = () => {
         </div>
 
         {/* Grid Container */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+          }}
+        >
           <AnimatePresence mode="popLayout">
             {loading ? (
                // Skeletons
@@ -110,12 +119,13 @@ const CarList = () => {
               Array.isArray(filteredCars) ? filteredCars.map((car) => (
                 <motion.div
                   layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
+                  variants={{ hidden: { y: 20, opacity: 0 }, visible: { y: 0, opacity: 1 } }}
+                  initial="hidden"
+                  animate="visible"
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.3 }}
                   key={car.id}
-                  className="rounded-2xl border border-slate-100 overflow-hidden bg-white hover:shadow-xl transition-shadow group relative"
+                  className="rounded-2xl border border-slate-100 overflow-hidden bg-white hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-900/5 transition-all duration-300 ease-in-out group relative"
                 >
                   <button className="absolute top-4 right-4 z-10 p-2 bg-white/70 backdrop-blur-md rounded-full text-slate-400 hover:text-red-500 hover:bg-white transition-colors">
                     <Heart size={20} />
@@ -160,7 +170,7 @@ const CarList = () => {
               )) : null
             )}
           </AnimatePresence>
-        </div>
+        </motion.div>
 
       </div>
     </section>

@@ -45,7 +45,7 @@ const HowItWorks = () => {
               viewport={{ once: true }}
               className="relative z-10 flex flex-col items-center"
             >
-              <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-600/30 mb-6 rotate-3 hover:rotate-0 transition-transform">
+              <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-600/30 mb-6 transition-transform">
                 {step.icon}
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">{step.title}</h3>
