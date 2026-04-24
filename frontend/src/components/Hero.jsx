@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="bg-white overflow-hidden py-16 lg:py-24 relative">
       <div className="absolute top-10 left-10 w-96 h-96 filter blur-3xl bg-blue-100 rounded-full opacity-50 z-0"></div>
@@ -30,10 +33,10 @@ const Hero = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-blue-600 text-white px-8 py-3.5 rounded-md font-semibold text-lg hover:scale-105 active:scale-95 transition-all duration-300 hover:shadow-blue-500/30 flex items-center justify-center gap-2">
+              <button onClick={() => navigate('/fleet')} className="bg-blue-600 text-white px-8 py-3.5 rounded-md font-semibold text-lg hover:scale-105 active:scale-95 transition-all duration-300 hover:shadow-blue-500/30 flex items-center justify-center gap-2">
                 Sewa Sekarang <ArrowRight size={20} />
               </button>
-              <button className="bg-white text-slate-700 border-2 border-slate-200 px-8 py-3.5 rounded-md font-semibold text-lg hover:border-slate-300 hover:bg-slate-50 transition-all flex items-center justify-center">
+              <button onClick={() => navigate('/fleet')} className="bg-white text-slate-700 border-2 border-slate-200 px-8 py-3.5 rounded-md font-semibold text-lg hover:border-slate-300 hover:bg-slate-50 transition-all flex items-center justify-center">
                 Lihat Armada
               </button>
             </div>

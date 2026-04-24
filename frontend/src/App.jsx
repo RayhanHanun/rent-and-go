@@ -1,23 +1,24 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Features from './components/Features';
-import CarList from './components/CarList';
-import HowItWorks from './components/HowItWorks';
-import Testimonials from './components/Testimonials';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
+import Home from './pages/Home';
+import Fleet from './pages/Fleet';
+import SignIn from './pages/SignIn';
 import './index.css';
 
 function App() {
   return (
     <div className="min-h-screen font-sans bg-white flex flex-col selection:bg-blue-200 selection:text-blue-900">
+      <ScrollToTop />
       <Navbar />
       <main className="flex-grow">
-        <Hero />
-        <Features />
-        <CarList />
-        <HowItWorks />
-        <Testimonials />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/fleet" element={<Fleet />} />
+          <Route path="/signin" element={<SignIn />} />
+        </Routes>
       </main>
       <Footer />
     </div>
