@@ -5,7 +5,7 @@ import CarList from '../components/CarList';
 import HowItWorks from '../components/HowItWorks';
 import Testimonials from '../components/Testimonials';
 
-const Home = () => {
+const Beranda = () => {
   return (
     <div className="flex flex-col min-h-screen font-sans bg-white selection:bg-blue-200 selection:text-blue-900">
       <main className="flex-grow">
@@ -19,4 +19,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Beranda;
