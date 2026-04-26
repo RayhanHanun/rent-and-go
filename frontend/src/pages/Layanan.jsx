@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { ChevronRight, Key, UserCheck, Briefcase, Plane } from 'lucide-react';
+import { ChevronRight, Key, UserCheck, Map, Plane } from 'lucide-react';
 
 const CAROUSEL_SLIDES = [
   {
@@ -18,9 +18,9 @@ const CAROUSEL_SLIDES = [
   },
   {
     id: 3,
-    image: 'https://images.unsplash.com/photo-1563720360172-67b8f3dce741?q=80&w=2670&auto=format&fit=crop',
-    title: 'Sewa Jangka Panjang Korporat',
-    subtitle: 'Solusi mobilitas elegan untuk operasional bisnis, dirancang fleksibel hingga bulanan dan tahunan.'
+    image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2621&auto=format&fit=crop',
+    title: 'Layanan Paket Tour Eksklusif',
+    subtitle: 'Jelajahi berbagai destinasi wisata menarik dengan armada premium dan itinerary khusus yang disesuaikan untuk kenyamanan Anda.'
   },
   {
     id: 4,
@@ -48,12 +48,12 @@ const SERVICES_DATA = [
     link: "/layanan/dengan-pengemudi"
   },
   {
-    id: 'jangka-panjang',
-    title: "Sewa Jangka Panjang (Korporat)",
-    description: "Solusi hemat dan elegan untuk kebutuhan kantor Anda tanpa repot memikirkan depresiasi aset, pajak, atau perawatan rutin kendaraan. Tersedia opsi harian, mingguan, dan bulanan yang bisa dipersonalisasi penuh untuk menjamin operasional bisnis Anda tak pernah berhenti.",
-    icon: Briefcase,
-    image: "https://images.unsplash.com/photo-1550355291-bbee04a92027?q=80&w=1500&auto=format&fit=crop",
-    link: "/layanan/jangka-panjang"
+    id: 'paket-tour',
+    title: "Layanan Paket Tour Wisata",
+    description: "Liburan bebas repot dengan paket komplit kami! Harga sudah mencakup sewa armada premium, layanan pengemudi profesional sekaligus pemandu, serta BBM dan biaya parkir. Jelajahi destinasi wisata terbaik kota dengan nyaman tanpa perlu merencanakan rute sendiri.",
+    icon: Map,
+    image: "https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?q=80&w=1500&auto=format&fit=crop",
+    link: "/layanan/paket-tour"
   },
   {
     id: 'bandara',
