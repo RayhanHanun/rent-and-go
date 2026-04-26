@@ -104,7 +104,7 @@ const Armada = () => {
         {/* Header Section */}
         <div className="text-center max-w-2xl mx-auto mb-12">
           <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight">
-            Our Premium <span className="text-blue-600">Fleet</span>
+            Our Premium <span className="text-slate-900">Fleet</span>
           </h1>
           <p className="text-lg text-slate-500">
             Tentukan pilihan kendaraan premium yang menyempurnakan gaya dan kenyamanan perjalanan Anda berikutnya.
@@ -124,7 +124,7 @@ const Armada = () => {
               placeholder="Search cars by name..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl leading-5 bg-slate-50 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors sm:text-sm"
+              className="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl leading-5 bg-slate-50 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-slate-800 focus:border-slate-800 transition-colors sm:text-sm"
             />
           </div>
 
@@ -137,7 +137,7 @@ const Armada = () => {
                 /* Aku pindahkan 'border' ke class utama agar dimensinya selalu stabil di semua kondisi */
                 className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 whitespace-nowrap border ${
                   activeCategory === category
-                    ? "bg-blue-600 border-blue-600 text-white shadow-md shadow-blue-500/30" // Border ikut warna biru
+                    ? "bg-slate-900 border-slate-900 text-white shadow-md shadow-slate-800/30" // Border ikut warna biru
                     : "bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100 hover:border-slate-300" // Border abu-abu
                 }`}
               >
@@ -163,7 +163,7 @@ const Armada = () => {
                   delay: index * 0.1 /* Efek beruntun */
                 }}
                 /* Efek Hover Premium Tailwind */
-                className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-blue-900/10 hover:-translate-y-2 transition-all duration-300 ease-out group flex flex-col"
+                className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-slate-950/10 hover:-translate-y-2 transition-all duration-300 ease-out group flex flex-col"
               >
                 {/* Image */}
                 <div className="relative h-56 overflow-hidden bg-slate-100">
@@ -184,15 +184,15 @@ const Armada = () => {
                   {/* Specs */}
                   <div className="grid grid-cols-3 gap-4 mb-6 pb-6 border-b border-slate-100">
                     <div className="flex flex-col items-center justify-center gap-1.5 p-2 rounded-xl bg-slate-50 text-slate-600">
-                      <Users className="w-5 h-5 text-blue-600" />
+                      <Users className="w-5 h-5 text-slate-900" />
                       <span className="text-xs font-medium">{car.seats} Seats</span>
                     </div>
                     <div className="flex flex-col items-center justify-center gap-1.5 p-2 rounded-xl bg-slate-50 text-slate-600">
-                      <Briefcase className="w-5 h-5 text-blue-600" />
+                      <Briefcase className="w-5 h-5 text-slate-900" />
                       <span className="text-xs font-medium">{car.luggage} Bags</span>
                     </div>
                     <div className="flex flex-col items-center justify-center gap-1.5 p-2 rounded-xl bg-slate-50 text-slate-600">
-                      <Settings className="w-5 h-5 text-blue-600" />
+                      <Settings className="w-5 h-5 text-slate-900" />
                       <span className="text-xs font-medium truncate w-full text-center">{car.transmission}</span>
                     </div>
                   </div>
@@ -205,7 +205,7 @@ const Armada = () => {
                         {car.price} <span className="text-sm font-normal text-slate-500">/ hari</span>
                       </p>
                     </div>
-                    <button className="bg-slate-900 text-white px-5 py-2.5 rounded-xl font-medium hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-300 flex items-center gap-1">
+                    <button className="bg-slate-900 text-white px-5 py-2.5 rounded-xl font-medium hover:bg-slate-900 hover:shadow-lg hover:shadow-slate-800/30 transition-all duration-300 flex items-center gap-1">
                       Book Now
                       <ChevronRight className="w-4 h-4" />
                     </button>
@@ -223,7 +223,7 @@ const Armada = () => {
             <p className="text-slate-500">We couldn't find any cars matching your search or category.</p>
             <button 
               onClick={() => { setSearchTerm(""); setActiveCategory("ALL"); }}
-              className="mt-6 text-blue-600 font-medium hover:text-blue-700 underline underline-offset-4"
+              className="mt-6 text-slate-900 font-medium hover:text-slate-950 underline underline-offset-4"
             >
               Clear filters
             </button>

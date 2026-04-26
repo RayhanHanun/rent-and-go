@@ -7,7 +7,7 @@ import Testimonials from '../components/Testimonials';
 
 const Beranda = () => {
   return (
-    <div className="flex flex-col min-h-screen font-sans bg-white selection:bg-blue-200 selection:text-blue-900">
+    <div className="flex flex-col min-h-screen font-sans bg-white selection:bg-slate-300 selection:text-slate-950">
       <main className="flex-grow">
         <Hero />
         <Features />

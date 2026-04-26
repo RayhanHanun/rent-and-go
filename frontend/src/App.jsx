@@ -11,7 +11,7 @@ import './index.css';
 
 function App() {
   return (
-    <div className="min-h-screen font-sans bg-white flex flex-col selection:bg-blue-200 selection:text-blue-900">
+    <div className="min-h-screen font-sans bg-white flex flex-col selection:bg-slate-300 selection:text-slate-950">
       <ScrollToTop />
       <Navbar />
       <main className="grow">

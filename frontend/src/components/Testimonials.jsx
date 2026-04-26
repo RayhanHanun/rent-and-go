@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Star } from 'lucide-react';
 
 const testimonials = [
   {
@@ -19,12 +20,26 @@ const testimonials = [
     role: "Family Traveler",
     initials: "AP",
     text: "Sewa SUV untuk liburan keluarga, prosesnya cepat tanpa ribet dan harga sangat transparan. Pasti akan sewa di sini lagi."
+  },
+  {
+    name: "Maya Indah",
+    role: "Travel Blogger",
+    initials: "MI",
+    text: "Pengalaman road trip terbaik! Mobil nyaman, wangi, dan pelayanannya sangat profesional. Urusan booking juga sangat gampang."
+  },
+  {
+    name: "Rizky Darmawan",
+    role: "Corporate Executive",
+    initials: "RD",
+    text: "Solusi mobilitas premium yang nyata. Dari reservasi hingga pengembalian, semuanya berjalan mulus dan sangat efisien."
   }
 ];
 
+const duplicatedTestimonials = [...testimonials, ...testimonials];
+
 const Testimonials = () => {
   return (
-    <section className="bg-white py-24">
+    <section className="bg-white py-24 overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center mb-16">
@@ -33,39 +48,50 @@ const Testimonials = () => {
             Kepercayaan pelanggan adalah prioritas kami. Simak pengalaman mereka bersama Rent & Go.
           </p>
         </div>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, idx) => (
-            <motion.div 
+      <div className="relative flex overflow-hidden group">
+        {/* Left Fade Overlay */}
+        <div className="absolute top-0 bottom-0 left-0 w-16 sm:w-32 bg-linear-to-r from-white to-transparent z-10 pointer-events-none" />
+
+        {/* Marquee Track */}
+        <motion.div 
+          className="flex gap-6 w-max items-center pr-6 py-16"
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ repeat: Infinity, ease: "linear", duration: 25 }}
+        >
+          {duplicatedTestimonials.map((testimonial, idx) => (
+            <div 
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1, duration: 0.5 }}
-              className="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-900/5 transition-all duration-300 ease-in-out"
+              className="bg-slate-50 border border-slate-100 shadow-lg shadow-slate-200/50 rounded-2xl p-8 w-87.5 shrink-0 transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-2xl hover:shadow-slate-300/60"
             >
               <div className="flex gap-1 mb-6">
-                {[1, 2, 3, 4, 5].map(star => (
-                   <span key={star} className="text-yellow-400 text-2xl drop-shadow-sm">★</span>
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} size={18} className="fill-yellow-400 text-yellow-400" />
                 ))}
               </div>
               
-              <p className="text-slate-600 mb-8 italic leading-relaxed">"{testimonial.text}"</p>
+              <p className="text-slate-600 mb-8 italic leading-relaxed min-h-20">
+                "{testimonial.text}"
+              </p>
               
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold text-lg border border-blue-200">
+                <div className="w-12 h-12 bg-white text-slate-900 font-bold rounded-full flex items-center justify-center text-lg shadow-sm border border-slate-200">
                   {testimonial.initials}
                 </div>
                 <div>
-                  <h4 className="font-semibold text-slate-900">{testimonial.name}</h4>
+                  <h4 className="font-bold text-slate-900">{testimonial.name}</h4>
                   <p className="text-sm text-slate-500">{testimonial.role}</p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </div>
+        </motion.div>
 
+        {/* Right Fade Overlay */}
+        <div className="absolute top-0 bottom-0 right-0 w-16 sm:w-32 bg-linear-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
       </div>
+
     </section>
   );
 };

@@ -5,22 +5,22 @@ import { Car, Clock, ShieldCheck, Tag } from 'lucide-react';
 const Features = () => {
   const features = [
     {
-      icon: <Car className="w-8 h-8 text-blue-600" />,
+      icon: <Car className="w-8 h-8 text-slate-900" />,
       title: "Banyak pilihan mobil",
       description: "Mulai dari City Car yang lincah hingga Luxury SUV untuk kenyamanan keluarga Anda."
     },
     {
-      icon: <Clock className="w-8 h-8 text-blue-600" />,
+      icon: <Clock className="w-8 h-8 text-slate-900" />,
       title: "Proses booking cepat",
       description: "Hanya butuh 5 menit untuk memesan kendaraan impian Anda lewat platform digital kami."
     },
     {
-      icon: <Tag className="w-8 h-8 text-blue-600" />,
+      icon: <Tag className="w-8 h-8 text-slate-900" />,
       title: "Harga transparan",
       description: "Tidak ada biaya tersembunyi. Harga yang Anda lihat adalah harga yang Anda bayar."
     },
     {
-      icon: <ShieldCheck className="w-8 h-8 text-blue-600" />,
+      icon: <ShieldCheck className="w-8 h-8 text-slate-900" />,
       title: "Aman & terpercaya",
       description: "Seluruh unit kami telah melewati pengecekan rutin dan dilindungi asuransi komprehensif."
     }
@@ -60,9 +60,9 @@ const Features = () => {
             <motion.div 
               key={index} 
               variants={itemVariants}
-              className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-900/5 transition-all duration-300 ease-in-out"
+              className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:-translate-y-2 hover:shadow-xl hover:shadow-slate-950/5 transition-all duration-300 ease-in-out"
             >
-              <div className="w-16 h-16 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
+              <div className="w-16 h-16 bg-slate-50 rounded-xl flex items-center justify-center mb-6">
                 {feature.icon}
               </div>
               <h3 className="text-xl font-semibold text-slate-900 mb-3">{feature.title}</h3>

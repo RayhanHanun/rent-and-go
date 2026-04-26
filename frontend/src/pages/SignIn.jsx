@@ -10,7 +10,7 @@ const SignIn = () => {
             <label className="block text-sm font-medium text-slate-700">Email</label>
             <input 
               type="email" 
-              className="mt-1 block w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/20 px-4 py-2 border" 
+              className="mt-1 block w-full rounded-lg border-slate-300 shadow-sm focus:border-slate-800 focus:ring focus:ring-slate-800/20 px-4 py-2 border" 
               placeholder="Enter your email"
             />
           </div>
@@ -18,13 +18,13 @@ const SignIn = () => {
             <label className="block text-sm font-medium text-slate-700">Password</label>
             <input 
               type="password" 
-              className="mt-1 block w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/20 px-4 py-2 border" 
+              className="mt-1 block w-full rounded-lg border-slate-300 shadow-sm focus:border-slate-800 focus:ring focus:ring-slate-800/20 px-4 py-2 border" 
               placeholder="••••••••"
             />
           </div>
           <button 
             type="button" 
-            className="w-full bg-blue-600 text-white rounded-lg px-4 py-2.5 font-medium hover:bg-blue-700 transition-colors"
+            className="w-full bg-slate-900 text-white rounded-lg px-4 py-2.5 font-medium hover:bg-slate-950 transition-colors"
           >
             Log In
           </button>

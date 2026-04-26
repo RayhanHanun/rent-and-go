@@ -37,7 +37,7 @@ const Layanan = () => {
   return (
     <section className="pt-24 pb-20 min-h-screen bg-slate-50 relative overflow-hidden">
       {/* Background Soft Gradients */}
-      <div className="absolute top-0 right-0 w-96 h-96 filter blur-3xl bg-blue-100 rounded-full opacity-50 z-0 translate-x-1/3 -translate-y-1/4"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 filter blur-3xl bg-slate-100 rounded-full opacity-50 z-0 translate-x-1/3 -translate-y-1/4"></div>
       <div className="absolute bottom-0 left-0 w-125 h-125 filter blur-3xl bg-slate-200 rounded-full opacity-40 z-0 -translate-x-1/4 translate-y-1/3"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -50,7 +50,7 @@ const Layanan = () => {
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight">
-              Layanan <span className="text-blue-600">Unggulan</span> Kami
+              Layanan <span className="text-slate-900">Unggulan</span> Kami
             </h1>
             <p className="text-lg text-slate-500 leading-relaxed">
               Sebagai mitra mobilitas Anda, Rent & Go menghadirkan solusi transportasi total yang dirancang untuk memberikan kenyamanan ekstra pada setiap kebutuhan pribadi maupun bisnis Anda.
@@ -67,10 +67,10 @@ const Layanan = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: service.delay, ease: "easeOut" }}
-              className="bg-white rounded-2xl p-10 lg:p-12 border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-blue-900/10 hover:-translate-y-2 transition-all duration-300 group flex flex-col"
+              className="bg-white rounded-2xl p-10 lg:p-12 border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-slate-950/10 hover:-translate-y-2 transition-all duration-300 group flex flex-col"
             >
               {/* Icon Container */}
-              <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+              <div className="w-16 h-16 bg-slate-50 text-slate-900 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-slate-900 group-hover:text-white transition-colors duration-300">
                 <service.icon className="w-8 h-8" />
               </div>
               
@@ -84,7 +84,7 @@ const Layanan = () => {
               
               {/* CTA Button */}
               <div className="mt-auto border-t border-slate-50 pt-6">
-                <button className="flex items-center text-blue-600 font-semibold group/btn hover:text-blue-700 transition-colors">
+                <button className="flex items-center text-slate-900 font-semibold group/btn hover:text-slate-950 transition-colors">
                   Konsultasi Sekarang
                   <ChevronRight className="w-5 h-5 ml-1 inline-block group-hover/btn:translate-x-1.5 transition-transform duration-300" />
                 </button>
