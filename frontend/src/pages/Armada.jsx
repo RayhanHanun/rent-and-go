@@ -1,236 +1,211 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Search, Users, Briefcase, Settings, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Users, Settings, Briefcase, Fuel, ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-const DUMMY_CARS = [
+const CATEGORIES = ['Semua', 'City Car', 'SUV', 'Premium', 'Microbus'];
+
+const CARS = [
   {
     id: 1,
-    name: "Tesla Model 3",
-    category: "LUXURY",
-    price: "Rp 1.500.000",
-    image: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    seats: 5,
-    luggage: 2,
-    transmission: "Automatic"
+    name: 'Toyota Agya',
+    category: 'City Car',
+    price: 'Rp 250.000',
+    image: 'https://images.unsplash.com/photo-1590362891991-f776e747a588?q=80&w=1500&auto=format&fit=crop',
+    specs: { seats: '4', trans: 'Automatic', luggage: '1', fuel: 'Bensin' }
   },
   {
     id: 2,
-    name: "Range Rover Vogue",
-    category: "SUV",
-    price: "Rp 3.500.000",
-    image: "https://images.unsplash.com/photo-1606016159991-dfe4f2746ad5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    seats: 5,
-    luggage: 4,
-    transmission: "Automatic"
+    name: 'Toyota Avanza',
+    category: 'SUV',
+    price: 'Rp 300.000',
+    image: 'https://plus.unsplash.com/premium_photo-1661338573175-10acb650fbdf?q=80&w=1500&auto=format&fit=crop',
+    specs: { seats: '7', trans: 'AT / MT', luggage: '2', fuel: 'Bensin' }
   },
   {
     id: 3,
-    name: "Mercedes-Benz G-Class",
-    category: "SUV",
-    price: "Rp 5.000.000",
-    image: "https://images.unsplash.com/photo-1520031441872-265e4ff70366?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    seats: 5,
-    luggage: 3,
-    transmission: "Automatic"
+    name: 'Honda HR-V',
+    category: 'SUV',
+    price: 'Rp 450.000',
+    image: 'https://images.unsplash.com/photo-1550355291-bbee04a92027?q=80&w=1500&auto=format&fit=crop',
+    specs: { seats: '5', trans: 'Automatic', luggage: '3', fuel: 'Bensin' }
   },
   {
     id: 4,
-    name: "BMW M3 Competition",
-    category: "SPORT",
-    price: "Rp 3.000.000",
-    image: "https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    seats: 4,
-    luggage: 2,
-    transmission: "Automatic"
+    name: 'Innova Zenix',
+    category: 'Premium',
+    price: 'Rp 600.000',
+    image: 'https://images.unsplash.com/photo-1549921296-3a6b3923f0d9?q=80&w=1500&auto=format&fit=crop',
+    specs: { seats: '7', trans: 'Automatic', luggage: '3', fuel: 'Hybrid' }
   },
   {
     id: 5,
-    name: "Porsche 911 Carrera",
-    category: "SPORT",
-    price: "Rp 6.000.000",
-    image: "https://images.unsplash.com/photo-1503376713356-20092c422c53?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    seats: 2,
-    luggage: 1,
-    transmission: "Automatic"
+    name: 'Toyota Alphard',
+    category: 'Premium',
+    price: 'Rp 1.500.000',
+    image: 'https://images.unsplash.com/photo-1619767886558-efdc259cde1a?q=80&w=1500&auto=format&fit=crop',
+    specs: { seats: '7', trans: 'Automatic', luggage: '4', fuel: 'Bensin' }
   },
   {
     id: 6,
-    name: "Toyota Alphard",
-    category: "LUXURY",
-    price: "Rp 2.500.000",
-    image: "https://images.unsplash.com/photo-1626081498696-6e2feabcedd8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    seats: 7,
-    luggage: 4,
-    transmission: "Automatic"
-  },
-  {
-    id: 7,
-    name: "Honda Civic Type R",
-    category: "SPORT",
-    price: "Rp 2.000.000",
-    image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    seats: 4,
-    luggage: 2,
-    transmission: "Manual"
-  },
-  {
-    id: 8,
-    name: "Mercedes-Benz S-Class",
-    category: "SEDAN",
-    price: "Rp 4.500.000",
-    image: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    seats: 5,
-    luggage: 3,
-    transmission: "Automatic"
+    name: 'Toyota Hiace',
+    category: 'Microbus',
+    price: 'Rp 900.000',
+    image: 'https://images.unsplash.com/photo-1551830820-330a71b99659?q=80&w=1500&auto=format&fit=crop',
+    specs: { seats: '14', trans: 'Manual', luggage: '5', fuel: 'Diesel' }
   }
 ];
 
-const CATEGORIES = ["ALL", "SUV", "SEDAN", "LUXURY", "SPORT"];
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } }
+};
 
 const Armada = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [activeCategory, setActiveCategory] = useState("ALL");
+  const navigate = useNavigate();
+  const [activeCategory, setActiveCategory] = useState('Semua');
 
-  const filteredCars = DUMMY_CARS.filter((car) => {
-    const matchesSearch = car.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = activeCategory === "ALL" || car.category === activeCategory;
-    return matchesSearch && matchesCategory;
-  });
+  const filteredCars = activeCategory === 'Semua'
+    ? CARS
+    : CARS.filter(car => car.category === activeCategory);
 
   return (
-    <div className="pt-24 min-h-screen bg-slate-50 pb-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Header Section */}
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight">
-            Our Premium <span className="text-slate-900">Fleet</span>
-          </h1>
-          <p className="text-lg text-slate-500">
-            Tentukan pilihan kendaraan premium yang menyempurnakan gaya dan kenyamanan perjalanan Anda berikutnya.
-          </p>
+    <div className="bg-slate-50 min-h-screen">
+      
+      {/* Hero Section */}
+      <section className="relative min-h-[40vh] bg-slate-900 pb-32 pt-20 flex flex-col items-center justify-center text-center px-4 overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-overlay"
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1493238792000-8113da705763?q=80&w=2670&auto=format&fit=crop')" }}
+        />
+        <div className="relative z-10 max-w-3xl mx-auto mt-10">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 drop-shadow-lg"
+          >
+            Koleksi Armada Premium Kami
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="text-lg md:text-xl text-slate-300 font-light leading-relaxed"
+          >
+            Temukan kendaraan sempurna untuk setiap perjalanan Anda. Tersedia berbagai pilihan mulai dari city car hingga bus pariwisata.
+          </motion.p>
         </div>
+      </section>
 
-        {/* Filters Section */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-12 bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
-          
-          {/* Search */}
-          <div className="relative w-full md:w-96 shrink-0">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Search className="h-5 w-5 text-slate-400" />
-            </div>
-            <input
-              type="text"
-              placeholder="Search cars by name..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl leading-5 bg-slate-50 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-slate-800 focus:border-slate-800 transition-colors sm:text-sm"
-            />
-          </div>
-
-          {/* Categories */}
-          <div className="flex flex-wrap justify-center gap-2 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto">
-            {CATEGORIES.map((category) => (
-              <button
-                key={category}
-                onClick={() => setActiveCategory(category)}
-                /* Aku pindahkan 'border' ke class utama agar dimensinya selalu stabil di semua kondisi */
-                className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 whitespace-nowrap border ${
-                  activeCategory === category
-                    ? "bg-slate-900 border-slate-900 text-white shadow-md shadow-slate-800/30" // Border ikut warna biru
-                    : "bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100 hover:border-slate-300" // Border abu-abu
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Car Grid with Scroll Reveal (framer-motion) */}
-        {filteredCars.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-            {filteredCars.map((car, index) => (
-              <motion.div
-                key={car.id}
-                /* Animasi Scroll Reveal: Muncul dari bawah saat di-scroll */
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ 
-                  duration: 0.5, 
-                  ease: "easeOut",
-                  delay: index * 0.1 /* Efek beruntun */
-                }}
-                /* Efek Hover Premium Tailwind */
-                className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-slate-950/10 hover:-translate-y-2 transition-all duration-300 ease-out group flex flex-col"
-              >
-                {/* Image */}
-                <div className="relative h-56 overflow-hidden bg-slate-100">
-                  <img 
-                    src={car.image} 
-                    alt={car.name} 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-slate-800 shadow-sm">
-                    {car.category}
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="p-6 flex flex-col grow">
-                  <h3 className="text-xl font-bold text-slate-900 mb-4">{car.name}</h3>
-                  
-                  {/* Specs */}
-                  <div className="grid grid-cols-3 gap-4 mb-6 pb-6 border-b border-slate-100">
-                    <div className="flex flex-col items-center justify-center gap-1.5 p-2 rounded-xl bg-slate-50 text-slate-600">
-                      <Users className="w-5 h-5 text-slate-900" />
-                      <span className="text-xs font-medium">{car.seats} Seats</span>
-                    </div>
-                    <div className="flex flex-col items-center justify-center gap-1.5 p-2 rounded-xl bg-slate-50 text-slate-600">
-                      <Briefcase className="w-5 h-5 text-slate-900" />
-                      <span className="text-xs font-medium">{car.luggage} Bags</span>
-                    </div>
-                    <div className="flex flex-col items-center justify-center gap-1.5 p-2 rounded-xl bg-slate-50 text-slate-600">
-                      <Settings className="w-5 h-5 text-slate-900" />
-                      <span className="text-xs font-medium truncate w-full text-center">{car.transmission}</span>
-                    </div>
-                  </div>
-
-                  {/* Footer */}
-                  <div className="mt-auto flex items-center justify-between">
-                    <div>
-                      <p className="text-sm font-medium text-slate-500 mb-0.5">Mulai dari</p>
-                      <p className="text-lg font-bold text-slate-900">
-                        {car.price} <span className="text-sm font-normal text-slate-500">/ hari</span>
-                      </p>
-                    </div>
-                    <button className="bg-slate-900 text-white px-5 py-2.5 rounded-xl font-medium hover:bg-slate-900 hover:shadow-lg hover:shadow-slate-800/30 transition-all duration-300 flex items-center gap-1">
-                      Book Now
-                      <ChevronRight className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-20">
-            <div className="bg-white mx-auto w-24 h-24 rounded-full flex items-center justify-center mb-4 shadow-sm border border-slate-100">
-              <Search className="w-10 h-10 text-slate-300" />
-            </div>
-            <h3 className="text-xl font-bold text-slate-900 mb-2">No cars found</h3>
-            <p className="text-slate-500">We couldn't find any cars matching your search or category.</p>
-            <button 
-              onClick={() => { setSearchTerm(""); setActiveCategory("ALL"); }}
-              className="mt-6 text-slate-900 font-medium hover:text-slate-950 underline underline-offset-4"
+      {/* Category Filter Bar */}
+      <section className="relative z-20 max-w-7xl mx-auto px-4 -mt-10">
+        <div className="bg-white rounded-2xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] p-2 border border-slate-100 flex items-center gap-2 overflow-x-auto whitespace-nowrap hide-scrollbar">
+          {CATEGORIES.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${
+                activeCategory === cat
+                  ? 'bg-slate-900 text-white shadow-md'
+                  : 'bg-transparent text-slate-500 hover:bg-slate-50 hover:text-slate-900'
+              }`}
             >
-              Clear filters
+              {cat}
             </button>
-          </div>
-        )}
+          ))}
+        </div>
+      </section>
 
-      </div>
+      {/* Vehicle Grid Section */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeCategory}
+              variants={containerVariants}
+              initial="hidden"
+              animate="show"
+              exit={{ opacity: 0, y: -10 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              {filteredCars.map((car) => (
+                <motion.div
+                  key={car.id}
+                  variants={itemVariants}
+                  className="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] hover:-translate-y-1 transition-transform duration-300 group flex flex-col cursor-pointer"
+                  onClick={() => navigate(`/armada/${car.id}`)}
+                >
+                  {/* Image Container */}
+                  <div className="h-56 overflow-hidden relative bg-slate-100">
+                    <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/10 transition-colors z-10 duration-300" />
+                    <img
+                      src={car.image}
+                      alt={car.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                    />
+                    <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-lg text-xs font-bold text-slate-900 z-20 shadow-sm">
+                      {car.category}
+                    </div>
+                  </div>
+
+                  {/* Content Container */}
+                  <div className="p-6 grow flex flex-col">
+                    <h3 className="text-2xl font-bold text-slate-900 mb-1">{car.name}</h3>
+                    <p className="text-slate-900 font-extrabold text-xl mb-6">
+                      Mulai {car.price} <span className="text-sm font-normal text-slate-500">/ hari</span>
+                    </p>
+
+                    {/* Specs Grid */}
+                    <div className="grid grid-cols-4 gap-2 mb-8 bg-slate-50 py-3 px-2 rounded-xl border border-slate-100">
+                      <div className="flex flex-col items-center justify-center text-center text-slate-600 gap-1 border-r border-slate-200">
+                        <Users size={16} className="text-slate-400" />
+                        <span className="text-[10px] font-medium">{car.specs.seats}</span>
+                      </div>
+                      <div className="flex flex-col items-center justify-center text-center text-slate-600 gap-1 border-r border-slate-200">
+                        <Settings size={16} className="text-slate-400" />
+                        <span className="text-[10px] font-medium">{car.specs.trans}</span>
+                      </div>
+                      <div className="flex flex-col items-center justify-center text-center text-slate-600 gap-1 border-r border-slate-200">
+                        <Briefcase size={16} className="text-slate-400" />
+                        <span className="text-[10px] font-medium">{car.specs.luggage}</span>
+                      </div>
+                      <div className="flex flex-col items-center justify-center text-center text-slate-600 gap-1">
+                        <Fuel size={16} className="text-slate-400" />
+                        <span className="text-[10px] font-medium">{car.specs.fuel}</span>
+                      </div>
+                    </div>
+
+                    {/* Action Button */}
+                    <div className="mt-auto pt-2 border-t border-slate-50">
+                      <button className="w-full flex items-center justify-between text-slate-900 font-bold group/btn py-2">
+                        <span>Lihat Detail</span>
+                        <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center group-hover/btn:bg-slate-900 group-hover/btn:text-white transition-colors duration-300">
+                          <ChevronRight size={16} />
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
+
+          {filteredCars.length === 0 && (
+            <div className="text-center py-20 text-slate-500">
+              Kategori armada ini belum tersedia saat ini.
+            </div>
+          )}
+        </div>
+      </section>
     </div>
   );
 };

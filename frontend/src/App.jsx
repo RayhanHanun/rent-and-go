@@ -11,6 +11,8 @@ import LayananLepasKunci from './pages/LayananLepasKunci';
 import LayananDenganPengemudi from './pages/LayananDenganPengemudi';
 import LayananPaketTour from './pages/LayananPaketTour';
 import LayananBandara from './pages/LayananBandara';
+import Kontak from './pages/Kontak';
+import DetailArmada from './pages/DetailArmada';
 import './index.css';
 
 function App() {
@@ -22,12 +24,14 @@ function App() {
         <Routes>
           <Route path="/" element={<Beranda />} />
           <Route path="/fleet" element={<Armada />} />
+          <Route path="/armada/:id" element={<DetailArmada />} />
           <Route path="/services" element={<Layanan />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/layanan/lepas-kunci" element={<LayananLepasKunci />} />
           <Route path="/layanan/dengan-pengemudi" element={<LayananDenganPengemudi />} />
           <Route path="/layanan/paket-tour" element={<LayananPaketTour />} />
           <Route path="/layanan/bandara" element={<LayananBandara />} />
+          <Route path="/kontak" element={<Kontak />} />
         </Routes>
       </main>
       <Footer />
