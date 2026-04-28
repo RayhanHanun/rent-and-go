@@ -81,7 +81,7 @@ const Armada = () => {
     <div className="bg-slate-50 min-h-screen">
       
       {/* Hero Section */}
-      <section className="relative min-h-[40vh] bg-slate-900 pb-32 pt-20 flex flex-col items-center justify-center text-center px-4 overflow-hidden">
+      <section className="relative min-h-[40vh] bg-slate-900 pb-20 pt-20 flex flex-col items-center justify-center text-center px-4 overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-overlay"
           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1493238792000-8113da705763?q=80&w=2670&auto=format&fit=crop')" }}
@@ -107,13 +107,14 @@ const Armada = () => {
       </section>
 
       {/* Category Filter Bar */}
-      <section className="relative z-20 max-w-7xl mx-auto px-4 -mt-10">
-        <div className="bg-white rounded-2xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] p-2 border border-slate-100 flex items-center gap-2 overflow-x-auto whitespace-nowrap hide-scrollbar">
+      <section className="bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 py-8">
+          <div className="bg-white rounded-2xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] p-2 border border-slate-100 flex items-center w-full gap-4 overflow-x-auto whitespace-nowrap hide-scrollbar justify-start md:overflow-visible md:justify-between">
           {CATEGORIES.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${
+                className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 flex items-center justify-center md:flex-1 md:text-center shrink-0 ${
                 activeCategory === cat
                   ? 'bg-slate-900 text-white shadow-md'
                   : 'bg-transparent text-slate-500 hover:bg-slate-50 hover:text-slate-900'
@@ -122,11 +123,12 @@ const Armada = () => {
               {cat}
             </button>
           ))}
+          </div>
         </div>
       </section>
 
       {/* Vehicle Grid Section */}
-      <section className="py-16">
+      <section className="pt-0 pb-16 mt-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatePresence mode="wait">
             <motion.div
