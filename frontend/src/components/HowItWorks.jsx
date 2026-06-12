@@ -7,17 +7,17 @@ const HowItWorks = () => {
     {
       icon: <Search className="w-8 h-8 text-white" />,
       title: "Pilih mobil",
-      description: "Pilih kendaraan yang sesuai dengan gaya dan kebutuhan perjalanan Anda dari koleksi premium kami."
+      description: "Temukan kendaraan yang tepat sesuai kebutuhan perjalananmu."
     },
     {
       icon: <CalendarDays className="w-8 h-8 text-white" />,
       title: "Tentukan tanggal",
-      description: "Atur jadwal sewa yang fleksibel. Pilih lokasi pengambilan dan pengembalian yang nyaman bagi Anda."
+      description: "Tentukan jadwal perjalanan dan lokasi yang kamu butuhkan."
     },
     {
       icon: <CheckCircle className="w-8 h-8 text-white" />,
       title: "Booking",
-      description: "Selesaikan pembayaran dengan aman, dan mobil Anda siap untuk digunakan."
+      description: "Booking sekarang dan langsung mulai perjalananmu tanpa ribet."
     }
   ];
 
@@ -27,7 +27,7 @@ const HowItWorks = () => {
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Cara Kerja Rent & Go</h2>
           <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-            Proses penyewaan yang simpel, dirancang khusus untuk menghemat waktu Anda tanpa proses yang berbelit.
+            Temukan semua yang kamu butuhkan dalam satu aplikasi.
           </p>
         </div>
 

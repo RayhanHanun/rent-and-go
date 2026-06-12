@@ -8,7 +8,7 @@ const CAR_DATA = {
   name: 'Toyota Agya',
   category: 'City Car',
   price: 'Rp 250.000',
-  description: 'Toyota Agya adalah pilihan sempurna untuk mobilitas perkotaan yang padat. Dengan dimensi compact, konsumsi bahan bakar yang sangat efisien, dan manuver yang lincah, mobil ini ideal untuk pasangan muda, perjalanan dinas singkat, atau sekadar berkeliling kota dengan penuh gaya.',
+  description: 'Toyota Agya cocok untuk kebutuhan perjalanan dalam kota. Ukurannya ringkas, mudah dikendarai, dan nyaman digunakan untuk perjalanan singkat maupun aktivitas harian.',
   images: [
     'https://images.unsplash.com/photo-1590362891991-f776e747a588?auto=format&fit=crop&q=80',
     'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fd?auto=format&fit=crop&q=80',
@@ -138,7 +138,7 @@ const DetailArmada = () => {
 
             {/* CTA Button */}
             <a
-              href={`https://wa.me/6281234567890?text=Halo%20Rent%20%26%20Go,%20saya%20tertarik%20untuk%20menyewa%20${car.name}.%20Apakah%20unitnya%20tersedia?`}
+              href={`https://wa.me/628812704174?text=Halo%20Rent%20%26%20Go,%20saya%20tertarik%20untuk%20menyewa%20${car.name}.%20Apakah%20unitnya%20tersedia?`}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full bg-slate-900 hover:bg-slate-800 text-white rounded-xl py-4 flex items-center justify-center gap-2 font-semibold transition-all hover:shadow-lg hover:shadow-slate-900/20 active:scale-[0.98]"

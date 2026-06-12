@@ -6,18 +6,18 @@ import { useNavigate } from 'react-router-dom';
 const BENEFITS_DATA = [
   {
     icon: Clock,
-    title: 'On-time Guarantee',
-    desc: 'Driver kami akan standby sebelum pesawat Anda mendarat.'
+    title: 'Penjemputan Tepat Waktu',
+    desc: 'Pengemudi siap menjemput sesuai jadwal perjalanan Anda.'
   },
   {
     icon: Luggage,
     title: 'Bantuan Bagasi',
-    desc: 'Tak perlu repot, tim kami siap membantu mengangkat koper Anda.'
+    desc: 'Perjalanan dari bandara jadi lebih nyaman tanpa ribet membawa bagasi.'
   },
   {
     icon: Plane,
     title: 'Bebas Biaya Delay',
-    desc: 'Pesawat terlambat? Kami tetap menunggu tanpa biaya tambahan.'
+    desc: 'Jadwal penjemputan menyesuaikan informasi penerbangan Anda.'
   }
 ];
 
@@ -89,7 +89,7 @@ const LayananBandara = () => {
             transition={{ duration: 0.7 }}
             className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 drop-shadow-lg"
           >
-            Penjemputan Tepat Waktu YIA
+            Layanan Antar-Jemput Bandara
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -97,7 +97,7 @@ const LayananBandara = () => {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-lg md:text-xl text-slate-300 font-light leading-relaxed"
           >
-            Layanan drop-off dan pick-up bandara yang efisien, aman, dan tanpa repot.
+            Proses cepat, harga transparan, dan layanan tepat waktu untuk perjalanan dari atau menuju bandara.
           </motion.p>
         </div>
       </section>
@@ -131,7 +131,7 @@ const LayananBandara = () => {
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-slate-900 mb-4 border-l-4 border-slate-900 pl-4">Pilihan Armada Bandara YIA</h2>
             <p className="text-slate-500 max-w-2xl">
-              Armada nyaman dan ramah bagasi untuk kebutuhan transfer bandara pribadi, keluarga, hingga rombongan.
+              Nikmati perjalanan lebih nyaman dengan pilihan armada untuk pribadi, keluarga, hingga rombongan.
             </p>
           </div>
 
@@ -200,12 +200,14 @@ const LayananBandara = () => {
       {/* Modern Minimalist CTA */}
       <section className="py-24 bg-white border-t border-slate-100">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-slate-900 mb-6">Perlu tracking penerbangan & booking cepat?</h2>
+          <h2 className="text-3xl font-bold text-slate-900 mb-6">Kenapa harus ribet cari kendaraan di banyak tempat?</h2>
           <p className="text-slate-500 mb-10 max-w-xl mx-auto">
-            Hubungi admin kami via WhatsApp untuk konfirmasi flight tracking real-time dan reservasi antar-jemput bandara Anda.
+            Selain buang waktu, rencana perjalananmu juga jadi nggak maksimal. Temukan semua yang kamu butuhkan dalam satu aplikasi.
+            <br />
+            Booking sekarang dan langsung mulai perjalananmu tanpa ribet.
           </p>
           <a
-            href="https://wa.me/628123456789"
+            href="https://wa.me/628812704174"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-3 bg-slate-900 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-slate-800 transition-colors shadow-xl shadow-slate-900/20"

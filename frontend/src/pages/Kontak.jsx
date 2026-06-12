@@ -5,19 +5,23 @@ import { Phone, Mail, MapPin, Send, Clock } from 'lucide-react';
 const QUICK_CONTACTS = [
   {
     icon: Phone,
-    title: 'WhatsApp / Telepon',
-    value: '+62 812-3456-7890'
+    title: "WhatsApp / Telepon",
+    value: "+62 881-2704-174",
+    href: "https://wa.me/628812704174",
   },
   {
     icon: Mail,
-    title: 'Email Corporate',
-    value: 'hello@rentandgo.com'
+    title: "Email",
+    value: "rentalmobilngo@gmail.com",
+    href: "mailto:rentalmobilngo@gmail.com",
   },
   {
     icon: MapPin,
-    title: 'Kantor Pusat',
-    value: 'Jl. Ring Road Utara, Condongcatur, Yogyakarta'
-  }
+    title: "Kantor Pusat",
+    value:
+      "Jl. Ring Road Utara, Ngringin, Condongcatur, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281",
+    href: "https://www.google.com/maps/search/?api=1&query=Jl.%20Ring%20Road%20Utara%2C%20Ngringin%2C%20Condongcatur%2C%20Kec.%20Depok%2C%20Kabupaten%20Sleman%2C%20Daerah%20Istimewa%20Yogyakarta%2055281",
+  },
 ];
 
 const Kontak = () => {
@@ -46,7 +50,7 @@ const Kontak = () => {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-lg md:text-xl text-slate-300 font-light leading-relaxed max-w-3xl mx-auto"
           >
-            Punya pertanyaan seputar armada atau butuh penawaran khusus untuk perusahaan? Jangan ragu untuk menghubungi tim kami.
+            Temukan semua yang kamu butuhkan dalam satu aplikasi. Booking sekarang dan langsung mulai perjalananmu tanpa ribet.
           </motion.p>
         </div>
       </section>
@@ -67,7 +71,14 @@ const Kontak = () => {
                   <contact.icon size={28} strokeWidth={2} />
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 mb-2">{contact.title}</h3>
-                <p className="text-slate-500 leading-relaxed">{contact.value}</p>
+                <a
+                  href={contact.href}
+                  target={contact.href.startsWith('http') ? '_blank' : undefined}
+                  rel={contact.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className="text-slate-500 leading-relaxed hover:text-slate-900 transition-colors"
+                >
+                  {contact.value}
+                </a>
               </motion.div>
             ))}
           </div>
@@ -104,7 +115,7 @@ const Kontak = () => {
 
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">
-                    Email Address
+                    Alamat Email
                   </label>
                   <input
                     id="email"
@@ -179,8 +190,8 @@ const Kontak = () => {
             >
               <div className="bg-white rounded-2xl border border-slate-100 p-3 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)]">
                 <iframe
-                  title="Lokasi Rent and Go Yogyakarta"
-                  src="https://www.google.com/maps?q=Yogyakarta&output=embed"
+                  title="Lokasi Rent & Go Condongcatur"
+                  src="https://www.google.com/maps?q=Jl.%20Ring%20Road%20Utara%2C%20Ngringin%2C%20Condongcatur%2C%20Kec.%20Depok%2C%20Kabupaten%20Sleman%2C%20Daerah%20Istimewa%20Yogyakarta%2055281&output=embed"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   className="w-full h-96 rounded-2xl border-0"

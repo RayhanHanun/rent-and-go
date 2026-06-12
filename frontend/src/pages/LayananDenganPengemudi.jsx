@@ -7,17 +7,17 @@ const BENEFITS_DATA = [
   {
     icon: UserCheck,
     title: 'Driver Berpengalaman',
-    desc: 'Ramah, profesional, dan hafal rute terbaik.'
+    desc: 'Layanan pengemudi yang membantu perjalananmu tetap nyaman dan tepat waktu.'
   },
   {
     icon: MapPin,
     title: 'Bebas Lelah & Nyasar',
-    desc: 'Nikmati perjalanan tanpa perlu memikirkan navigasi atau kemacetan.'
+    desc: 'Nikmati perjalanan tanpa perlu ribet memikirkan navigasi dan rute.'
   },
   {
     icon: ShieldCheck,
     title: 'Jaminan Aman & Nyaman',
-    desc: 'Standar pelayanan VIP untuk keamanan maksimal.'
+    desc: 'Kendaraan yang tepat dan layanan terbaik untuk setiap perjalanan Anda.'
   }
 ];
 
@@ -98,7 +98,7 @@ const LayananDenganPengemudi = () => {
             transition={{ duration: 0.7 }}
             className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 drop-shadow-lg"
           >
-            Perjalanan Eksklusif & Bebas Stres
+            Sewa Mobil dengan Pengemudi
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -106,7 +106,7 @@ const LayananDenganPengemudi = () => {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-lg md:text-xl text-slate-300 font-light leading-relaxed"
           >
-            Duduk santai dan nikmati perjalanan. Driver profesional kami siap melayani Anda.
+            Nikmati perjalanan lebih nyaman dengan pilihan armada mobil premium terbaru. Proses cepat dan harga transparan untuk setiap perjalanan Anda.
           </motion.p>
         </div>
       </section>
@@ -140,7 +140,7 @@ const LayananDenganPengemudi = () => {
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-slate-900 mb-4 border-l-4 border-slate-900 pl-4">Pilihan Armada dengan Pengemudi</h2>
             <p className="text-slate-500 max-w-2xl">
-              Armada premium lengkap dengan driver profesional untuk perjalanan kota yang nyaman, aman, dan tepat waktu.
+              Perjalanan lebih tenang dimulai dari kendaraan yang tepat dan layanan pengemudi sesuai kebutuhanmu.
             </p>
           </div>
 
@@ -209,12 +209,14 @@ const LayananDenganPengemudi = () => {
       {/* Modern Minimalist CTA */}
       <section className="py-24 bg-white border-t border-slate-100">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-slate-900 mb-6">Butuh rute luar kota?</h2>
+          <h2 className="text-3xl font-bold text-slate-900 mb-6">Kenapa harus ribet cari kendaraan di banyak tempat?</h2>
           <p className="text-slate-500 mb-10 max-w-xl mx-auto">
-            Konsultasikan kebutuhan perjalanan Anda bersama tim kami untuk opsi rute, durasi, dan paket layanan terbaik.
+            Selain buang waktu, rencana perjalananmu juga jadi nggak maksimal. Temukan semua yang kamu butuhkan dalam satu aplikasi.
+            <br />
+            Booking sekarang dan langsung mulai perjalananmu tanpa ribet.
           </p>
           <a
-            href="https://wa.me/628123456789"
+            href="https://wa.me/628812704174"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-3 bg-slate-900 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-slate-800 transition-colors shadow-xl shadow-slate-900/20"

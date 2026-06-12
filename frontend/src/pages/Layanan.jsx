@@ -8,25 +8,25 @@ const CAROUSEL_SLIDES = [
     id: 1,
     image: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?q=80&w=2670&auto=format&fit=crop',
     title: 'Kebebasan Lepas Kunci',
-    subtitle: 'Jelajahi destinasi dengan kontrol penuh menggunakan armada eksklusif terbaru dari Rent & Go.'
+    subtitle: 'Pilih kendaraan yang tepat dan mulai perjalananmu dengan lebih nyaman.'
   },
   {
     id: 2,
     image: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2670&auto=format&fit=crop',
-    title: 'Kenyamanan Driver Profesional',
-    subtitle: 'Nikmati perjalanan santai dan aman, ditemani oleh staf pengemudi premium kami yang berpengalaman.'
+    title: 'Perjalanan Nyaman dengan Pengemudi',
+    subtitle: 'Nikmati perjalanan lebih tenang dengan layanan pengemudi sesuai kebutuhanmu.'
   },
   {
     id: 3,
     image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2621&auto=format&fit=crop',
-    title: 'Layanan Paket Tour Eksklusif',
-    subtitle: 'Jelajahi berbagai destinasi wisata menarik dengan armada premium dan itinerary khusus yang disesuaikan untuk kenyamanan Anda.'
+    title: 'Paket Tour untuk Perjalananmu',
+    subtitle: 'Temukan kendaraan dan layanan perjalanan yang kamu butuhkan dalam satu tempat.'
   },
   {
     id: 4,
     image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2674&auto=format&fit=crop',
-    title: 'Antar-Jemput Bandara VIP',
-    subtitle: 'Layanan penjemputan eksekutif tepat waktu di area kedatangan, siap mengantar Anda kapan saja.'
+    title: 'Antar-Jemput Bandara Tanpa Ribet',
+    subtitle: 'Proses cepat dan layanan tepat waktu untuk perjalanan dari atau menuju bandara.'
   }
 ];
 
@@ -34,7 +34,7 @@ const SERVICES_DATA = [
   {
     id: 'lepas-kunci',
     title: "Sewa Mobil Lepas Kunci",
-    description: "Rasakan privasi dan kebebasan mengemudi mobil premium pilihan Anda sendiri dengan fleksibilitas tinggi. Kami menyediakan unit terbaru yang dirawat berkala, siap pakai dengan proses verifikasi dokumen yang sangat mudah, cepat, dan sepenuhnya transparan tanpa biaya tersembunyi.",
+    description: "Pilih armada mobil terbaru sesuai kebutuhanmu dan nikmati perjalanan dengan lebih leluasa. Proses booking cepat dan harga transparan membuat perjalananmu bisa dimulai tanpa ribet.",
     icon: Key,
     image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1500&auto=format&fit=crop",
     link: "/layanan/lepas-kunci"
@@ -42,7 +42,7 @@ const SERVICES_DATA = [
   {
     id: 'dengan-pengemudi',
     title: "Sewa Mobil dengan Pengemudi",
-    description: "Nikmati perjalanan VIP tanpa stres di tengah kota maupun luar kota. Pengemudi kami tidak sekadar mengantar; mereka ramah, mengetahui rute tercepat, dan terlatih menjaga kenyamanan Anda. Silakan bersantai di kursi belakang sambil menikmati suasana berkelas yang sesungguhnya.",
+    description: "Nikmati perjalanan lebih nyaman dengan kendaraan yang tepat dan layanan pengemudi sesuai kebutuhanmu. Booking dalam satu aplikasi untuk perjalanan dalam maupun luar kota.",
     icon: UserCheck,
     image: "https://images.unsplash.com/photo-1616422285623-13ff0162193c?q=80&w=1500&auto=format&fit=crop",
     link: "/layanan/dengan-pengemudi"
@@ -50,7 +50,7 @@ const SERVICES_DATA = [
   {
     id: 'paket-tour',
     title: "Layanan Paket Tour Wisata",
-    description: "Liburan bebas repot dengan paket komplit kami! Harga sudah mencakup sewa armada premium, layanan pengemudi profesional sekaligus pemandu, serta BBM dan biaya parkir. Jelajahi destinasi wisata terbaik kota dengan nyaman tanpa perlu merencanakan rute sendiri.",
+    description: "Temukan kebutuhan kendaraan dan layanan perjalanan wisata dalam satu tempat. Pilih paket tour, lakukan booking, dan mulai perjalananmu tanpa ribet.",
     icon: Map,
     image: "https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?q=80&w=1500&auto=format&fit=crop",
     link: "/layanan/paket-tour"
@@ -58,7 +58,7 @@ const SERVICES_DATA = [
   {
     id: 'bandara',
     title: "Layanan Antar-Jemput Bandara",
-    description: "Bosan mencari taksi setelah penerbangan yang melelahkan? Manfaatkan layanan transfer bandara eksekutif kami. Jadwal penerbangan Anda dipantau secara real-time, jadi sopir kami akan selalu tiba on-time dan langsung membawakan bagasi Anda menaiki armada pilihan.",
+    description: "Atur perjalanan dari atau menuju bandara dengan proses cepat dan kendaraan yang tepat. Harga transparan dan layanan tepat waktu membantu perjalanan Anda lebih nyaman.",
     icon: Plane,
     image: "https://images.unsplash.com/photo-1542282088-fe8426682b8f?q=80&w=1500&auto=format&fit=crop",
     link: "/layanan/bandara"
@@ -136,10 +136,10 @@ const Layanan = () => {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">Layanan Premium Kami</h2>
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">Perjalanan Asik Dimulai dari Jasa yang Menarik.</h2>
             <div className="w-16 h-1 bg-slate-900 mx-auto rounded-full mb-6"></div>
             <p className="text-slate-500 max-w-2xl mx-auto">
-              Empat solusi mobilitas eksklusif yang dirancang secara spesifik untuk memastikan setiap perjalanan Anda berjalan sempurna tanpa kompromi.
+              Kenapa harus ribet cari kendaraan di banyak tempat? Temukan semua yang kamu butuhkan dalam satu aplikasi.
             </p>
           </div>
 

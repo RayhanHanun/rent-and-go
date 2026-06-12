@@ -1,51 +1,93 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Heart, FileText, Activity } from 'lucide-react';
+import { Heart, FileText, Activity, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const defaultCars = [
   {
     id: 1,
-    name: "Tesla Model 3",
-    category: "LUXURY",
-    transmission: "Electric Automatic",
-    price: "Rp 1.5jt",
+    name: "Toyota Agya",
+    category: "CITY CAR",
+    transmission: "Automatic",
+    price: "Rp 250.000",
     rating: 4.9,
-    imageUrl: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    featured: true,
+    imageUrl: "https://images.unsplash.com/photo-1590362891991-f776e747a588?q=80&w=1500&auto=format&fit=crop"
   },
   {
     id: 2,
-    name: "Range Rover",
+    name: "Toyota Avanza",
     category: "SUV",
-    transmission: "Automatic",
-    price: "Rp 2.2jt",
+    transmission: "AT / MT",
+    price: "Rp 300.000",
     rating: 4.8,
-    imageUrl: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    featured: true,
+    imageUrl: "https://plus.unsplash.com/premium_photo-1661338573175-10acb650fbdf?q=80&w=1500&auto=format&fit=crop"
   },
   {
     id: 3,
-    name: "Honda Civic",
-    category: "SEDAN",
+    name: "Honda HR-V",
+    category: "SUV",
     transmission: "Automatic",
-    price: "Rp 800rb",
+    price: "Rp 450.000",
     rating: 4.7,
-    imageUrl: "https://images.unsplash.com/photo-1590362891991-f776e747a588?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    featured: true,
+    imageUrl: "https://images.unsplash.com/photo-1550355291-bbee04a92027?q=80&w=1500&auto=format&fit=crop"
+  },
+  {
+    id: 4,
+    name: "Innova Zenix",
+    category: "PREMIUM",
+    transmission: "Automatic",
+    price: "Rp 600.000",
+    rating: 4.8,
+    featured: false,
+    imageUrl: "https://images.unsplash.com/photo-1549921296-3a6b3923f0d9?q=80&w=1500&auto=format&fit=crop"
+  },
+  {
+    id: 5,
+    name: "Toyota Alphard",
+    category: "PREMIUM",
+    transmission: "Automatic",
+    price: "Rp 1.500.000",
+    rating: 4.9,
+    featured: false,
+    imageUrl: "https://images.unsplash.com/photo-1619767886558-efdc259cde1a?q=80&w=1500&auto=format&fit=crop"
+  },
+  {
+    id: 6,
+    name: "Toyota Hiace",
+    category: "MICROBUS",
+    transmission: "Manual",
+    price: "Rp 900.000",
+    rating: 4.8,
+    featured: false,
+    imageUrl: "https://images.unsplash.com/photo-1551830820-330a71b99659?q=80&w=1500&auto=format&fit=crop"
   }
 ];
 
-const categories = ["ALL", "SUV", "SEDAN", "CITY CAR", "LUXURY"];
+const addFeaturedFlags = (cars) => {
+  const hasFeaturedCars = cars.some((car) => car.featured === true || car.favorite === true);
+
+  return cars.map((car, index) => ({
+    ...car,
+    featured: hasFeaturedCars
+      ? car.featured === true || car.favorite === true
+      : index < 3
+  }));
+};
 
 const CarList = () => {
   const [cars, setCars] = useState(defaultCars);
   const [loading, setLoading] = useState(true);
-  const [activeCategory, setActiveCategory] = useState("ALL");
 
   useEffect(() => {
     const fetchCars = async () => {
       try {
         const response = await axios.get('/api/cars');
         // fallback to default if empty
-        setCars(response.data?.length ? response.data : defaultCars);
+        setCars(response.data?.length ? addFeaturedFlags(response.data) : defaultCars);
       } catch (error) {
         console.error("Failed to fetch cars, using fallback data", error);
         setCars(defaultCars);
@@ -56,36 +98,19 @@ const CarList = () => {
     fetchCars();
   }, []);
 
-  const filteredCars = activeCategory === "ALL" 
-    ? cars 
-    : cars.filter(car => car.category.toUpperCase() === activeCategory);
+  const featuredCars = cars
+    .filter((car) => car.featured === true || car.favorite === true)
+    .slice(0, 6);
 
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <h2 className="text-3xl font-bold text-slate-900 mb-4">Mobil Favorit untuk Anda</h2>
+          <h2 className="text-3xl font-bold text-slate-900 mb-4">Armada Pilihan untuk Perjalananmu</h2>
           <p className="text-slate-500">
-            Temukan kendaraan yang paling sesuai dengan kebutuhan gaya hidup Anda.
+            Temukan beberapa pilihan kendaraan terbaik yang nyaman, fleksibel, dan siap menemani kebutuhan perjalananmu.
           </p>
-        </div>
-
-        {/* Filters */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                activeCategory === category 
-                  ? "bg-slate-900 text-white shadow-md shadow-slate-900/20" 
-                  : "bg-slate-100 text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-              }`}
-            >
-              {category}
-            </button>
-          ))}
         </div>
 
         {/* Grid Container */}
@@ -116,7 +141,7 @@ const CarList = () => {
                 </div>
                ))
             ) : (
-              Array.isArray(filteredCars) ? filteredCars.map((car) => (
+              Array.isArray(featuredCars) ? featuredCars.map((car) => (
                 <motion.div
                   layout
                   variants={{ hidden: { y: 20, opacity: 0 }, visible: { y: 0, opacity: 1 } }}
@@ -171,6 +196,16 @@ const CarList = () => {
             )}
           </AnimatePresence>
         </motion.div>
+
+        <div className="flex justify-center mt-12">
+          <Link
+            to="/fleet"
+            className="bg-slate-900 text-white px-8 py-4 rounded-full font-bold hover:bg-slate-800 transition-colors flex items-center justify-center gap-2 group"
+          >
+            Lihat Semua Armada
+            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
 
       </div>
     </section>

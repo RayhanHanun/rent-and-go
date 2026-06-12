@@ -57,7 +57,7 @@ const Hero = () => {
           {/* Kicker */}
           <motion.div variants={itemVariants} className="mb-6">
             <span className="inline-block bg-white text-slate-900 px-4 py-1.5 rounded-full text-sm font-bold tracking-widest uppercase shadow-sm">
-              Rental Mobil No. 1 di Indonesia
+              Rent & Go
             </span>
           </motion.div>
           
@@ -66,7 +66,7 @@ const Hero = () => {
             variants={itemVariants} 
             className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6"
           >
-            Jelajahi Destinasi dengan Armada Ternyaman
+            Satu Tempat untuk Semua Kebutuhan Perjalananmu
           </motion.h1>
           
           {/* Subtitle */}
@@ -74,7 +74,7 @@ const Hero = () => {
             variants={itemVariants} 
             className="text-lg sm:text-xl text-slate-300 mb-10 leading-relaxed font-light max-w-xl"
           >
-            Mulai petualangan tak terlupakan dan nikmati dunia dengan kenyamanan dan gaya tak tertandingi bersama koleksi mobil premium kami.
+            Nikmati perjalanan lebih nyaman dengan pilihan armada mobil premium terbaru.
           </motion.p>
           
           {/* Action Buttons */}

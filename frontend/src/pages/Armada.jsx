@@ -93,7 +93,7 @@ const Armada = () => {
             transition={{ duration: 0.7 }}
             className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 drop-shadow-lg"
           >
-            Koleksi Armada Premium Kami
+            Perjalanan Lebih Tenang Dimulai dari Kendaraan yang Tepat
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -101,7 +101,7 @@ const Armada = () => {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-lg md:text-xl text-slate-300 font-light leading-relaxed"
           >
-            Temukan kendaraan sempurna untuk setiap perjalanan Anda. Tersedia berbagai pilihan mulai dari city car hingga bus pariwisata.
+            Nikmati perjalanan lebih nyaman dengan pilihan armada mobil premium terbaru.
           </motion.p>
         </div>
       </section>

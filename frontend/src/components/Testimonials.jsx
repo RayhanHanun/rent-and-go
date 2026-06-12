@@ -5,33 +5,33 @@ import { Star } from 'lucide-react';
 const testimonials = [
   {
     name: "Budi Santoso",
-    role: "Business Traveler",
+    role: "Pelaku Perjalanan Bisnis",
     initials: "BS",
-    text: "Rent & Go sangat membantu perjalanan dinas saya. Mobil dalam kondisi prima dan bersih. Sangat direkomendasikan!"
+    text: "Pilihan mobilnya sesuai kebutuhan perjalanan dinas saya. Proses booking cepat dan tidak ribet."
   },
   {
     name: "Sari Wijaya",
-    role: "Entrepreneur",
+    role: "Wirausaha",
     initials: "SW",
-    text: "Pilihan armadanya sangat beragam dan mewah. Cocok untuk menjemput klien penting. Pelayanannya benar-benar bintang lima."
+    text: "Pilihan armadanya beragam dan nyaman. Harga yang ditampilkan juga transparan sejak awal."
   },
   {
     name: "Andi Pratama",
-    role: "Family Traveler",
+    role: "Pelaku Perjalanan Keluarga",
     initials: "AP",
-    text: "Sewa SUV untuk liburan keluarga, prosesnya cepat tanpa ribet dan harga sangat transparan. Pasti akan sewa di sini lagi."
+    text: "Kami menemukan SUV untuk perjalanan keluarga dalam satu tempat. Booking cepat dan perjalanannya nyaman."
   },
   {
     name: "Maya Indah",
-    role: "Travel Blogger",
+    role: "Blogger Perjalanan",
     initials: "MI",
-    text: "Pengalaman road trip terbaik! Mobil nyaman, wangi, dan pelayanannya sangat profesional. Urusan booking juga sangat gampang."
+    text: "Mobilnya nyaman dan proses pemesanannya mudah. Rencana perjalanan jadi lebih praktis."
   },
   {
     name: "Rizky Darmawan",
-    role: "Corporate Executive",
+    role: "Eksekutif Perusahaan",
     initials: "RD",
-    text: "Solusi mobilitas premium yang nyata. Dari reservasi hingga pengembalian, semuanya berjalan mulus dan sangat efisien."
+    text: "Dari memilih kendaraan sampai booking, semuanya bisa dilakukan dengan cepat dalam satu platform."
   }
 ];
 
@@ -45,7 +45,7 @@ const Testimonials = () => {
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Apa Kata Pengguna Kami?</h2>
           <p className="text-slate-500 text-lg max-w-2xl mx-auto">
-            Kepercayaan pelanggan adalah prioritas kami. Simak pengalaman mereka bersama Rent & Go.
+            Platform rental terpercaya untuk semua kebutuhan perjalananmu.
           </p>
         </div>
       </div>

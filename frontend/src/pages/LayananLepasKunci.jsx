@@ -7,17 +7,17 @@ const BENEFITS_DATA = [
   {
     icon: Shield,
     title: 'Privasi Total',
-    desc: 'Bebas bepergian ke mana saja bersama teman atau keluarga tersayang, tanpa orang asing di dalam satu mobil.'
+    desc: 'Pilih kendaraan yang tepat dan nikmati perjalanan bersama orang terdekatmu.'
   },
   {
     icon: Clock,
     title: 'Waktu Fleksibel',
-    desc: 'Atur jadwal perjalanan Anda sendiri secara bebas. Tidak perlu terpaku pada itinerary kaku atau jam kerja pengemudi.'
+    desc: 'Atur sendiri jadwal perjalanan sesuai waktu yang kamu butuhkan.'
   },
   {
     icon: Sparkles,
     title: 'Unit Terawat & Bersih',
-    desc: 'Seluruh armada kami melewati inspeksi berkala, dicuci menyeluruh, dan disinfeksi total sebelum kunci diserahkan.'
+    desc: 'Nikmati perjalanan lebih nyaman dengan pilihan armada yang terawat dan bersih.'
   }
 ];
 
@@ -107,7 +107,7 @@ const LayananLepasKunci = () => {
             transition={{ duration: 0.7 }}
             className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 drop-shadow-lg"
           >
-            Kebebasan Berkendara Tanpa Batas
+            Sewa Mobil Lepas Kunci Tanpa Ribet
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -115,7 +115,7 @@ const LayananLepasKunci = () => {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-lg md:text-xl text-slate-300 font-light leading-relaxed"
           >
-            Eksplorasi setiap sudut kota dengan privasi dan fleksibilitas penuh. Rent & Go siap memfasilitasi perjalanan Anda.
+            Nikmati perjalanan lebih nyaman dengan pilihan armada mobil premium terbaru. Proses cepat dan harga transparan untuk setiap perjalanan Anda.
           </motion.p>
         </div>
       </section>
@@ -150,7 +150,7 @@ const LayananLepasKunci = () => {
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-slate-900 mb-4 border-l-4 border-slate-900 pl-4">Pilihan Armada Lepas Kunci</h2>
             <p className="text-slate-500 max-w-2xl">
-              Armada premium, dirawat berkala, asuransi penuh, siap dikendarai kapanpun Anda butuhkan.
+              Perjalanan lebih tenang dimulai dari kendaraan yang tepat, terawat, dan siap digunakan.
             </p>
           </div>
 
@@ -224,12 +224,14 @@ const LayananLepasKunci = () => {
       {/* Modern Minimalist CTA */}
       <section className="py-24 bg-white border-t border-slate-100">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-slate-900 mb-6">Punya Pertanyaan Spesifik?</h2>
+          <h2 className="text-3xl font-bold text-slate-900 mb-6">Kenapa harus ribet cari kendaraan di banyak tempat?</h2>
           <p className="text-slate-500 mb-10 max-w-xl mx-auto">
-            Tim admin kami standby 24/7 untuk memastikan Anda mendapatkan armada Lepas Kunci yang paling tepat untuk kebutuhan Anda.
+            Selain buang waktu, rencana perjalananmu juga jadi nggak maksimal. Temukan semua yang kamu butuhkan dalam satu aplikasi.
+            <br />
+            Booking sekarang dan langsung mulai perjalananmu tanpa ribet.
           </p>
           <a
-            href="https://wa.me/628123456789"
+            href="https://wa.me/628812704174"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-3 bg-slate-900 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-slate-800 transition-colors shadow-xl shadow-slate-900/20"

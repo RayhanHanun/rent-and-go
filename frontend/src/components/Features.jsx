@@ -7,22 +7,22 @@ const Features = () => {
     {
       icon: <Car className="w-8 h-8 text-slate-900" />,
       title: "Banyak pilihan mobil",
-      description: "Mulai dari City Car yang lincah hingga Luxury SUV untuk kenyamanan keluarga Anda."
+      description: "Temukan pilihan armada mobil premium terbaru sesuai kebutuhan perjalananmu."
     },
     {
       icon: <Clock className="w-8 h-8 text-slate-900" />,
       title: "Proses booking cepat",
-      description: "Hanya butuh 5 menit untuk memesan kendaraan impian Anda lewat platform digital kami."
+      description: "Booking dalam satu aplikasi dan langsung mulai perjalananmu tanpa ribet."
     },
     {
       icon: <Tag className="w-8 h-8 text-slate-900" />,
       title: "Harga transparan",
-      description: "Tidak ada biaya tersembunyi. Harga yang Anda lihat adalah harga yang Anda bayar."
+      description: "Proses cepat dan harga transparan untuk setiap perjalanan Anda."
     },
     {
       icon: <ShieldCheck className="w-8 h-8 text-slate-900" />,
       title: "Aman & terpercaya",
-      description: "Seluruh unit kami telah melewati pengecekan rutin dan dilindungi asuransi komprehensif."
+      description: "Armada terawat dan layanan terbaik untuk perjalanan yang lebih nyaman."
     }
   ];
 
