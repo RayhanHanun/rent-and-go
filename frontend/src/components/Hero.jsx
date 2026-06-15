@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, ArrowUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -34,20 +34,20 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen lg:min-h-[90vh] bg-slate-950 overflow-hidden flex items-center">
+    <section className="relative flex min-h-[clamp(44rem,calc(100svh-4rem),47.5rem)] items-start overflow-hidden bg-slate-950 sm:min-h-[calc(100svh-4rem)] lg:min-h-[90vh] lg:items-center">
       {/* Background Image memanggil variabel heroImage */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 bg-[length:auto_114%] bg-[position:62%_bottom] bg-no-repeat sm:bg-cover sm:bg-[position:60%_bottom] md:bg-center"
         style={{
           backgroundImage: `url(${heroImage})`,
         }}
       />
       
       {/* Gradient Overlay for Text Readability */}
-      <div className="absolute inset-0 bg-linear-to-r from-slate-950/95 via-slate-900/80 to-transparent/10 z-10" />
+      <div className="absolute inset-0 z-10 bg-linear-to-b from-slate-950/95 via-slate-900/70 to-slate-950/15 md:bg-linear-to-r md:from-slate-950/95 md:via-slate-900/80 md:to-transparent/10" />
 
       {/* Content Container */}
-      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-16 md:mt-0">
+      <div className="relative z-20 mx-auto w-full max-w-7xl px-5 pt-[4.25rem] pb-6 sm:px-6 sm:pt-12 sm:pb-10 md:px-6 md:pt-20 md:pb-12 lg:px-8 lg:py-0">
         <motion.div 
           className="max-w-2xl"
           variants={containerVariants}
@@ -55,8 +55,8 @@ const Hero = () => {
           animate="show"
         >
           {/* Kicker */}
-          <motion.div variants={itemVariants} className="mb-6">
-            <span className="inline-block bg-white text-slate-900 px-4 py-1.5 rounded-full text-sm font-bold tracking-widest uppercase shadow-sm">
+          <motion.div variants={itemVariants} className="mb-3.5 sm:mb-6">
+            <span className="inline-block rounded-full bg-white px-3 py-1 text-xs font-bold tracking-widest text-slate-900 uppercase shadow-sm sm:px-4 sm:py-1.5 sm:text-sm">
               Rent & Go
             </span>
           </motion.div>
@@ -64,7 +64,7 @@ const Hero = () => {
           {/* Main Headline */}
           <motion.h1 
             variants={itemVariants} 
-            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6"
+            className="mb-3.5 text-[clamp(2.125rem,8.5vw,2.5rem)] leading-[1.08] font-extrabold text-white sm:mb-6 sm:text-5xl sm:leading-tight lg:text-6xl"
           >
             Satu Tempat untuk Semua Kebutuhan Perjalananmu
           </motion.h1>
@@ -72,22 +72,22 @@ const Hero = () => {
           {/* Subtitle */}
           <motion.p 
             variants={itemVariants} 
-            className="text-lg sm:text-xl text-slate-300 mb-10 leading-relaxed font-light max-w-xl"
+            className="mb-5 max-w-[22rem] text-[0.9375rem] leading-relaxed font-light text-slate-300 sm:mb-10 sm:max-w-xl sm:text-xl"
           >
             Nikmati perjalanan lebih nyaman dengan pilihan armada mobil premium terbaru.
           </motion.p>
           
           {/* Action Buttons */}
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4">
+          <motion.div variants={itemVariants} className="grid w-full max-w-[25rem] grid-cols-2 gap-3 sm:flex sm:max-w-none sm:flex-row sm:gap-4">
             <button 
               onClick={() => navigate('/fleet')} 
-              className="bg-white text-slate-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-slate-100 transition-all duration-300 flex items-center justify-center gap-2 group shadow-xl hover:shadow-white/20"
+              className="group flex min-h-11 min-w-0 items-center justify-center gap-1.5 rounded-full bg-white px-3 py-2.5 text-sm font-bold text-slate-900 shadow-xl transition-all duration-300 hover:bg-slate-100 hover:shadow-white/20 sm:gap-2 sm:px-8 sm:py-4 sm:text-lg"
             >
-              Sewa Sekarang <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              Sewa Sekarang <ArrowRight size={18} className="shrink-0 transition-transform group-hover:translate-x-1 sm:h-5 sm:w-5" />
             </button>
             <button 
               onClick={() => navigate('/fleet')} 
-              className="bg-transparent border border-white/30 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 hover:border-white transition-all duration-300 flex items-center justify-center backdrop-blur-sm"
+              className="flex min-h-11 min-w-0 items-center justify-center rounded-full border border-white/30 bg-transparent px-3 py-2.5 text-sm font-bold text-white backdrop-blur-sm transition-all duration-300 hover:border-white hover:bg-white/10 sm:px-8 sm:py-4 sm:text-lg"
             >
               Lihat Armada
             </button>

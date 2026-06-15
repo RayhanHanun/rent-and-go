@@ -1,9 +1,47 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+
+const WHATSAPP_URL = 'https://wa.me/628812704174?text=Halo%20Rent%20%26%20Go%2C%20saya%20ingin%20bertanya%20tentang%20layanan%20rental%20mobil.';
+
+const NAV_ITEMS = [
+  {
+    label: 'Beranda',
+    to: '/',
+    isActive: (pathname) => pathname === '/' || pathname === '/beranda',
+  },
+  {
+    label: 'Armada',
+    to: '/fleet',
+    isActive: (pathname) =>
+      pathname === '/fleet' || pathname === '/armada' || pathname.startsWith('/armada/'),
+  },
+  {
+    label: 'Layanan',
+    to: '/services',
+    isActive: (pathname) =>
+      pathname === '/services' || pathname === '/layanan' || pathname.startsWith('/layanan/'),
+  },
+  {
+    label: 'Kontak',
+    to: '/kontak',
+    isActive: (pathname) => pathname === '/kontak',
+  },
+];
+
+const WhatsAppIcon = () => (
+  <svg
+    viewBox="0 0 16 16"
+    className="size-[18px] shrink-0 fill-current"
+    aria-hidden="true"
+  >
+    <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93a7.898 7.898 0 0 0-2.327-5.607ZM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.25a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592Zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.066-.315-.099-.445.099-.133.197-.514.646-.627.775-.116.133-.232.15-.43.05-.197-.099-.836-.308-1.592-.984-.59-.525-.986-1.174-1.099-1.372.116-.198.216-.33.314-.463.099-.13.133-.232.199-.364.066-.133.033-.248-.017-.347-.05-.099-.445-1.075-.61-1.47-.16-.389-.323-.335-.445-.34-.116-.007-.248-.007-.381-.007a.729.729 0 0 0-.527.248c-.182.198-.693.678-.693 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.463.164-.86.115-.943-.05-.082-.182-.132-.38-.23Z" />
+  </svg>
+);
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const { pathname } = useLocation();
 
   return (
     <nav className="sticky top-0 z-50 bg-white/70 backdrop-blur-md border-b border-gray-100 shadow-sm">
@@ -19,33 +57,41 @@ const Navbar = () => {
           
           {/* 2. BAGIAN TENGAH: Navigasi (Tepat di Tengah) */}
           <div className="hidden md:flex items-center justify-center space-x-8">
-            <Link to="/" className="relative group text-slate-600 hover:text-slate-900 font-medium transition-colors">
-              Beranda
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-slate-900 transition-all duration-300 group-hover:w-full"></span>
-            </Link>
-            <Link to="/fleet" className="relative group text-slate-600 hover:text-slate-900 font-medium transition-colors">
-              Armada
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-slate-900 transition-all duration-300 group-hover:w-full"></span>
-            </Link>
-            <Link to="/services" className="relative group text-slate-600 hover:text-slate-900 font-medium transition-colors">
-              Layanan
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-slate-900 transition-all duration-300 group-hover:w-full"></span>
-            </Link>
-            <Link to="/kontak" className="relative group text-slate-600 hover:text-slate-900 font-medium transition-colors">
-              Kontak
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-slate-900 transition-all duration-300 group-hover:w-full"></span>
-            </Link>
+            {NAV_ITEMS.map((item) => {
+              const active = item.isActive(pathname);
+
+              return (
+                <Link
+                  key={item.label}
+                  to={item.to}
+                  aria-current={active ? 'page' : undefined}
+                  className={`relative group transition-colors duration-200 hover:text-slate-900 ${
+                    active ? 'font-semibold text-slate-900' : 'font-medium text-slate-600'
+                  }`}
+                >
+                  {item.label}
+                  <span
+                    className={`absolute -bottom-1 left-0 h-0.5 bg-slate-900 transition-all duration-300 ${
+                      active ? 'w-full' : 'w-0 group-hover:w-full'
+                    }`}
+                  />
+                </Link>
+              );
+            })}
           </div>
 
-          {/* 3. BAGIAN KANAN: Tombol & Auth */}
+          {/* 3. BAGIAN KANAN: Tombol CTA */}
           <div className="flex-1 flex items-center justify-end space-x-4">
-            <div className="hidden md:flex items-center space-x-4">
-              <Link to="/signin" className="text-slate-600 hover:text-slate-900 font-medium px-3 py-2">
-                Masuk
-              </Link>
-              <Link to="/fleet" className="bg-slate-900 text-white px-4 py-2 rounded-md font-medium hover:bg-slate-950 transition-colors shadow-sm shadow-slate-800/20">
-                Sewa Sekarang
-              </Link>
+            <div className="hidden md:flex items-center">
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-5 py-2.5 font-medium text-white shadow-sm shadow-slate-800/20 transition-all duration-300 hover:bg-slate-800 hover:shadow-md hover:shadow-slate-800/25"
+              >
+                <WhatsAppIcon />
+                Hubungi Kami
+              </a>
             </div>
 
             {/* Menu Mobile Button (Muncul saat layar kecil) */}
@@ -65,13 +111,36 @@ const Navbar = () => {
       {/* Mobile menu (Dropdown) */}
       {isOpen && (
         <div className="md:hidden bg-white border-t border-slate-100 px-4 pt-2 pb-6 space-y-1 shadow-lg">
-          <Link to="/" className="block px-3 py-3 text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50 rounded-md" onClick={() => setIsOpen(false)}>Beranda</Link>
-          <Link to="/fleet" className="block px-3 py-3 text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50 rounded-md" onClick={() => setIsOpen(false)}>Armada</Link>
-          <Link to="/services" className="block px-3 py-3 text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50 rounded-md" onClick={() => setIsOpen(false)}>Layanan</Link>
-          <Link to="/kontak" className="block px-3 py-3 text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50 rounded-md" onClick={() => setIsOpen(false)}>Kontak</Link>
-          <div className="mt-4 pt-4 border-t border-slate-100 flex flex-col space-y-2">
-            <Link to="/signin" className="w-full text-center text-slate-600 hover:text-slate-900 font-medium px-3 py-3" onClick={() => setIsOpen(false)}>Masuk</Link>
-            <Link to="/fleet" className="w-full text-center bg-slate-900 text-white px-4 py-3 rounded-md font-bold hover:bg-slate-950 transition-colors" onClick={() => setIsOpen(false)}>Sewa Sekarang</Link>
+          {NAV_ITEMS.map((item) => {
+            const active = item.isActive(pathname);
+
+            return (
+              <Link
+                key={item.label}
+                to={item.to}
+                aria-current={active ? 'page' : undefined}
+                className={`block rounded-md border-l-2 px-3 py-3 text-base transition-colors duration-200 ${
+                  active
+                    ? 'border-slate-900 bg-slate-50 font-semibold text-slate-900'
+                    : 'border-transparent font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900'
+                }`}
+                onClick={() => setIsOpen(false)}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+          <div className="mt-4 border-t border-slate-100 pt-4">
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-slate-900 px-4 py-3 font-bold text-white shadow-sm shadow-slate-800/20 transition-all duration-300 hover:bg-slate-800 hover:shadow-md"
+              onClick={() => setIsOpen(false)}
+            >
+              <WhatsAppIcon />
+              Hubungi Kami
+            </a>
           </div>
         </div>
       )}
