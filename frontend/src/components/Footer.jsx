@@ -1,6 +1,9 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail } from 'lucide-react';
+import { services } from '../data/services';
+
+const footerLinkClass =
+  'rounded-sm transition-colors duration-200 hover:text-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white';
 
 const Footer = () => {
   return (
@@ -25,22 +28,22 @@ const Footer = () => {
             </h4>
             <ul className="space-y-4 text-slate-400 text-sm">
               <li>
-                <Link to="/" className="hover:text-slate-300 transition-colors">
+                <Link to="/" className={footerLinkClass}>
                   Beranda
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/fleet"
-                  className="hover:text-slate-300 transition-colors"
+                  to="/armada"
+                  className={footerLinkClass}
                 >
                   Armada
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/services"
-                  className="hover:text-slate-300 transition-colors"
+                  to="/layanan"
+                  className={footerLinkClass}
                 >
                   Layanan
                 </Link>
@@ -48,7 +51,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/kontak"
-                  className="hover:text-slate-300 transition-colors"
+                  className={footerLinkClass}
                 >
                   Kontak
                 </Link>
@@ -62,38 +65,16 @@ const Footer = () => {
               Layanan
             </h4>
             <ul className="space-y-4 text-slate-400 text-sm">
-              <li>
-                <Link
-                  to="/layanan/lepas-kunci"
-                  className="hover:text-slate-300 transition-colors"
-                >
-                  Sewa Mobil Lepas Kunci
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/layanan/dengan-pengemudi"
-                  className="hover:text-slate-300 transition-colors"
-                >
-                  Sewa dengan Pengemudi
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/layanan/paket-tour"
-                  className="hover:text-slate-300 transition-colors"
-                >
-                  Paket Tour Wisata
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/layanan/bandara"
-                  className="hover:text-slate-300 transition-colors"
-                >
-                  Antar-Jemput Bandara
-                </Link>
-              </li>
+              {services.map((service) => (
+                <li key={service.slug}>
+                  <Link
+                    to={`/layanan/${service.slug}`}
+                    className={footerLinkClass}
+                  >
+                    {service.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -107,18 +88,20 @@ const Footer = () => {
                 <Phone size={20} className="text-slate-400 shrink-0 mt-0.5" />
                 <a
                   href="tel:+628812704174"
-                  className="hover:text-slate-300 transition-colors"
+                  className={footerLinkClass}
                 >
                   +62 881-2704-174
                   <br />
-                  Senin-Minggu (24 Jam)
+                  Layanan online 24/7
+                  <br />
+                  Garasi 07.00-22.00 WIB
                 </a>
               </li>
               <li className="flex items-start gap-4">
                 <Mail size={20} className="text-slate-400 shrink-0 mt-0.5" />
                 <a
                   href="mailto:rentalmobilngo@gmail.com"
-                  className="hover:text-slate-300 transition-colors break-all"
+                  className={`${footerLinkClass} break-all`}
                 >
                   rentalmobilngo@gmail.com
                 </a>
@@ -129,7 +112,7 @@ const Footer = () => {
                   href="https://www.google.com/maps/search/?api=1&query=Jl.%20Ring%20Road%20Utara%2C%20Ngringin%2C%20Condongcatur%2C%20Kec.%20Depok%2C%20Kabupaten%20Sleman%2C%20Daerah%20Istimewa%20Yogyakarta%2055281"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="leading-relaxed hover:text-slate-300 transition-colors"
+                  className={`${footerLinkClass} leading-relaxed`}
                 >
                   Jl. Ring Road Utara, Ngringin, Condongcatur, Kec. Depok,
                   Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281

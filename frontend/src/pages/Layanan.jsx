@@ -1,193 +1,142 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
-import { ChevronRight, Key, UserCheck, Map, Plane } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { ChevronRight, Key, Map, Plane, UserCheck } from 'lucide-react';
+import { services } from '../data/services';
+import Button from '../components/ui/Button';
+import SafeImage from '../components/ui/SafeImage';
+import SectionHeader from '../components/ui/SectionHeader';
 
-const CAROUSEL_SLIDES = [
-  {
-    id: 1,
-    image: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?q=80&w=2670&auto=format&fit=crop',
-    title: 'Kebebasan Lepas Kunci',
-    subtitle: 'Pilih kendaraan yang tepat dan mulai perjalananmu dengan lebih nyaman.'
-  },
-  {
-    id: 2,
-    image: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2670&auto=format&fit=crop',
-    title: 'Perjalanan Nyaman dengan Pengemudi',
-    subtitle: 'Nikmati perjalanan lebih tenang dengan layanan pengemudi sesuai kebutuhanmu.'
-  },
-  {
-    id: 3,
-    image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2621&auto=format&fit=crop',
-    title: 'Paket Tour untuk Perjalananmu',
-    subtitle: 'Temukan kendaraan dan layanan perjalanan yang kamu butuhkan dalam satu tempat.'
-  },
-  {
-    id: 4,
-    image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2674&auto=format&fit=crop',
-    title: 'Antar-Jemput Bandara Tanpa Ribet',
-    subtitle: 'Proses cepat dan layanan tepat waktu untuk perjalanan dari atau menuju bandara.'
-  }
-];
-
-const SERVICES_DATA = [
-  {
-    id: 'lepas-kunci',
-    title: "Sewa Mobil Lepas Kunci",
-    description: "Pilih armada mobil terbaru sesuai kebutuhanmu dan nikmati perjalanan dengan lebih leluasa. Proses booking cepat dan harga transparan membuat perjalananmu bisa dimulai tanpa ribet.",
-    icon: Key,
-    image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1500&auto=format&fit=crop",
-    link: "/layanan/lepas-kunci"
-  },
-  {
-    id: 'dengan-pengemudi',
-    title: "Sewa Mobil dengan Pengemudi",
-    description: "Nikmati perjalanan lebih nyaman dengan kendaraan yang tepat dan layanan pengemudi sesuai kebutuhanmu. Booking dalam satu aplikasi untuk perjalanan dalam maupun luar kota.",
-    icon: UserCheck,
-    image: "https://images.unsplash.com/photo-1616422285623-13ff0162193c?q=80&w=1500&auto=format&fit=crop",
-    link: "/layanan/dengan-pengemudi"
-  },
-  {
-    id: 'paket-tour',
-    title: "Layanan Paket Tour Wisata",
-    description: "Temukan kebutuhan kendaraan dan layanan perjalanan wisata dalam satu tempat. Pilih paket tour, lakukan booking, dan mulai perjalananmu tanpa ribet.",
-    icon: Map,
-    image: "https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?q=80&w=1500&auto=format&fit=crop",
-    link: "/layanan/paket-tour"
-  },
-  {
-    id: 'bandara',
-    title: "Layanan Antar-Jemput Bandara",
-    description: "Atur perjalanan dari atau menuju bandara dengan proses cepat dan kendaraan yang tepat. Harga transparan dan layanan tepat waktu membantu perjalanan Anda lebih nyaman.",
-    icon: Plane,
-    image: "https://images.unsplash.com/photo-1542282088-fe8426682b8f?q=80&w=1500&auto=format&fit=crop",
-    link: "/layanan/bandara"
-  }
-];
+const serviceIcons = {
+  key: Key,
+  userCheck: UserCheck,
+  map: Map,
+  plane: Plane,
+};
 
 const Layanan = () => {
-  const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const shouldReduceMotion = useReducedMotion();
+  const currentService = services[currentSlide];
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % CAROUSEL_SLIDES.length);
+    if (shouldReduceMotion) return undefined;
+
+    const timer = window.setInterval(() => {
+      setCurrentSlide((previous) => (previous + 1) % services.length);
     }, 5000);
-    return () => clearInterval(timer);
-  }, []);
+
+    return () => window.clearInterval(timer);
+  }, [shouldReduceMotion]);
 
   return (
-    <div className="bg-slate-50 min-h-screen">
-      {/* Hero Carousel Section */}
-      <section className="relative w-full h-[70vh] bg-slate-950 overflow-hidden">
+    <div className="min-h-screen bg-slate-50">
+      <section className="relative h-[70vh] min-h-[32rem] w-full overflow-hidden bg-slate-950">
         <AnimatePresence mode="wait">
           <motion.div
-            key={currentSlide}
-            initial={{ opacity: 0, scale: 1.05 }}
+            key={currentService.slug}
+            initial={shouldReduceMotion ? false : { opacity: 0, scale: 1.02 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
+            exit={shouldReduceMotion ? undefined : { opacity: 0 }}
+            transition={{ duration: shouldReduceMotion ? 0 : 0.6 }}
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${CAROUSEL_SLIDES[currentSlide].image})` }}
+            style={{ backgroundImage: `url(${currentService.image})` }}
           />
         </AnimatePresence>
+        <div className="absolute inset-0 z-10 bg-linear-to-b from-slate-950/45 via-slate-900/65 to-slate-950/95" />
 
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-linear-to-b from-slate-950/40 via-slate-900/60 to-slate-950/90 z-10" />
-
-        {/* Text Content */}
-        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 mt-12">
+        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center px-4 pt-12 text-center sm:px-6 lg:px-8">
           <AnimatePresence mode="wait">
             <motion.div
-              key={`text-${currentSlide}`}
-              initial={{ opacity: 0, y: 20 }}
+              key={`text-${currentService.slug}`}
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              exit={shouldReduceMotion ? undefined : { opacity: 0, y: -12 }}
+              transition={{ duration: shouldReduceMotion ? 0 : 0.4 }}
               className="max-w-4xl"
             >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-xl">
-                {CAROUSEL_SLIDES[currentSlide].title}
+              <h1 className="mb-6 text-4xl font-extrabold leading-tight text-white drop-shadow-xl md:text-5xl lg:text-6xl">
+                {currentService.shortTitle}
               </h1>
-              <p className="text-lg md:text-xl text-slate-200 font-light max-w-2xl mx-auto drop-shadow-md">
-                {CAROUSEL_SLIDES[currentSlide].subtitle}
+              <p className="mx-auto max-w-2xl text-lg font-light text-slate-200 drop-shadow-md md:text-xl">
+                {currentService.heroDescription}
               </p>
             </motion.div>
           </AnimatePresence>
 
-          {/* Slide Indicators */}
-          <div className="absolute bottom-12 flex gap-3">
-            {CAROUSEL_SLIDES.map((_, idx) => (
+          <div className="absolute bottom-12 flex gap-3" aria-label="Pilih slide layanan">
+            {services.map((service, index) => (
               <button
-                key={idx}
-                onClick={() => setCurrentSlide(idx)}
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-500 ${
-                  currentSlide === idx ? "w-8 bg-white" : "bg-white/40 hover:bg-white/70"
+                key={service.slug}
+                type="button"
+                onClick={() => setCurrentSlide(index)}
+                className={`h-2.5 rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 ${
+                  currentSlide === index
+                    ? 'w-8 bg-white'
+                    : 'w-2.5 bg-white/40 hover:bg-white/70'
                 }`}
-                aria-label={`Go to slide ${idx + 1}`}
+                aria-label={`Tampilkan layanan ${service.title}`}
+                aria-current={currentSlide === index ? 'true' : undefined}
               />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Services 1-Column List Section */}
-      <section className="py-24">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">Perjalanan Asik Dimulai dari Jasa yang Menarik.</h2>
-            <div className="w-16 h-1 bg-slate-900 mx-auto rounded-full mb-6"></div>
-            <p className="text-slate-500 max-w-2xl mx-auto">
-              Kenapa harus ribet cari kendaraan di banyak tempat? Temukan semua yang kamu butuhkan dalam satu aplikasi.
-            </p>
-          </div>
+      <section className="py-20 sm:py-24">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            title="Layanan Perjalanan Rent & Go"
+            description="Temukan kendaraan dan layanan perjalanan Anda dalam satu tempat, dengan proses yang jelas dan mudah."
+            className="mb-16"
+          />
 
-          <div className="flex flex-col gap-16">
-            {SERVICES_DATA.map((service, idx) => (
-              <motion.div 
-                key={service.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
-                className="bg-white rounded-3xl overflow-hidden shadow-[0_15px_30px_-5px_rgba(0,0,0,0.05)] border border-slate-100 flex flex-col md:flex-row group"
-              >
-                {/* Image Column */}
-                <div className="md:w-5/12 relative h-64 md:h-auto overflow-hidden">
-                  <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                  <img 
-                    src={service.image} 
-                    alt={service.title} 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                  />
-                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm p-3 rounded-2xl shadow-lg z-20 text-slate-900">
-                    <service.icon size={24} strokeWidth={2.5} />
+          <div className="flex flex-col gap-12">
+            {services.map((service, index) => {
+              const Icon = serviceIcons[service.icon];
+
+              return (
+                <motion.article
+                  key={service.slug}
+                  initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-80px' }}
+                  transition={{
+                    duration: shouldReduceMotion ? 0 : 0.4,
+                    delay: shouldReduceMotion ? 0 : index * 0.05,
+                  }}
+                  className="group flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-[0_16px_36px_-20px_rgba(15,23,42,0.28)] md:flex-row"
+                >
+                  <div className="relative h-64 overflow-hidden md:h-auto md:w-5/12">
+                    <SafeImage
+                      src={service.image}
+                      alt={service.imageAlt}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                    />
+                    <div className="absolute left-4 top-4 z-20 rounded-xl bg-white/90 p-3 text-slate-900 shadow-lg backdrop-blur-sm">
+                      <Icon size={24} aria-hidden="true" />
+                    </div>
                   </div>
-                </div>
 
-                {/* Text Content Column */}
-                <div className="md:w-7/12 p-8 lg:p-12 flex flex-col justify-center">
-                  <h3 className="text-2xl lg:text-3xl font-bold text-slate-900 mb-4 group-hover:text-slate-700 transition-colors">
-                    {service.title}
-                  </h3>
-                  <p className="text-slate-500 mb-8 leading-relaxed">
-                    {service.description}
-                  </p>
-                  <div className="mt-auto pointer-events-auto">
-                    <button 
-                      onClick={() => navigate(service.link)}
-                      className="bg-slate-900 text-white px-6 py-3.5 rounded-xl font-medium hover:bg-slate-800 transition-colors flex items-center gap-2 w-fit group/btn"
+                  <div className="flex flex-col justify-center p-8 md:w-7/12 lg:p-12">
+                    <h2 className="mb-4 text-2xl font-bold text-slate-900 lg:text-3xl">
+                      {service.title}
+                    </h2>
+                    <p className="mb-8 leading-relaxed text-slate-500">
+                      {service.description}
+                    </p>
+                    <Button
+                      to={`/layanan/${service.slug}`}
+                      className="w-fit rounded-xl"
                     >
-                      Pelajari Lebih Lanjut 
-                      <ChevronRight size={18} className="group-hover/btn:translate-x-1 transition-transform" />
-                    </button>
+                      Pelajari Lebih Lanjut
+                      <ChevronRight size={18} aria-hidden="true" />
+                    </Button>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.article>
+              );
+            })}
           </div>
-
         </div>
       </section>
     </div>

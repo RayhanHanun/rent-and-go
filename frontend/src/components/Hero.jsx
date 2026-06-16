@@ -1,36 +1,47 @@
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight, ArrowUp } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 import heroImage from '../assets/hero-mobil.jpeg';
+import Button from './ui/Button';
+import { getWhatsAppUrl } from '../utils/whatsapp';
 
 const Hero = () => {
-  const navigate = useNavigate();
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
+  const heroWhatsappUrl = getWhatsAppUrl(
+    'Halo Rent & Go, saya ingin menyewa mobil. Mohon bantu saya memilih armada yang tersedia.',
+  );
 
   useEffect(() => {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 300);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const reduceMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
   };
 
   const containerVariants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: { staggerChildren: 0.2 },
+          transition: { staggerChildren: shouldReduceMotion ? 0 : 0.15 },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, x: -30 },
-    show: { opacity: 1, x: 0, transition: { duration: 0.8, ease: 'easeOut' } },
+    hidden: { opacity: 0, x: shouldReduceMotion ? 0 : -24 },
+    show: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: shouldReduceMotion ? 0 : 0.6, ease: 'easeOut' },
+    },
   };
 
   return (
@@ -51,7 +62,7 @@ const Hero = () => {
         <motion.div 
           className="max-w-2xl"
           variants={containerVariants}
-          initial="hidden"
+          initial={shouldReduceMotion ? false : 'hidden'}
           animate="show"
         >
           {/* Kicker */}
@@ -66,7 +77,7 @@ const Hero = () => {
             variants={itemVariants} 
             className="mb-3.5 text-[clamp(2.125rem,8.5vw,2.5rem)] leading-[1.08] font-extrabold text-white sm:mb-6 sm:text-5xl sm:leading-tight lg:text-6xl"
           >
-            Satu Tempat untuk Semua Kebutuhan Perjalananmu
+            Satu Tempat untuk Semua Kebutuhan Perjalananmu.
           </motion.h1>
           
           {/* Subtitle */}
@@ -75,22 +86,30 @@ const Hero = () => {
             className="mb-5 max-w-[22rem] text-[0.9375rem] leading-relaxed font-light text-slate-300 sm:mb-10 sm:max-w-xl sm:text-xl"
           >
             Nikmati perjalanan lebih nyaman dengan pilihan armada mobil premium terbaru.
+            Proses cepat, harga transparan, dan layanan terbaik untuk setiap perjalanan Anda.
           </motion.p>
           
           {/* Action Buttons */}
           <motion.div variants={itemVariants} className="grid w-full max-w-[25rem] grid-cols-2 gap-3 sm:flex sm:max-w-none sm:flex-row sm:gap-4">
-            <button 
-              onClick={() => navigate('/fleet')} 
-              className="group flex min-h-11 min-w-0 items-center justify-center gap-1.5 rounded-full bg-white px-3 py-2.5 text-sm font-bold text-slate-900 shadow-xl transition-all duration-300 hover:bg-slate-100 hover:shadow-white/20 sm:gap-2 sm:px-8 sm:py-4 sm:text-lg"
+            <Button
+              href={heroWhatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="secondary"
+              size="md"
+              className="group min-w-0 text-sm sm:min-h-12 sm:px-8 sm:py-3.5 sm:text-lg"
             >
-              Sewa Sekarang <ArrowRight size={18} className="shrink-0 transition-transform group-hover:translate-x-1 sm:h-5 sm:w-5" />
-            </button>
-            <button 
-              onClick={() => navigate('/fleet')} 
-              className="flex min-h-11 min-w-0 items-center justify-center rounded-full border border-white/30 bg-transparent px-3 py-2.5 text-sm font-bold text-white backdrop-blur-sm transition-all duration-300 hover:border-white hover:bg-white/10 sm:px-8 sm:py-4 sm:text-lg"
+              <span className="whitespace-nowrap">Sewa Sekarang</span>
+              <ArrowRight size={18} className="shrink-0 transition-transform group-hover:translate-x-1 sm:h-5 sm:w-5" />
+            </Button>
+            <Button
+              to="/armada"
+              variant="outline"
+              size="md"
+              className="min-w-0 border-white/30 text-sm text-white backdrop-blur-sm hover:border-white hover:bg-white/10 sm:min-h-12 sm:px-8 sm:py-3.5 sm:text-lg"
             >
               Lihat Armada
-            </button>
+            </Button>
           </motion.div>
         </motion.div>
       </div>
@@ -100,8 +119,10 @@ const Hero = () => {
         className={`fixed bottom-8 right-8 z-50 transition-opacity duration-300 ${showScrollTop ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
       >
         <button 
+          type="button"
           onClick={scrollToTop}
-          className="bg-slate-900 text-white p-4 rounded-full shadow-2xl hover:bg-slate-800 transition-colors border border-white/10"
+          aria-label="Kembali ke atas"
+          className="rounded-full border border-white/10 bg-slate-900 p-3 text-white shadow-2xl transition-colors duration-200 hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 sm:p-4"
         >
           <ArrowUp size={24} />
         </button>

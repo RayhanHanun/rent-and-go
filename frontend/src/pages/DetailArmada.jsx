@@ -1,151 +1,220 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { ChevronRight, Users, Briefcase, Settings, Zap, Shield, UserCheck, MessageCircle } from 'lucide-react';
+import { useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import {
+  Briefcase,
+  ChevronRight,
+  Fuel,
+  MessageCircle,
+  Settings,
+  ShieldCheck,
+  Star,
+  Users,
+} from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
-
-const CAR_DATA = {
-  id: 'toyota-agya',
-  name: 'Toyota Agya',
-  category: 'City Car',
-  price: 'Rp 250.000',
-  description: 'Toyota Agya cocok untuk kebutuhan perjalanan dalam kota. Ukurannya ringkas, mudah dikendarai, dan nyaman digunakan untuk perjalanan singkat maupun aktivitas harian.',
-  images: [
-    'https://images.unsplash.com/photo-1590362891991-f776e747a588?auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fd?auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&q=80'
-  ],
-  specs: [
-    { icon: Users, label: 'Tempat Duduk', value: '4 Kursi' },
-    { icon: Briefcase, label: 'Bagasi', value: '2 Koper' },
-    { icon: Settings, label: 'Transmisi', value: 'Automatic' },
-    { icon: Zap, label: 'Bahan Bakar', value: 'Bensin' },
-    { icon: Shield, label: 'Asuransi', value: 'Termasuk' },
-    { icon: UserCheck, label: 'Pengemudi', value: 'Lepas Kunci / Supir' },
-  ]
-};
+import { getCarBySlug } from '../data/cars';
+import { getWhatsAppUrl } from '../utils/whatsapp';
+import Button from '../components/ui/Button';
+import SafeImage from '../components/ui/SafeImage';
 
 const DetailArmada = () => {
-  const { id } = useParams();
-  const [activeImage, setActiveImage] = useState(0);
+  const { slug } = useParams();
+  const car = getCarBySlug(slug);
+  const shouldReduceMotion = useReducedMotion();
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-  // In a real app, you would fetch real data based on the ID.
-  const car = CAR_DATA; // Mock data for now
+  if (!car) {
+    return (
+      <section className="flex min-h-[65vh] items-center bg-slate-50 px-4 py-20 text-center">
+        <div className="mx-auto max-w-xl">
+          <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-slate-500">
+            Armada tidak ditemukan
+          </p>
+          <h1 className="mb-4 text-4xl font-extrabold text-slate-900">
+            Kendaraan yang Anda cari belum tersedia.
+          </h1>
+          <p className="mb-8 text-slate-600">
+            Silakan kembali ke katalog untuk melihat pilihan armada lainnya.
+          </p>
+          <Button to="/armada" size="lg">
+            Kembali ke Armada
+          </Button>
+        </div>
+      </section>
+    );
+  }
 
-  // Scroll to top on mount
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  const specs = [
+    { icon: Users, label: 'Tempat Duduk', value: `${car.seats} kursi` },
+    { icon: Briefcase, label: 'Bagasi', value: `${car.luggage} bagasi` },
+    { icon: Settings, label: 'Transmisi', value: car.transmission },
+    { icon: Fuel, label: 'Bahan Bakar', value: car.fuel },
+  ];
+  const galleryImages =
+    car.images?.length > 0
+      ? car.images
+      : [{ src: car.image, alt: car.imageAlt }];
+  const activeImage = galleryImages[activeImageIndex] ?? galleryImages[0];
 
   return (
-    <div className="min-h-screen bg-white pt-20">
-      {/* Breadcrumb Context */}
-      <div className="bg-slate-50 border-b border-slate-200 py-4">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center text-sm text-slate-500">
-          <Link to="/" className="hover:text-slate-900 transition-colors">Beranda</Link>
-          <ChevronRight className="w-4 h-4 mx-2" />
-          <Link to="/armada" className="hover:text-slate-900 transition-colors">Armada</Link>
-          <ChevronRight className="w-4 h-4 mx-2" />
-          <span className="text-slate-900 font-medium">{car.name}</span>
-        </div>
-      </div>
+    <div className="min-h-screen bg-white">
+      <nav
+        aria-label="Breadcrumb"
+        className="border-b border-slate-200 bg-slate-50 py-4"
+      >
+        <ol className="mx-auto flex max-w-7xl items-center px-4 text-sm text-slate-500 sm:px-6 lg:px-8">
+          <li>
+            <Link
+              to="/"
+              className="rounded-sm transition-colors duration-200 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900"
+            >
+              Beranda
+            </Link>
+          </li>
+          <ChevronRight className="mx-2 h-4 w-4" aria-hidden="true" />
+          <li>
+            <Link
+              to="/armada"
+              className="rounded-sm transition-colors duration-200 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900"
+            >
+              Armada
+            </Link>
+          </li>
+          <ChevronRight className="mx-2 h-4 w-4" aria-hidden="true" />
+          <li className="truncate font-medium text-slate-900" aria-current="page">
+            {car.name}
+          </li>
+        </ol>
+      </nav>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 lg:grid-cols-2 gap-12">
-        {/* Left Column (Image Gallery) */}
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 py-12 sm:px-6 lg:grid-cols-2 lg:gap-12 lg:px-8">
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={shouldReduceMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: shouldReduceMotion ? 0 : 0.45 }}
           className="space-y-4"
         >
-          {/* Main Image */}
-          <div className="aspect-4/3 rounded-2xl overflow-hidden border border-slate-100 bg-slate-50 relative group">
-            <img 
-              src={car.images[activeImage]} 
-              alt={car.name}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          <div className="aspect-4/3 overflow-hidden rounded-2xl border border-slate-100 bg-slate-50">
+            <SafeImage
+              src={activeImage.src}
+              alt={activeImage.alt}
+              className="h-full w-full object-cover"
             />
           </div>
+          <div
+            className="flex gap-3 overflow-x-auto pb-2"
+            aria-label={`Galeri foto ${car.name}`}
+          >
+            {galleryImages.map((image, index) => {
+              const isActive = activeImageIndex === index;
 
-          {/* Thumbnails */}
-          <div className="grid grid-cols-4 gap-4">
-            {car.images.map((img, idx) => (
-              <button
-                key={idx}
-                onClick={() => setActiveImage(idx)}
-                className={`aspect-4/3 rounded-xl overflow-hidden border-2 transition-all ${
-                  activeImage === idx 
-                    ? 'border-slate-900 ring-4 ring-slate-900/10' 
-                    : 'border-transparent hover:border-slate-300'
-                }`}
-              >
-                <img src={img} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
-              </button>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Right Column (Specs & Action) */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-col"
-        >
-          <span className="inline-block px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm font-medium mb-4 w-fit">
-            {car.category}
-          </span>
-          <h1 className="text-4xl font-bold text-slate-900 mb-2">{car.name}</h1>
-          <div className="flex items-baseline gap-2 mb-8 border-b border-slate-100 pb-8">
-            <span className="text-3xl font-bold text-slate-900">{car.price}</span>
-            <span className="text-slate-500">/ hari</span>
-          </div>
-
-          {/* Specs Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 gap-6 mb-8">
-            {car.specs.map((spec, idx) => {
-              const Icon = spec.icon;
               return (
-                <div key={idx} className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-600 shrink-0">
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="text-xs text-slate-500">{spec.label}</p>
-                    <p className="font-medium text-slate-900">{spec.value}</p>
-                  </div>
-                </div>
+                <button
+                  key={`${image.alt}-${index}`}
+                  type="button"
+                  onClick={() => setActiveImageIndex(index)}
+                  aria-label={`Lihat foto ${image.alt}`}
+                  aria-current={isActive ? 'true' : undefined}
+                  className={`h-20 w-28 shrink-0 overflow-hidden rounded-xl border-2 bg-slate-50 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2 sm:h-24 sm:w-32 ${
+                    isActive
+                      ? 'border-slate-900 ring-4 ring-slate-900/10'
+                      : 'border-transparent hover:border-slate-300'
+                  }`}
+                >
+                  <SafeImage
+                    src={image.src}
+                    alt={image.alt}
+                    loading="lazy"
+                    className="h-full w-full object-cover"
+                  />
+                </button>
               );
             })}
           </div>
+        </motion.div>
 
-          {/* Description */}
-          <div className="mb-8">
-            <h3 className="text-lg font-semibold text-slate-900 mb-2">Tentang Kendaraan Ini</h3>
-            <p className="text-slate-600 leading-relaxed">
-              {car.description}
-            </p>
+        <motion.div
+          initial={shouldReduceMotion ? false : { opacity: 0, x: 24 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{
+            duration: shouldReduceMotion ? 0 : 0.45,
+            delay: shouldReduceMotion ? 0 : 0.1,
+          }}
+          className="flex flex-col"
+        >
+          <div className="mb-4 flex flex-wrap items-center gap-3">
+            <span className="rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-700">
+              {car.category}
+            </span>
+            <span className="flex items-center gap-1 text-sm font-semibold text-slate-700">
+              <Star size={16} className="fill-amber-400 text-amber-400" aria-hidden="true" />
+              {car.rating.toFixed(1)}
+            </span>
           </div>
 
+          <h1 className="mb-2 text-4xl font-bold text-slate-900">{car.name}</h1>
+          <div className="mb-8 flex items-baseline gap-2 border-b border-slate-100 pb-8">
+            <span className="text-3xl font-bold text-slate-900">{car.priceLabel}</span>
+            <span className="text-slate-500">/ hari</span>
+          </div>
+
+          <div className="mb-8 grid grid-cols-2 gap-6">
+            {specs.map(({ icon: Icon, label, value }) => (
+              <div key={label} className="flex items-center gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-50 text-slate-600">
+                  <Icon className="h-5 w-5" aria-hidden="true" />
+                </div>
+                <div>
+                  <p className="text-xs text-slate-500">{label}</p>
+                  <p className="font-medium text-slate-900">{value}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <section className="mb-8">
+            <h2 className="mb-2 text-lg font-semibold text-slate-900">
+              Tentang Kendaraan Ini
+            </h2>
+            <p className="leading-relaxed text-slate-600">{car.description}</p>
+          </section>
+
+          <section className="mb-8">
+            <h2 className="mb-3 text-lg font-semibold text-slate-900">Fasilitas</h2>
+            <ul className="grid grid-cols-2 gap-3 text-sm text-slate-700">
+              {car.features.map((feature) => (
+                <li key={feature} className="flex items-center gap-2">
+                  <ShieldCheck size={17} className="text-slate-500" aria-hidden="true" />
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </section>
+
           <div className="mt-auto space-y-4">
-            {/* Assurance Box */}
-            <div className="bg-slate-50 rounded-xl p-4 flex items-start gap-3 border border-slate-100">
-              <Shield className="w-6 h-6 text-slate-700 shrink-0 mt-0.5" />
-              <p className="text-sm text-slate-700 leading-relaxed">
-                Kendaraan selalu <span className="font-semibold">divakum, dicuci, dan disinfeksi total</span> sebelum penyerahan kunci kepada pelanggan.
+            <div className="flex items-start gap-3 rounded-xl border border-slate-100 bg-slate-50 p-4">
+              <ShieldCheck className="mt-0.5 h-6 w-6 shrink-0 text-slate-700" aria-hidden="true" />
+              <p className="text-sm leading-relaxed text-slate-700">
+                Armada diperiksa dan dibersihkan sebelum digunakan pelanggan.
               </p>
             </div>
-
-            {/* CTA Button */}
-            <a
-              href={`https://wa.me/628812704174?text=Halo%20Rent%20%26%20Go,%20saya%20tertarik%20untuk%20menyewa%20${car.name}.%20Apakah%20unitnya%20tersedia?`}
+            <Button
+              href={getWhatsAppUrl(car.whatsappMessage)}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full bg-slate-900 hover:bg-slate-800 text-white rounded-xl py-4 flex items-center justify-center gap-2 font-semibold transition-all hover:shadow-lg hover:shadow-slate-900/20 active:scale-[0.98]"
+              size="lg"
+              className="w-full rounded-xl"
             >
-              <MessageCircle className="w-5 h-5" />
-              Booking Kendaraan Ini
-            </a>
+              <MessageCircle className="h-5 w-5" aria-hidden="true" />
+              Sewa Mobil Ini
+            </Button>
+            <Button
+              to="/armada"
+              variant="outline"
+              size="lg"
+              className="w-full rounded-xl"
+            >
+              Lihat Armada Lainnya
+            </Button>
           </div>
         </motion.div>
       </div>

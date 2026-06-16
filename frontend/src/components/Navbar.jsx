@@ -1,26 +1,27 @@
-import React from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-
-const WHATSAPP_URL = 'https://wa.me/628812704174?text=Halo%20Rent%20%26%20Go%2C%20saya%20ingin%20bertanya%20tentang%20layanan%20rental%20mobil.';
+import Button from './ui/Button';
+import {
+  GENERAL_WHATSAPP_MESSAGE,
+  getWhatsAppUrl,
+} from '../utils/whatsapp';
 
 const NAV_ITEMS = [
   {
     label: 'Beranda',
     to: '/',
-    isActive: (pathname) => pathname === '/' || pathname === '/beranda',
+    isActive: (pathname) => pathname === '/',
   },
   {
     label: 'Armada',
-    to: '/fleet',
-    isActive: (pathname) =>
-      pathname === '/fleet' || pathname === '/armada' || pathname.startsWith('/armada/'),
+    to: '/armada',
+    isActive: (pathname) => pathname === '/armada' || pathname.startsWith('/armada/'),
   },
   {
     label: 'Layanan',
-    to: '/services',
-    isActive: (pathname) =>
-      pathname === '/services' || pathname === '/layanan' || pathname.startsWith('/layanan/'),
+    to: '/layanan',
+    isActive: (pathname) => pathname === '/layanan' || pathname.startsWith('/layanan/'),
   },
   {
     label: 'Kontak',
@@ -40,17 +41,52 @@ const WhatsAppIcon = () => (
 );
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const { pathname } = useLocation();
+  const mobileNavigationRef = useRef(null);
+  const whatsappUrl = getWhatsAppUrl(GENERAL_WHATSAPP_MESSAGE);
+
+  useEffect(() => {
+    if (!isOpen) return undefined;
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setIsOpen(false);
+      }
+    };
+
+    const handlePointerDown = (event) => {
+      if (
+        mobileNavigationRef.current &&
+        !mobileNavigationRef.current.contains(event.target)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('pointerdown', handlePointerDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('pointerdown', handlePointerDown);
+    };
+  }, [isOpen]);
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/70 backdrop-blur-md border-b border-gray-100 shadow-sm">
+    <nav
+      ref={mobileNavigationRef}
+      className="sticky top-0 z-50 border-b border-slate-100 bg-white/80 shadow-sm backdrop-blur-md"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 w-full">
           
           {/* 1. BAGIAN KIRI: Logo */}
           <div className="flex-1 flex justify-start">
-            <Link to="/" className="font-bold text-xl text-black">
+            <Link
+              to="/"
+              className="rounded-sm text-xl font-bold text-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900"
+            >
               Rent <span className="text-slate-900">&</span> Go
             </Link>
           </div>
@@ -65,7 +101,7 @@ const Navbar = () => {
                   key={item.label}
                   to={item.to}
                   aria-current={active ? 'page' : undefined}
-                  className={`relative group transition-colors duration-200 hover:text-slate-900 ${
+                  className={`group relative rounded-sm transition-colors duration-200 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-4 ${
                     active ? 'font-semibold text-slate-900' : 'font-medium text-slate-600'
                   }`}
                 >
@@ -83,22 +119,27 @@ const Navbar = () => {
           {/* 3. BAGIAN KANAN: Tombol CTA */}
           <div className="flex-1 flex items-center justify-end space-x-4">
             <div className="hidden md:flex items-center">
-              <a
-                href={WHATSAPP_URL}
+              <Button
+                href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-5 py-2.5 font-medium text-white shadow-sm shadow-slate-800/20 transition-all duration-300 hover:bg-slate-800 hover:shadow-md hover:shadow-slate-800/25"
+                variant="whatsapp"
+                size="md"
               >
                 <WhatsAppIcon />
                 Hubungi Kami
-              </a>
+              </Button>
             </div>
 
             {/* Menu Mobile Button (Muncul saat layar kecil) */}
             <div className="flex items-center md:hidden">
               <button
+                type="button"
                 onClick={() => setIsOpen(!isOpen)}
-                className="text-slate-600 hover:text-slate-900 focus:outline-none p-2 rounded-lg hover:bg-slate-50 transition-colors"
+                aria-label={isOpen ? 'Tutup menu navigasi' : 'Buka menu navigasi'}
+                aria-expanded={isOpen}
+                aria-controls="mobile-navigation"
+                className="rounded-lg p-2 text-slate-600 transition-colors duration-200 hover:bg-slate-50 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900"
               >
                 {isOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -110,7 +151,10 @@ const Navbar = () => {
       
       {/* Mobile menu (Dropdown) */}
       {isOpen && (
-        <div className="md:hidden bg-white border-t border-slate-100 px-4 pt-2 pb-6 space-y-1 shadow-lg">
+        <div
+          id="mobile-navigation"
+          className="space-y-1 border-t border-slate-100 bg-white px-4 pb-6 pt-2 shadow-lg md:hidden"
+        >
           {NAV_ITEMS.map((item) => {
             const active = item.isActive(pathname);
 
@@ -119,7 +163,7 @@ const Navbar = () => {
                 key={item.label}
                 to={item.to}
                 aria-current={active ? 'page' : undefined}
-                className={`block rounded-md border-l-2 px-3 py-3 text-base transition-colors duration-200 ${
+                className={`block rounded-md border-l-2 px-3 py-3 text-base transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 ${
                   active
                     ? 'border-slate-900 bg-slate-50 font-semibold text-slate-900'
                     : 'border-transparent font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900'
@@ -131,16 +175,18 @@ const Navbar = () => {
             );
           })}
           <div className="mt-4 border-t border-slate-100 pt-4">
-            <a
-              href={WHATSAPP_URL}
+            <Button
+              href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-slate-900 px-4 py-3 font-bold text-white shadow-sm shadow-slate-800/20 transition-all duration-300 hover:bg-slate-800 hover:shadow-md"
+              variant="whatsapp"
+              size="lg"
+              className="w-full"
               onClick={() => setIsOpen(false)}
             >
               <WhatsAppIcon />
               Hubungi Kami
-            </a>
+            </Button>
           </div>
         </div>
       )}

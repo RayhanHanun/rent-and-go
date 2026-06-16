@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Ilustrasi armada Rent &amp; Go</title>
+  <desc id="desc">Ilustrasi mobil netral berwarna gelap pada latar premium.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#020617"/>
+      <stop offset="0.55" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#334155"/>
+    </linearGradient>
+    <linearGradient id="car" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#cbd5e1"/>
+      <stop offset="0.5" stop-color="#f8fafc"/>
+      <stop offset="1" stop-color="#94a3b8"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-30%" width="140%" height="180%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="20"/>
+      <feOffset dy="22"/>
+      <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .45 0"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="1200" height="800" fill="url(#background)"/>
+  <circle cx="990" cy="120" r="260" fill="#475569" opacity=".18"/>
+  <circle cx="170" cy="730" r="320" fill="#64748b" opacity=".12"/>
+  <path d="M0 650C250 590 420 620 610 665s350 54 590-12v147H0Z" fill="#020617" opacity=".55"/>
+  <g filter="url(#shadow)" transform="translate(115 180)">
+    <path d="M108 339c22-70 73-112 156-126l112-19c43-72 91-119 145-141 48-20 139-29 274-25 66 2 115 21 147 57l93 107c55 11 94 28 116 51 18 18 31 56 38 113l-15 72H76l-15-58c5-15 21-25 47-31Z" fill="url(#car)"/>
+    <path d="M417 190c37-56 72-90 105-103 42-17 116-24 222-21 43 1 79 16 106 44l67 76Z" fill="#172033"/>
+    <path d="M435 176c31-42 62-68 92-80 25-10 65-16 121-19v104Z" fill="#64748b" opacity=".55"/>
+    <path d="M674 77c66 0 112 4 137 13 20 7 42 25 65 53l29 37H674Z" fill="#475569" opacity=".65"/>
+    <path d="M127 340h926" stroke="#64748b" stroke-width="8" opacity=".55"/>
+    <path d="M926 240c61 2 103 15 125 39l-17 27-104-12Z" fill="#f8fafc" opacity=".95"/>
+    <path d="M119 276l128-30-26 57-105 8Z" fill="#e2e8f0"/>
+    <circle cx="290" cy="424" r="90" fill="#0f172a"/>
+    <circle cx="290" cy="424" r="48" fill="#64748b"/>
+    <circle cx="290" cy="424" r="21" fill="#e2e8f0"/>
+    <circle cx="925" cy="424" r="90" fill="#0f172a"/>
+    <circle cx="925" cy="424" r="48" fill="#64748b"/>
+    <circle cx="925" cy="424" r="21" fill="#e2e8f0"/>
+  </g>
+  <text x="70" y="92" fill="#f8fafc" font-family="Arial, sans-serif" font-size="34" font-weight="700">RENT &amp; GO</text>
+  <text x="72" y="130" fill="#94a3b8" font-family="Arial, sans-serif" font-size="20" letter-spacing="4">ARMADA PILIHAN</text>
+</svg>

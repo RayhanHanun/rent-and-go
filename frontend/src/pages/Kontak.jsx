@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Send, Clock } from 'lucide-react';
 
@@ -50,7 +49,7 @@ const Kontak = () => {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-lg md:text-xl text-slate-300 font-light leading-relaxed max-w-3xl mx-auto"
           >
-            Temukan semua yang kamu butuhkan dalam satu aplikasi. Booking sekarang dan langsung mulai perjalananmu tanpa ribet.
+            Temukan kebutuhan perjalanan Anda dalam satu tempat dan hubungi tim kami untuk mendapatkan informasi yang diperlukan.
           </motion.p>
         </div>
       </section>
