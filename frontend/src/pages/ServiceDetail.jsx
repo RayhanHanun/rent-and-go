@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import {
   Briefcase,
@@ -16,8 +17,11 @@ import {
 import { useParams } from 'react-router-dom';
 import CarCard from '../components/CarCard';
 import Button from '../components/ui/Button';
-import { cars } from '../data/cars';
+import { cars as localCars } from '../data/cars';
+import { carsApi } from '../api/carsApi';
+import { normalizeCar, normalizeService } from '../api/normalizers';
 import { getServiceBySlug } from '../data/services';
+import { servicesApi } from '../api/servicesApi';
 import { getWhatsAppUrl } from '../utils/whatsapp';
 
 const icons = {
@@ -36,8 +40,55 @@ const icons = {
 
 const ServiceDetail = () => {
   const { slug } = useParams();
-  const service = getServiceBySlug(slug);
+  const [service, setService] = useState(() => getServiceBySlug(slug));
+  const [cars, setCars] = useState(localCars);
+  const [isLoading, setIsLoading] = useState(true);
   const shouldReduceMotion = useReducedMotion();
+
+  useEffect(() => {
+    let isMounted = true;
+
+    queueMicrotask(() => {
+      if (isMounted) {
+        setIsLoading(true);
+      }
+    });
+
+    Promise.all([servicesApi.publicDetail(slug), carsApi.publicList()])
+      .then(([serviceResponse, carsResponse]) => {
+        if (!isMounted) return;
+
+        setService(serviceResponse.data ? normalizeService(serviceResponse.data) : null);
+        setCars(Array.isArray(carsResponse.data) ? carsResponse.data.map(normalizeCar) : localCars);
+      })
+      .catch(() => {
+        if (isMounted) {
+          setService(getServiceBySlug(slug) || null);
+          setCars(localCars);
+        }
+      })
+      .finally(() => {
+        if (isMounted) {
+          setIsLoading(false);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [slug]);
+
+  if (isLoading) {
+    return (
+      <section className="flex min-h-[65vh] items-center bg-slate-50 px-4 py-20 text-center">
+        <div className="mx-auto max-w-xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
+            Memuat layanan...
+          </p>
+        </div>
+      </section>
+    );
+  }
 
   if (!service) {
     return (

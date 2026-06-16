@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import {
   Briefcase,
@@ -12,15 +12,63 @@ import {
 } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 import { getCarBySlug } from '../data/cars';
+import { carsApi } from '../api/carsApi';
+import { normalizeCar } from '../api/normalizers';
 import { getWhatsAppUrl } from '../utils/whatsapp';
 import Button from '../components/ui/Button';
 import SafeImage from '../components/ui/SafeImage';
 
 const DetailArmada = () => {
   const { slug } = useParams();
-  const car = getCarBySlug(slug);
+  const [car, setCar] = useState(() => getCarBySlug(slug));
+  const [isLoading, setIsLoading] = useState(true);
   const shouldReduceMotion = useReducedMotion();
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    queueMicrotask(() => {
+      if (isMounted) {
+        setIsLoading(true);
+        setActiveImageIndex(0);
+      }
+    });
+
+    carsApi
+      .publicDetail(slug)
+      .then((response) => {
+        if (isMounted) {
+          setCar(response.data ? normalizeCar(response.data) : null);
+        }
+      })
+      .catch(() => {
+        if (isMounted) {
+          setCar(getCarBySlug(slug) || null);
+        }
+      })
+      .finally(() => {
+        if (isMounted) {
+          setIsLoading(false);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [slug]);
+
+  if (isLoading) {
+    return (
+      <section className="flex min-h-[65vh] items-center bg-slate-50 px-4 py-20 text-center">
+        <div className="mx-auto max-w-xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
+            Memuat armada...
+          </p>
+        </div>
+      </section>
+    );
+  }
 
   if (!car) {
     return (

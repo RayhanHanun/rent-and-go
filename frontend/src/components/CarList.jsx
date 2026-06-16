@@ -1,12 +1,37 @@
+import { useEffect, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { featuredCars } from '../data/cars';
+import { carsApi } from '../api/carsApi';
+import { normalizeCar } from '../api/normalizers';
 import CarCard from './CarCard';
 import Button from './ui/Button';
 import SectionHeader from './ui/SectionHeader';
 
 const CarList = () => {
   const shouldReduceMotion = useReducedMotion();
+  const [items, setItems] = useState(featuredCars);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    carsApi
+      .publicFeatured()
+      .then((response) => {
+        if (isMounted && Array.isArray(response.data) && response.data.length > 0) {
+          setItems(response.data.map(normalizeCar));
+        }
+      })
+      .catch(() => {
+        if (isMounted) {
+          setItems(featuredCars);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <section className="bg-white py-20">
@@ -32,7 +57,7 @@ const CarList = () => {
             },
           }}
         >
-          {featuredCars.map((car) => (
+          {items.map((car) => (
             <motion.div
               key={car.slug}
               variants={{

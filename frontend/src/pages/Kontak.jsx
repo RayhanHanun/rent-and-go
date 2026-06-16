@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Send, Clock } from 'lucide-react';
+import { useState } from 'react';
+import { messagesApi } from '../api/messagesApi';
 
 const QUICK_CONTACTS = [
   {
@@ -24,6 +26,40 @@ const QUICK_CONTACTS = [
 ];
 
 const Kontak = () => {
+  const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    setIsSubmitting(true);
+    setSubmitStatus({ type: '', message: '' });
+
+    try {
+      await messagesApi.createPublic({
+        name: formData.get('nama'),
+        email: formData.get('email'),
+        phone: formData.get('whatsapp'),
+        subject: formData.get('subjek'),
+        message: formData.get('pesan'),
+      });
+      form.reset();
+      setSubmitStatus({
+        type: 'success',
+        message: 'Pesan berhasil dikirim. Tim Rent & Go akan menindaklanjuti secepatnya.',
+      });
+    } catch {
+      setSubmitStatus({
+        type: 'error',
+        message: 'Pesan belum berhasil dikirim. Silakan coba lagi atau hubungi kami lewat WhatsApp.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="bg-slate-50 min-h-screen">
       {/* Hero Section */}
@@ -98,7 +134,7 @@ const Kontak = () => {
             >
               <h2 className="text-2xl font-bold text-slate-900 mb-8">Kirim Pesan</h2>
 
-              <form className="space-y-5">
+              <form className="space-y-5" onSubmit={handleSubmit}>
                 <div>
                   <label htmlFor="nama" className="block text-sm font-medium text-slate-700 mb-2">
                     Nama Lengkap
@@ -107,6 +143,7 @@ const Kontak = () => {
                     id="nama"
                     name="nama"
                     type="text"
+                    required
                     placeholder="Masukkan nama lengkap"
                     className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-slate-900 transition"
                   />
@@ -164,6 +201,7 @@ const Kontak = () => {
                     id="pesan"
                     name="pesan"
                     rows={5}
+                    required
                     placeholder="Tulis kebutuhan Anda di sini..."
                     className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-slate-900 transition resize-none"
                   />
@@ -171,11 +209,24 @@ const Kontak = () => {
 
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   className="w-full inline-flex items-center justify-center gap-2 bg-slate-900 text-white px-6 py-3.5 rounded-xl font-bold hover:bg-slate-800 transition-colors shadow-sm shadow-slate-900/20"
                 >
                   <Send size={18} />
-                  Kirim Pesan Sekarang
+                  {isSubmitting ? 'Mengirim Pesan...' : 'Kirim Pesan Sekarang'}
                 </button>
+                {submitStatus.message && (
+                  <p
+                    className={`rounded-xl px-4 py-3 text-sm font-medium ${
+                      submitStatus.type === 'success'
+                        ? 'bg-emerald-50 text-emerald-700'
+                        : 'bg-rose-50 text-rose-700'
+                    }`}
+                    role="status"
+                  >
+                    {submitStatus.message}
+                  </p>
+                )}
               </form>
             </motion.div>
 

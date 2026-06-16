@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { ChevronRight, Key, Map, Plane, UserCheck } from 'lucide-react';
+import { ChevronRight, Key, Map, Plane, ShieldCheck, UserCheck } from 'lucide-react';
 import { services } from '../data/services';
+import { servicesApi } from '../api/servicesApi';
+import { normalizeService } from '../api/normalizers';
 import Button from '../components/ui/Button';
 import SafeImage from '../components/ui/SafeImage';
 import SectionHeader from '../components/ui/SectionHeader';
@@ -11,22 +13,46 @@ const serviceIcons = {
   userCheck: UserCheck,
   map: Map,
   plane: Plane,
+  shield: ShieldCheck,
 };
 
 const Layanan = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [items, setItems] = useState(services);
   const shouldReduceMotion = useReducedMotion();
-  const currentService = services[currentSlide];
+  const currentService = items[currentSlide] || items[0];
 
   useEffect(() => {
-    if (shouldReduceMotion) return undefined;
+    let isMounted = true;
+
+    servicesApi
+      .publicList()
+      .then((response) => {
+        if (isMounted && Array.isArray(response.data) && response.data.length > 0) {
+          setItems(response.data.map(normalizeService));
+          setCurrentSlide(0);
+        }
+      })
+      .catch(() => {
+        if (isMounted) {
+          setItems(services);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (shouldReduceMotion || items.length === 0) return undefined;
 
     const timer = window.setInterval(() => {
-      setCurrentSlide((previous) => (previous + 1) % services.length);
+      setCurrentSlide((previous) => (previous + 1) % items.length);
     }, 5000);
 
     return () => window.clearInterval(timer);
-  }, [shouldReduceMotion]);
+  }, [items.length, shouldReduceMotion]);
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -64,7 +90,7 @@ const Layanan = () => {
           </AnimatePresence>
 
           <div className="absolute bottom-12 flex gap-3" aria-label="Pilih slide layanan">
-            {services.map((service, index) => (
+            {items.map((service, index) => (
               <button
                 key={service.slug}
                 type="button"
@@ -91,8 +117,8 @@ const Layanan = () => {
           />
 
           <div className="flex flex-col gap-12">
-            {services.map((service, index) => {
-              const Icon = serviceIcons[service.icon];
+            {items.map((service, index) => {
+              const Icon = serviceIcons[service.icon] || ShieldCheck;
 
               return (
                 <motion.article

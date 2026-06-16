@@ -1,15 +1,49 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { cars, carCategories } from '../data/cars';
+import { carsApi } from '../api/carsApi';
+import { categoriesApi } from '../api/categoriesApi';
+import { normalizeCar } from '../api/normalizers';
 import CarCard from '../components/CarCard';
 
 const Armada = () => {
   const [activeCategory, setActiveCategory] = useState('Semua');
+  const [items, setItems] = useState(cars);
+  const [categories, setCategories] = useState(carCategories);
   const shouldReduceMotion = useReducedMotion();
   const filteredCars =
     activeCategory === 'Semua'
-      ? cars
-      : cars.filter((car) => car.category === activeCategory);
+      ? items
+      : items.filter((car) => car.category === activeCategory);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    Promise.all([carsApi.publicList(), categoriesApi.publicList()])
+      .then(([carsResponse, categoriesResponse]) => {
+        if (!isMounted) return;
+
+        const apiCars = Array.isArray(carsResponse.data)
+          ? carsResponse.data.map(normalizeCar)
+          : cars;
+        const apiCategories = Array.isArray(categoriesResponse.data)
+          ? ['Semua', ...categoriesResponse.data.map((category) => category.name)]
+          : carCategories;
+
+        setItems(apiCars.length > 0 ? apiCars : cars);
+        setCategories(apiCategories);
+      })
+      .catch(() => {
+        if (isMounted) {
+          setItems(cars);
+          setCategories(carCategories);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -41,7 +75,7 @@ const Armada = () => {
       <section aria-label="Filter kategori armada">
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
           <div className="grid w-full grid-cols-2 gap-3 rounded-2xl border border-slate-100 bg-white p-2 shadow-[0_16px_36px_-20px_rgba(15,23,42,0.25)] sm:grid-cols-3 lg:flex lg:flex-wrap lg:justify-center">
-            {carCategories.map((category) => {
+            {categories.map((category) => {
               const isActive = activeCategory === category;
 
               return (
