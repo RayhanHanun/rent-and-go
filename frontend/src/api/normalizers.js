@@ -1,6 +1,6 @@
 import carPlaceholder from '../assets/car-placeholder.svg';
 import heroImage from '../assets/hero-mobil.jpeg';
-import { getImageUrl, resolveImageUrl } from './imageUrls';
+import { resolveImageUrl } from './imageUrls';
 
 export const formatRupiah = (value) =>
   new Intl.NumberFormat('id-ID', {
@@ -20,7 +20,7 @@ export const normalizeCar = (car) => {
   const images = (Array.isArray(car.images) ? car.images : [])
     .map((image) => ({
       id: image.id,
-      src: getImageUrl(image, carPlaceholder),
+      src: resolveImageUrl(image.image_url || image.src || image.url || image.image_path, ''),
       alt: image.alt || image.alt_text || `${car.name} Rent & Go`,
       angle: image.angle,
       isPrimary: Boolean(image.is_primary ?? image.isPrimary),
@@ -63,7 +63,7 @@ export const normalizeCar = (car) => {
     price: Number(car.price_per_day ?? car.price ?? 0),
     priceLabel: car.priceLabel || formatRupiah(car.price_per_day ?? car.price),
     rating: Number(car.rating || 0),
-    image: fallbackImages[0]?.src || carPlaceholder,
+    image: primaryImageUrl || primaryImage?.src || images[0]?.src || carPlaceholder,
     imageAlt: fallbackImages[0]?.alt || `${car.name} Rent & Go`,
     images: fallbackImages,
     seats: car.seats || '-',

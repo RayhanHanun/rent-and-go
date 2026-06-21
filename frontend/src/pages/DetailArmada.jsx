@@ -187,7 +187,6 @@ const DetailArmada = () => {
                   <SafeImage
                     src={image.src}
                     alt={image.alt}
-                    loading="lazy"
                     className="h-full w-full object-cover"
                   />
                 </button>

@@ -13,7 +13,6 @@ const CarCard = ({ car }) => (
       <SafeImage
         src={car.image}
         alt={car.imageAlt}
-        loading="lazy"
         className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
       />
       <span className="absolute right-4 top-4 rounded-lg bg-white/95 px-3 py-1.5 text-xs font-bold text-slate-900 shadow-sm backdrop-blur-sm">
