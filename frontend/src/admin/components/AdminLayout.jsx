@@ -20,16 +20,16 @@ import { clearAdminSession, getAdminUser } from '../../api/authStorage';
 
 const navItems = [
   { label: 'Dashboard', to: '/admin/dashboard', icon: LayoutDashboard, end: true },
-  { label: 'Rental', to: '/admin/rental', icon: ClipboardList },
-  { label: 'Armada', to: '/admin/armada', icon: Car },
-  { label: 'Kategori', to: '/admin/kategori', icon: Tag },
-  { label: 'Unit', to: '/admin/unit', icon: FolderKanban },
+  { label: 'Rental', to: '/admin/rentals', icon: ClipboardList },
+  { label: 'Armada', to: '/admin/cars', icon: Car },
+  { label: 'Kategori', to: '/admin/categories', icon: Tag },
+  { label: 'Unit', to: '/admin/units', icon: FolderKanban },
   { label: 'Tracking', to: '/admin/tracking', icon: BarChart3 },
   { label: 'Maintenance', to: '/admin/maintenance', icon: Wrench },
-  { label: 'Pesan', to: '/admin/pesan', icon: Mail },
-  { label: 'Layanan', to: '/admin/layanan', icon: MessageSquare },
-  { label: 'Laporan', to: '/admin/laporan', icon: BarChart3 },
-  { label: 'Pengaturan', to: '/admin/pengaturan', icon: Settings },
+  { label: 'Pesan', to: '/admin/messages', icon: Mail },
+  { label: 'Layanan', to: '/admin/services', icon: MessageSquare },
+  { label: 'Laporan', to: '/admin/reports', icon: BarChart3 },
+  { label: 'Pengaturan', to: '/admin/settings', icon: Settings },
 ];
 
 const AdminLayout = () => {

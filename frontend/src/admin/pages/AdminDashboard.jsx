@@ -197,7 +197,7 @@ const AdminDashboard = () => {
         description="Pantau performa armada, penyewaan, pendapatan, maintenance, dan pesan pelanggan dalam satu layar."
       >
         <div className="rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-bold text-slate-600 shadow-sm">
-          Data: {source === 'api' ? 'API backend' : 'Mock fallback'}
+          {source === 'api' ? 'Terhubung' : 'Data Terkini'}
         </div>
       </AdminPageHeader>
 

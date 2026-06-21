@@ -20,7 +20,7 @@ import AdminUnits from './admin/pages/AdminUnits';
 import AdminRentals from './admin/pages/AdminRentals';
 import AdminTracking from './admin/pages/AdminTracking';
 import AdminMaintenance from './admin/pages/AdminMaintenance';
-import AdminMessages from './admin/pages/AdminMessages';
+import AdminMessages, { AdminMessageDetail } from './admin/pages/AdminMessages';
 import AdminServices from './admin/pages/AdminServices';
 import AdminReports from './admin/pages/AdminReports';
 import AdminSettings from './admin/pages/AdminSettings';
@@ -50,22 +50,50 @@ function App() {
               <Route element={<AdminLayout />}>
                 <Route index element={<Navigate to="dashboard" replace />} />
                 <Route path="dashboard" element={<AdminDashboard />} />
-                <Route path="armada" element={<AdminCars />} />
                 <Route path="cars" element={<AdminCars />} />
-                <Route path="kategori" element={<AdminCategories />} />
+                <Route path="cars/tambah" element={<AdminCars mode="create" />} />
+                <Route path="cars/edit/:id" element={<AdminCars mode="edit" />} />
+                <Route path="armada" element={<Navigate to="/admin/cars" replace />} />
+                <Route path="armada/tambah" element={<AdminCars mode="create" />} />
+                <Route path="armada/edit/:id" element={<AdminCars mode="edit" />} />
                 <Route path="categories" element={<AdminCategories />} />
-                <Route path="unit" element={<AdminUnits />} />
+                <Route path="categories/tambah" element={<AdminCategories mode="create" />} />
+                <Route path="categories/edit/:id" element={<AdminCategories mode="edit" />} />
+                <Route path="kategori" element={<Navigate to="/admin/categories" replace />} />
+                <Route path="kategori/tambah" element={<AdminCategories mode="create" />} />
+                <Route path="kategori/edit/:id" element={<AdminCategories mode="edit" />} />
                 <Route path="units" element={<AdminUnits />} />
-                <Route path="stok-mobil" element={<AdminUnits />} />
-                <Route path="rental" element={<AdminRentals />} />
+                <Route path="units/tambah" element={<AdminUnits mode="create" />} />
+                <Route path="units/edit/:id" element={<AdminUnits mode="edit" />} />
+                <Route path="unit" element={<Navigate to="/admin/units" replace />} />
+                <Route path="unit/tambah" element={<AdminUnits mode="create" />} />
+                <Route path="unit/edit/:id" element={<AdminUnits mode="edit" />} />
+                <Route path="stok-mobil" element={<Navigate to="/admin/units" replace />} />
+                <Route path="stok-mobil/tambah" element={<AdminUnits mode="create" />} />
+                <Route path="stok-mobil/edit/:id" element={<AdminUnits mode="edit" />} />
                 <Route path="rentals" element={<AdminRentals />} />
-                <Route path="penyewaan" element={<AdminRentals />} />
+                <Route path="rentals/tambah" element={<AdminRentals mode="create" />} />
+                <Route path="rentals/edit/:id" element={<AdminRentals mode="edit" />} />
+                <Route path="rental" element={<Navigate to="/admin/rentals" replace />} />
+                <Route path="rental/tambah" element={<AdminRentals mode="create" />} />
+                <Route path="rental/edit/:id" element={<AdminRentals mode="edit" />} />
+                <Route path="penyewaan" element={<Navigate to="/admin/rentals" replace />} />
+                <Route path="penyewaan/tambah" element={<AdminRentals mode="create" />} />
+                <Route path="penyewaan/edit/:id" element={<AdminRentals mode="edit" />} />
                 <Route path="tracking" element={<AdminTracking />} />
                 <Route path="maintenance" element={<AdminMaintenance />} />
-                <Route path="pesan" element={<AdminMessages />} />
+                <Route path="maintenance/tambah" element={<AdminMaintenance mode="create" />} />
+                <Route path="maintenance/edit/:id" element={<AdminMaintenance mode="edit" />} />
                 <Route path="messages" element={<AdminMessages />} />
-                <Route path="layanan" element={<AdminServices />} />
+                <Route path="messages/:id" element={<AdminMessageDetail />} />
+                <Route path="pesan" element={<Navigate to="/admin/messages" replace />} />
+                <Route path="pesan/:id" element={<AdminMessageDetail />} />
                 <Route path="services" element={<AdminServices />} />
+                <Route path="services/tambah" element={<AdminServices mode="create" />} />
+                <Route path="services/edit/:id" element={<AdminServices mode="edit" />} />
+                <Route path="layanan" element={<Navigate to="/admin/services" replace />} />
+                <Route path="layanan/tambah" element={<AdminServices mode="create" />} />
+                <Route path="layanan/edit/:id" element={<AdminServices mode="edit" />} />
                 <Route path="laporan" element={<AdminReports />} />
                 <Route path="reports" element={<AdminReports />} />
                 <Route path="pengaturan" element={<AdminSettings />} />

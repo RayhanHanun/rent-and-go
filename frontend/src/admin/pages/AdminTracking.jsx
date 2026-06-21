@@ -456,7 +456,7 @@ const AdminTracking = () => {
                   </p>
                 </div>
                 <Link
-                  to="/admin/rental"
+                  to="/admin/rentals"
                   className="inline-flex min-h-11 items-center justify-center rounded-xl bg-slate-900 px-6 py-2.5 text-sm font-bold text-white transition-colors duration-200 hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2"
                 >
                   Lihat Penyewaan

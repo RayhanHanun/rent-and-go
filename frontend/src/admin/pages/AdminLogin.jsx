@@ -4,7 +4,7 @@ import { authApi } from '../../api/authApi';
 import { getAdminToken, setAdminSession } from '../../api/authStorage';
 
 const AdminLogin = () => {
-  const [form, setForm] = useState({ email: 'admin@rentgo.com', password: 'admin123' });
+  const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ const AdminLogin = () => {
         </p>
         <h1 className="mb-2 text-3xl font-extrabold text-slate-950">Masuk Rent & Go</h1>
         <p className="mb-8 text-sm leading-relaxed text-slate-500">
-          Gunakan akun admin demo untuk mengelola armada, rental, layanan, dan laporan.
+          Masuk untuk mengelola armada, rental, layanan, laporan, dan operasional Rent & Go.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-5">

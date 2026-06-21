@@ -6,5 +6,5 @@ export const trackingApi = {
   create: (payload) => getData(apiClient.post('/admin/tracking', payload)),
   update: (id, payload) => getData(apiClient.put(`/admin/tracking/${id}`, payload)),
   remove: (id) => getData(apiClient.delete(`/admin/tracking/${id}`)),
-  refreshDemo: (id) => getData(apiClient.post(`/admin/tracking/${id}/refresh-demo`)),
+  refreshLocation: (id) => getData(apiClient.post(`/admin/tracking/${id}/refresh-location`)),
 };

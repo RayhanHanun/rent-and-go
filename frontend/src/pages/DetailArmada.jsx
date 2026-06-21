@@ -11,7 +11,6 @@ import {
   Users,
 } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
-import { getCarBySlug } from '../data/cars';
 import { carsApi } from '../api/carsApi';
 import { normalizeCar } from '../api/normalizers';
 import { getWhatsAppUrl } from '../utils/whatsapp';
@@ -20,8 +19,9 @@ import SafeImage from '../components/ui/SafeImage';
 
 const DetailArmada = () => {
   const { slug } = useParams();
-  const [car, setCar] = useState(() => getCarBySlug(slug));
+  const [car, setCar] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [hasLoadError, setHasLoadError] = useState(false);
   const shouldReduceMotion = useReducedMotion();
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
@@ -31,6 +31,7 @@ const DetailArmada = () => {
     queueMicrotask(() => {
       if (isMounted) {
         setIsLoading(true);
+        setHasLoadError(false);
         setActiveImageIndex(0);
       }
     });
@@ -40,11 +41,13 @@ const DetailArmada = () => {
       .then((response) => {
         if (isMounted) {
           setCar(response.data ? normalizeCar(response.data) : null);
+          setHasLoadError(false);
         }
       })
       .catch(() => {
         if (isMounted) {
-          setCar(getCarBySlug(slug) || null);
+          setCar(null);
+          setHasLoadError(true);
         }
       })
       .finally(() => {
@@ -59,12 +62,25 @@ const DetailArmada = () => {
   }, [slug]);
 
   if (isLoading) {
+    return <DetailArmadaSkeleton />;
+  }
+
+  if (hasLoadError) {
     return (
       <section className="flex min-h-[65vh] items-center bg-slate-50 px-4 py-20 text-center">
         <div className="mx-auto max-w-xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
-            Memuat armada...
+          <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-slate-500">
+            Data armada belum tersedia
           </p>
+          <h1 className="mb-4 text-4xl font-extrabold text-slate-900">
+            Detail kendaraan belum bisa dimuat.
+          </h1>
+          <p className="mb-8 text-slate-600">
+            Silakan refresh halaman atau kembali ke katalog armada.
+          </p>
+          <Button to="/armada" size="lg">
+            Kembali ke Armada
+          </Button>
         </div>
       </section>
     );
@@ -269,5 +285,39 @@ const DetailArmada = () => {
     </div>
   );
 };
+
+const DetailArmadaSkeleton = () => (
+  <div className="min-h-screen bg-white">
+    <div className="border-b border-slate-200 bg-slate-50 py-4">
+      <div className="mx-auto flex max-w-7xl gap-3 px-4 sm:px-6 lg:px-8">
+        <div className="h-4 w-20 animate-pulse rounded-full bg-slate-200" />
+        <div className="h-4 w-24 animate-pulse rounded-full bg-slate-200" />
+        <div className="h-4 w-32 animate-pulse rounded-full bg-slate-200" />
+      </div>
+    </div>
+    <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 py-12 sm:px-6 lg:grid-cols-2 lg:gap-12 lg:px-8">
+      <div className="space-y-4">
+        <div className="aspect-4/3 animate-pulse rounded-2xl bg-linear-to-r from-slate-100 via-slate-200 to-slate-100" />
+        <div className="flex gap-3">
+          {Array.from({ length: 4 }).map((_, index) => (
+            <div key={index} className="h-20 w-28 animate-pulse rounded-xl bg-slate-200 sm:h-24 sm:w-32" />
+          ))}
+        </div>
+      </div>
+      <div className="space-y-5">
+        <div className="h-8 w-32 animate-pulse rounded-full bg-slate-200" />
+        <div className="h-12 w-3/4 animate-pulse rounded-xl bg-slate-200" />
+        <div className="h-10 w-44 animate-pulse rounded-xl bg-slate-200" />
+        <div className="grid grid-cols-2 gap-6">
+          {Array.from({ length: 4 }).map((_, index) => (
+            <div key={index} className="h-14 animate-pulse rounded-xl bg-slate-100" />
+          ))}
+        </div>
+        <div className="h-28 animate-pulse rounded-2xl bg-slate-100" />
+        <div className="h-12 animate-pulse rounded-xl bg-slate-200" />
+      </div>
+    </div>
+  </div>
+);
 
 export default DetailArmada;

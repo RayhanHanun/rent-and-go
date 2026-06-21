@@ -11,5 +11,5 @@ export const carsApi = {
   remove: (id) => getData(apiClient.delete(`/admin/cars/${id}`)),
   uploadImage: (id, payload) => getData(apiClient.post(`/admin/cars/${id}/images`, payload)),
   deleteImage: (imageId) => getData(apiClient.delete(`/admin/car-images/${imageId}`)),
-  setPrimaryImage: (imageId) => getData(apiClient.patch(`/admin/car-images/${imageId}/primary`)),
+  setPrimaryImage: (imageId) => getData(apiClient.patch(`/admin/car-images/${imageId}/set-primary`)),
 };

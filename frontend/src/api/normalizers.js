@@ -1,5 +1,6 @@
 import carPlaceholder from '../assets/car-placeholder.svg';
 import heroImage from '../assets/hero-mobil.jpeg';
+import { getImageUrl, resolveImageUrl } from './imageUrls';
 
 export const formatRupiah = (value) =>
   new Intl.NumberFormat('id-ID', {
@@ -16,15 +17,37 @@ const normalizeCategoryName = (category) => {
 
 export const normalizeCar = (car) => {
   const categoryName = normalizeCategoryName(car.category);
-  const images = (car.images || [])
+  const images = (Array.isArray(car.images) ? car.images : [])
     .map((image) => ({
-      src: image.src || image.image_url || carPlaceholder,
+      id: image.id,
+      src: getImageUrl(image, carPlaceholder),
       alt: image.alt || image.alt_text || `${car.name} Rent & Go`,
+      angle: image.angle,
+      isPrimary: Boolean(image.is_primary ?? image.isPrimary),
+      sortOrder: image.sort_order ?? image.sortOrder ?? 0,
     }))
-    .filter(Boolean);
+    .filter((image) => Boolean(image.src));
 
-  const fallbackImages = images.length > 0
-    ? images
+  const primaryImage = images.find((image) => image.isPrimary);
+  const primaryImageUrl = resolveImageUrl(car.primary_image_url || car.primaryImageUrl || '');
+  const mainImage = primaryImageUrl
+    ? {
+        src: primaryImageUrl,
+        alt: car.primary_image_alt || `${car.name} Rent & Go`,
+        isPrimary: true,
+        sortOrder: -1,
+      }
+    : primaryImage || images[0];
+
+  const orderedImages = mainImage
+    ? [
+        mainImage,
+        ...images.filter((image) => image.src !== mainImage.src),
+      ]
+    : images;
+
+  const fallbackImages = orderedImages.length > 0
+    ? orderedImages
     : [
         { src: carPlaceholder, alt: `${car.name} tampak depan Rent & Go` },
         { src: carPlaceholder, alt: `${car.name} tampak samping Rent & Go` },

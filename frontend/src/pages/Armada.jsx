@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { cars, carCategories } from '../data/cars';
+import { carCategories } from '../data/cars';
 import { carsApi } from '../api/carsApi';
 import { categoriesApi } from '../api/categoriesApi';
 import { normalizeCar } from '../api/normalizers';
 import CarCard from '../components/CarCard';
+import CarCardSkeleton from '../components/CarCardSkeleton';
 
 const Armada = () => {
   const [activeCategory, setActiveCategory] = useState('Semua');
-  const [items, setItems] = useState(cars);
+  const [items, setItems] = useState([]);
   const [categories, setCategories] = useState(carCategories);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasLoadError, setHasLoadError] = useState(false);
   const shouldReduceMotion = useReducedMotion();
   const filteredCars =
     activeCategory === 'Semua'
@@ -19,24 +22,38 @@ const Armada = () => {
   useEffect(() => {
     let isMounted = true;
 
+    Promise.resolve().then(() => {
+      if (isMounted) {
+        setIsLoading(true);
+        setHasLoadError(false);
+      }
+    });
+
     Promise.all([carsApi.publicList(), categoriesApi.publicList()])
       .then(([carsResponse, categoriesResponse]) => {
         if (!isMounted) return;
 
         const apiCars = Array.isArray(carsResponse.data)
           ? carsResponse.data.map(normalizeCar)
-          : cars;
+          : [];
         const apiCategories = Array.isArray(categoriesResponse.data)
           ? ['Semua', ...categoriesResponse.data.map((category) => category.name)]
           : carCategories;
 
-        setItems(apiCars.length > 0 ? apiCars : cars);
+        setItems(apiCars);
         setCategories(apiCategories);
+        setHasLoadError(false);
       })
       .catch(() => {
         if (isMounted) {
-          setItems(cars);
+          setItems([]);
           setCategories(carCategories);
+          setHasLoadError(true);
+        }
+      })
+      .finally(() => {
+        if (isMounted) {
+          setIsLoading(false);
         }
       });
 
@@ -100,22 +117,34 @@ const Armada = () => {
 
       <section className="pb-20 pt-6">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeCategory}
-              initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={shouldReduceMotion ? undefined : { opacity: 0, y: -8 }}
-              transition={{ duration: shouldReduceMotion ? 0 : 0.25 }}
-              className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
-            >
-              {filteredCars.map((car) => (
-                <CarCard key={car.slug} car={car} />
+          {isLoading ? (
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3" aria-label="Memuat daftar armada">
+              {Array.from({ length: 6 }).map((_, index) => (
+                <CarCardSkeleton key={index} />
               ))}
-            </motion.div>
-          </AnimatePresence>
+            </div>
+          ) : hasLoadError ? (
+            <div className="rounded-2xl border border-slate-100 bg-white px-6 py-16 text-center text-slate-500 shadow-sm" role="status">
+              Data armada belum bisa dimuat. Silakan coba refresh halaman beberapa saat lagi.
+            </div>
+          ) : (
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeCategory}
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={shouldReduceMotion ? undefined : { opacity: 0, y: -8 }}
+                transition={{ duration: shouldReduceMotion ? 0 : 0.25 }}
+                className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
+              >
+                {filteredCars.map((car) => (
+                  <CarCard key={car.slug} car={car} />
+                ))}
+              </motion.div>
+            </AnimatePresence>
+          )}
 
-          {filteredCars.length === 0 && (
+          {!isLoading && !hasLoadError && filteredCars.length === 0 && (
             <div className="py-20 text-center text-slate-500" role="status">
               Kategori armada ini belum tersedia.
             </div>
