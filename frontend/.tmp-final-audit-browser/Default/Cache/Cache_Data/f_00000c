@@ -1,0 +1,158 @@
+import { getServiceHeroImage } from "/src/utils/serviceHeroImages.js";
+export const services = [
+	{
+		slug: "lepas-kunci",
+		title: "Sewa Mobil Lepas Kunci",
+		shortTitle: "Kebebasan Lepas Kunci",
+		description: "Pilih kendaraan sesuai kebutuhan Anda dan nikmati perjalanan dengan lebih leluasa. Proses pemesanan cepat dan harga transparan.",
+		heroDescription: "Nikmati perjalanan lebih nyaman dengan armada terawat, proses cepat, dan harga transparan untuk setiap perjalanan Anda.",
+		heroImage: getServiceHeroImage("lepas-kunci"),
+		image: getServiceHeroImage("lepas-kunci"),
+		imageAlt: "Layanan sewa mobil lepas kunci Rent & Go",
+		icon: "key",
+		benefits: [
+			{
+				icon: "shield",
+				title: "Privasi Terjaga",
+				description: "Nikmati perjalanan bersama orang terdekat dengan lebih leluasa."
+			},
+			{
+				icon: "clock",
+				title: "Waktu Fleksibel",
+				description: "Atur jadwal perjalanan sesuai waktu yang Anda butuhkan."
+			},
+			{
+				icon: "sparkles",
+				title: "Unit Terawat",
+				description: "Setiap kendaraan diperiksa dan dibersihkan sebelum digunakan."
+			}
+		],
+		vehicleSlugs: [
+			"toyota-agya",
+			"toyota-avanza",
+			"honda-hrv"
+		],
+		vehicleHeading: "Pilihan Armada Lepas Kunci",
+		vehicleDescription: "Pilih kendaraan yang terawat dan sesuai dengan kebutuhan perjalanan Anda.",
+		ctaLabel: "Konsultasi Sewa Lepas Kunci",
+		whatsappMessage: "Halo Rent & Go, saya ingin berkonsultasi tentang layanan sewa mobil lepas kunci."
+	},
+	{
+		slug: "dengan-pengemudi",
+		title: "Sewa Mobil dengan Pengemudi",
+		shortTitle: "Perjalanan Nyaman dengan Pengemudi",
+		description: "Nikmati perjalanan yang lebih tenang bersama pengemudi berpengalaman untuk kebutuhan dalam maupun luar kota.",
+		heroDescription: "Layanan kendaraan dan pengemudi berpengalaman untuk perjalanan yang nyaman, aman, dan tepat waktu.",
+		heroImage: getServiceHeroImage("driver"),
+		image: getServiceHeroImage("driver"),
+		imageAlt: "Layanan sewa mobil dengan pengemudi Rent & Go",
+		icon: "userCheck",
+		benefits: [
+			{
+				icon: "userCheck",
+				title: "Pengemudi Berpengalaman",
+				description: "Perjalanan Anda didampingi pengemudi yang profesional."
+			},
+			{
+				icon: "mapPin",
+				title: "Perjalanan Lebih Praktis",
+				description: "Anda tidak perlu memikirkan navigasi, parkir, dan rute."
+			},
+			{
+				icon: "shield",
+				title: "Aman dan Nyaman",
+				description: "Armada terawat dan layanan disesuaikan dengan kebutuhan Anda."
+			}
+		],
+		vehicleSlugs: [
+			"toyota-avanza",
+			"innova-zenix",
+			"toyota-alphard"
+		],
+		vehicleHeading: "Pilihan Armada dengan Pengemudi",
+		vehicleDescription: "Tentukan armada yang sesuai untuk perjalanan bisnis, keluarga, atau acara khusus.",
+		ctaLabel: "Konsultasi dengan Pengemudi",
+		whatsappMessage: "Halo Rent & Go, saya ingin berkonsultasi tentang layanan mobil dengan pengemudi."
+	},
+	{
+		slug: "paket-tour",
+		title: "Layanan Paket Tour Wisata",
+		shortTitle: "Paket Tour untuk Perjalanan Anda",
+		description: "Rencanakan perjalanan wisata keluarga atau rombongan dengan kendaraan dan layanan yang tersedia dalam satu tempat.",
+		heroDescription: "Konsultasikan tujuan, durasi, dan kebutuhan rombongan Anda bersama tim Rent & Go.",
+		heroImage: getServiceHeroImage("paket-tour"),
+		image: getServiceHeroImage("paket-tour"),
+		imageAlt: "Layanan paket tour wisata Rent & Go",
+		icon: "map",
+		benefits: [
+			{
+				icon: "map",
+				title: "Rute Fleksibel",
+				description: "Destinasi dan jadwal dapat disesuaikan dengan rencana perjalanan."
+			},
+			{
+				icon: "navigation",
+				title: "Pendamping Perjalanan",
+				description: "Pengemudi membantu perjalanan wisata tetap nyaman dan terarah."
+			},
+			{
+				icon: "tag",
+				title: "Harga Transparan",
+				description: "Rincian layanan dijelaskan sebelum perjalanan dimulai."
+			}
+		],
+		vehicleSlugs: [
+			"toyota-avanza",
+			"innova-zenix",
+			"toyota-hiace"
+		],
+		vehicleHeading: "Pilihan Armada Paket Tour",
+		vehicleDescription: "Armada tersedia untuk perjalanan pribadi, keluarga, hingga rombongan.",
+		ctaLabel: "Konsultasi Paket Tour",
+		whatsappMessage: "Halo Rent & Go, saya ingin berkonsultasi tentang layanan paket tour wisata."
+	},
+	{
+		slug: "bandara",
+		title: "Layanan Antar-Jemput Bandara",
+		shortTitle: "Antar-Jemput Bandara Tanpa Ribet",
+		description: "Atur perjalanan dari atau menuju bandara dengan kendaraan yang nyaman dan jadwal penjemputan yang jelas.",
+		heroDescription: "Proses cepat, harga transparan, dan layanan tepat waktu untuk perjalanan dari atau menuju bandara.",
+		heroImage: getServiceHeroImage("bandara"),
+		image: getServiceHeroImage("bandara"),
+		imageAlt: "Layanan antar-jemput bandara Rent & Go",
+		icon: "plane",
+		benefits: [
+			{
+				icon: "clock",
+				title: "Penjemputan Tepat Waktu",
+				description: "Jadwal penjemputan disesuaikan dengan kebutuhan perjalanan Anda."
+			},
+			{
+				icon: "briefcase",
+				title: "Bantuan Bagasi",
+				description: "Perjalanan lebih praktis dengan ruang bagasi sesuai kebutuhan."
+			},
+			{
+				icon: "plane",
+				title: "Jadwal Fleksibel",
+				description: "Tim kami membantu menyesuaikan perubahan jadwal penerbangan."
+			}
+		],
+		vehicleSlugs: [
+			"toyota-avanza",
+			"innova-zenix",
+			"toyota-hiace"
+		],
+		vehicleHeading: "Pilihan Armada Bandara",
+		vehicleDescription: "Pilih armada untuk perjalanan pribadi, keluarga, atau rombongan.",
+		ctaLabel: "Reservasi Antar-Jemput Bandara",
+		whatsappMessage: "Halo Rent & Go, saya ingin berkonsultasi tentang layanan antar-jemput bandara."
+	}
+];
+const serviceSlugAliases = { driver: "dengan-pengemudi" };
+export const getServiceBySlug = (slug) => {
+	const resolvedSlug = serviceSlugAliases[slug] || slug;
+	return services.find((service) => service.slug === resolvedSlug);
+};
+
+//# sourceMappingURL=data:application/json;base64,eyJtYXBwaW5ncyI6IkFBQUEsU0FBUywyQkFBMkI7QUFFcEMsT0FBTyxNQUFNLFdBQVc7Q0FDdEI7RUFDRSxNQUFNO0VBQ04sT0FBTztFQUNQLFlBQVk7RUFDWixhQUNFO0VBQ0YsaUJBQ0U7RUFDRixXQUFXLG9CQUFvQixhQUFhO0VBQzVDLE9BQU8sb0JBQW9CLGFBQWE7RUFDeEMsVUFBVTtFQUNWLE1BQU07RUFDTixVQUFVO0dBQ1I7SUFDRSxNQUFNO0lBQ04sT0FBTztJQUNQLGFBQWE7R0FDZjtHQUNBO0lBQ0UsTUFBTTtJQUNOLE9BQU87SUFDUCxhQUFhO0dBQ2Y7R0FDQTtJQUNFLE1BQU07SUFDTixPQUFPO0lBQ1AsYUFBYTtHQUNmO0VBQ0Y7RUFDQSxjQUFjO0dBQUM7R0FBZTtHQUFpQjtFQUFXO0VBQzFELGdCQUFnQjtFQUNoQixvQkFDRTtFQUNGLFVBQVU7RUFDVixpQkFDRTtDQUNKO0NBQ0E7RUFDRSxNQUFNO0VBQ04sT0FBTztFQUNQLFlBQVk7RUFDWixhQUNFO0VBQ0YsaUJBQ0U7RUFDRixXQUFXLG9CQUFvQixRQUFRO0VBQ3ZDLE9BQU8sb0JBQW9CLFFBQVE7RUFDbkMsVUFBVTtFQUNWLE1BQU07RUFDTixVQUFVO0dBQ1I7SUFDRSxNQUFNO0lBQ04sT0FBTztJQUNQLGFBQWE7R0FDZjtHQUNBO0lBQ0UsTUFBTTtJQUNOLE9BQU87SUFDUCxhQUFhO0dBQ2Y7R0FDQTtJQUNFLE1BQU07SUFDTixPQUFPO0lBQ1AsYUFBYTtHQUNmO0VBQ0Y7RUFDQSxjQUFjO0dBQUM7R0FBaUI7R0FBZ0I7RUFBZ0I7RUFDaEUsZ0JBQWdCO0VBQ2hCLG9CQUNFO0VBQ0YsVUFBVTtFQUNWLGlCQUNFO0NBQ0o7Q0FDQTtFQUNFLE1BQU07RUFDTixPQUFPO0VBQ1AsWUFBWTtFQUNaLGFBQ0U7RUFDRixpQkFDRTtFQUNGLFdBQVcsb0JBQW9CLFlBQVk7RUFDM0MsT0FBTyxvQkFBb0IsWUFBWTtFQUN2QyxVQUFVO0VBQ1YsTUFBTTtFQUNOLFVBQVU7R0FDUjtJQUNFLE1BQU07SUFDTixPQUFPO0lBQ1AsYUFBYTtHQUNmO0dBQ0E7SUFDRSxNQUFNO0lBQ04sT0FBTztJQUNQLGFBQWE7R0FDZjtHQUNBO0lBQ0UsTUFBTTtJQUNOLE9BQU87SUFDUCxhQUFhO0dBQ2Y7RUFDRjtFQUNBLGNBQWM7R0FBQztHQUFpQjtHQUFnQjtFQUFjO0VBQzlELGdCQUFnQjtFQUNoQixvQkFDRTtFQUNGLFVBQVU7RUFDVixpQkFDRTtDQUNKO0NBQ0E7RUFDRSxNQUFNO0VBQ04sT0FBTztFQUNQLFlBQVk7RUFDWixhQUNFO0VBQ0YsaUJBQ0U7RUFDRixXQUFXLG9CQUFvQixTQUFTO0VBQ3hDLE9BQU8sb0JBQW9CLFNBQVM7RUFDcEMsVUFBVTtFQUNWLE1BQU07RUFDTixVQUFVO0dBQ1I7SUFDRSxNQUFNO0lBQ04sT0FBTztJQUNQLGFBQWE7R0FDZjtHQUNBO0lBQ0UsTUFBTTtJQUNOLE9BQU87SUFDUCxhQUFhO0dBQ2Y7R0FDQTtJQUNFLE1BQU07SUFDTixPQUFPO0lBQ1AsYUFBYTtHQUNmO0VBQ0Y7RUFDQSxjQUFjO0dBQUM7R0FBaUI7R0FBZ0I7RUFBYztFQUM5RCxnQkFBZ0I7RUFDaEIsb0JBQ0U7RUFDRixVQUFVO0VBQ1YsaUJBQ0U7Q0FDSjtBQUNGO0FBRUEsTUFBTSxxQkFBcUIsRUFDekIsUUFBUSxtQkFDVjtBQUVBLE9BQU8sTUFBTSxvQkFBb0IsU0FBUztDQUN4QyxNQUFNLGVBQWUsbUJBQW1CLFNBQVM7Q0FFakQsT0FBTyxTQUFTLE1BQU0sWUFBWSxRQUFRLFNBQVMsWUFBWTtBQUNqRSIsIm5hbWVzIjpbXSwic291cmNlcyI6WyJzZXJ2aWNlcy5qcyJdLCJ2ZXJzaW9uIjozLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBnZXRTZXJ2aWNlSGVyb0ltYWdlIH0gZnJvbSAnLi4vdXRpbHMvc2VydmljZUhlcm9JbWFnZXMnO1xyXG5cclxuZXhwb3J0IGNvbnN0IHNlcnZpY2VzID0gW1xyXG4gIHtcclxuICAgIHNsdWc6ICdsZXBhcy1rdW5jaScsXHJcbiAgICB0aXRsZTogJ1Nld2EgTW9iaWwgTGVwYXMgS3VuY2knLFxyXG4gICAgc2hvcnRUaXRsZTogJ0tlYmViYXNhbiBMZXBhcyBLdW5jaScsXHJcbiAgICBkZXNjcmlwdGlvbjpcclxuICAgICAgJ1BpbGloIGtlbmRhcmFhbiBzZXN1YWkga2VidXR1aGFuIEFuZGEgZGFuIG5pa21hdGkgcGVyamFsYW5hbiBkZW5nYW4gbGViaWggbGVsdWFzYS4gUHJvc2VzIHBlbWVzYW5hbiBjZXBhdCBkYW4gaGFyZ2EgdHJhbnNwYXJhbi4nLFxyXG4gICAgaGVyb0Rlc2NyaXB0aW9uOlxyXG4gICAgICAnTmlrbWF0aSBwZXJqYWxhbmFuIGxlYmloIG55YW1hbiBkZW5nYW4gYXJtYWRhIHRlcmF3YXQsIHByb3NlcyBjZXBhdCwgZGFuIGhhcmdhIHRyYW5zcGFyYW4gdW50dWsgc2V0aWFwIHBlcmphbGFuYW4gQW5kYS4nLFxyXG4gICAgaGVyb0ltYWdlOiBnZXRTZXJ2aWNlSGVyb0ltYWdlKCdsZXBhcy1rdW5jaScpLFxyXG4gICAgaW1hZ2U6IGdldFNlcnZpY2VIZXJvSW1hZ2UoJ2xlcGFzLWt1bmNpJyksXHJcbiAgICBpbWFnZUFsdDogJ0xheWFuYW4gc2V3YSBtb2JpbCBsZXBhcyBrdW5jaSBSZW50ICYgR28nLFxyXG4gICAgaWNvbjogJ2tleScsXHJcbiAgICBiZW5lZml0czogW1xyXG4gICAgICB7XHJcbiAgICAgICAgaWNvbjogJ3NoaWVsZCcsXHJcbiAgICAgICAgdGl0bGU6ICdQcml2YXNpIFRlcmphZ2EnLFxyXG4gICAgICAgIGRlc2NyaXB0aW9uOiAnTmlrbWF0aSBwZXJqYWxhbmFuIGJlcnNhbWEgb3JhbmcgdGVyZGVrYXQgZGVuZ2FuIGxlYmloIGxlbHVhc2EuJyxcclxuICAgICAgfSxcclxuICAgICAge1xyXG4gICAgICAgIGljb246ICdjbG9jaycsXHJcbiAgICAgICAgdGl0bGU6ICdXYWt0dSBGbGVrc2liZWwnLFxyXG4gICAgICAgIGRlc2NyaXB0aW9uOiAnQXR1ciBqYWR3YWwgcGVyamFsYW5hbiBzZXN1YWkgd2FrdHUgeWFuZyBBbmRhIGJ1dHVoa2FuLicsXHJcbiAgICAgIH0sXHJcbiAgICAgIHtcclxuICAgICAgICBpY29uOiAnc3BhcmtsZXMnLFxyXG4gICAgICAgIHRpdGxlOiAnVW5pdCBUZXJhd2F0JyxcclxuICAgICAgICBkZXNjcmlwdGlvbjogJ1NldGlhcCBrZW5kYXJhYW4gZGlwZXJpa3NhIGRhbiBkaWJlcnNpaGthbiBzZWJlbHVtIGRpZ3VuYWthbi4nLFxyXG4gICAgICB9LFxyXG4gICAgXSxcclxuICAgIHZlaGljbGVTbHVnczogWyd0b3lvdGEtYWd5YScsICd0b3lvdGEtYXZhbnphJywgJ2hvbmRhLWhydiddLFxyXG4gICAgdmVoaWNsZUhlYWRpbmc6ICdQaWxpaGFuIEFybWFkYSBMZXBhcyBLdW5jaScsXHJcbiAgICB2ZWhpY2xlRGVzY3JpcHRpb246XHJcbiAgICAgICdQaWxpaCBrZW5kYXJhYW4geWFuZyB0ZXJhd2F0IGRhbiBzZXN1YWkgZGVuZ2FuIGtlYnV0dWhhbiBwZXJqYWxhbmFuIEFuZGEuJyxcclxuICAgIGN0YUxhYmVsOiAnS29uc3VsdGFzaSBTZXdhIExlcGFzIEt1bmNpJyxcclxuICAgIHdoYXRzYXBwTWVzc2FnZTpcclxuICAgICAgJ0hhbG8gUmVudCAmIEdvLCBzYXlhIGluZ2luIGJlcmtvbnN1bHRhc2kgdGVudGFuZyBsYXlhbmFuIHNld2EgbW9iaWwgbGVwYXMga3VuY2kuJyxcclxuICB9LFxyXG4gIHtcclxuICAgIHNsdWc6ICdkZW5nYW4tcGVuZ2VtdWRpJyxcclxuICAgIHRpdGxlOiAnU2V3YSBNb2JpbCBkZW5nYW4gUGVuZ2VtdWRpJyxcclxuICAgIHNob3J0VGl0bGU6ICdQZXJqYWxhbmFuIE55YW1hbiBkZW5nYW4gUGVuZ2VtdWRpJyxcclxuICAgIGRlc2NyaXB0aW9uOlxyXG4gICAgICAnTmlrbWF0aSBwZXJqYWxhbmFuIHlhbmcgbGViaWggdGVuYW5nIGJlcnNhbWEgcGVuZ2VtdWRpIGJlcnBlbmdhbGFtYW4gdW50dWsga2VidXR1aGFuIGRhbGFtIG1hdXB1biBsdWFyIGtvdGEuJyxcclxuICAgIGhlcm9EZXNjcmlwdGlvbjpcclxuICAgICAgJ0xheWFuYW4ga2VuZGFyYWFuIGRhbiBwZW5nZW11ZGkgYmVycGVuZ2FsYW1hbiB1bnR1ayBwZXJqYWxhbmFuIHlhbmcgbnlhbWFuLCBhbWFuLCBkYW4gdGVwYXQgd2FrdHUuJyxcclxuICAgIGhlcm9JbWFnZTogZ2V0U2VydmljZUhlcm9JbWFnZSgnZHJpdmVyJyksXHJcbiAgICBpbWFnZTogZ2V0U2VydmljZUhlcm9JbWFnZSgnZHJpdmVyJyksXHJcbiAgICBpbWFnZUFsdDogJ0xheWFuYW4gc2V3YSBtb2JpbCBkZW5nYW4gcGVuZ2VtdWRpIFJlbnQgJiBHbycsXHJcbiAgICBpY29uOiAndXNlckNoZWNrJyxcclxuICAgIGJlbmVmaXRzOiBbXHJcbiAgICAgIHtcclxuICAgICAgICBpY29uOiAndXNlckNoZWNrJyxcclxuICAgICAgICB0aXRsZTogJ1BlbmdlbXVkaSBCZXJwZW5nYWxhbWFuJyxcclxuICAgICAgICBkZXNjcmlwdGlvbjogJ1BlcmphbGFuYW4gQW5kYSBkaWRhbXBpbmdpIHBlbmdlbXVkaSB5YW5nIHByb2Zlc2lvbmFsLicsXHJcbiAgICAgIH0sXHJcbiAgICAgIHtcclxuICAgICAgICBpY29uOiAnbWFwUGluJyxcclxuICAgICAgICB0aXRsZTogJ1BlcmphbGFuYW4gTGViaWggUHJha3RpcycsXHJcbiAgICAgICAgZGVzY3JpcHRpb246ICdBbmRhIHRpZGFrIHBlcmx1IG1lbWlraXJrYW4gbmF2aWdhc2ksIHBhcmtpciwgZGFuIHJ1dGUuJyxcclxuICAgICAgfSxcclxuICAgICAge1xyXG4gICAgICAgIGljb246ICdzaGllbGQnLFxyXG4gICAgICAgIHRpdGxlOiAnQW1hbiBkYW4gTnlhbWFuJyxcclxuICAgICAgICBkZXNjcmlwdGlvbjogJ0FybWFkYSB0ZXJhd2F0IGRhbiBsYXlhbmFuIGRpc2VzdWFpa2FuIGRlbmdhbiBrZWJ1dHVoYW4gQW5kYS4nLFxyXG4gICAgICB9LFxyXG4gICAgXSxcclxuICAgIHZlaGljbGVTbHVnczogWyd0b3lvdGEtYXZhbnphJywgJ2lubm92YS16ZW5peCcsICd0b3lvdGEtYWxwaGFyZCddLFxyXG4gICAgdmVoaWNsZUhlYWRpbmc6ICdQaWxpaGFuIEFybWFkYSBkZW5nYW4gUGVuZ2VtdWRpJyxcclxuICAgIHZlaGljbGVEZXNjcmlwdGlvbjpcclxuICAgICAgJ1RlbnR1a2FuIGFybWFkYSB5YW5nIHNlc3VhaSB1bnR1ayBwZXJqYWxhbmFuIGJpc25pcywga2VsdWFyZ2EsIGF0YXUgYWNhcmEga2h1c3VzLicsXHJcbiAgICBjdGFMYWJlbDogJ0tvbnN1bHRhc2kgZGVuZ2FuIFBlbmdlbXVkaScsXHJcbiAgICB3aGF0c2FwcE1lc3NhZ2U6XHJcbiAgICAgICdIYWxvIFJlbnQgJiBHbywgc2F5YSBpbmdpbiBiZXJrb25zdWx0YXNpIHRlbnRhbmcgbGF5YW5hbiBtb2JpbCBkZW5nYW4gcGVuZ2VtdWRpLicsXHJcbiAgfSxcclxuICB7XHJcbiAgICBzbHVnOiAncGFrZXQtdG91cicsXHJcbiAgICB0aXRsZTogJ0xheWFuYW4gUGFrZXQgVG91ciBXaXNhdGEnLFxyXG4gICAgc2hvcnRUaXRsZTogJ1Bha2V0IFRvdXIgdW50dWsgUGVyamFsYW5hbiBBbmRhJyxcclxuICAgIGRlc2NyaXB0aW9uOlxyXG4gICAgICAnUmVuY2FuYWthbiBwZXJqYWxhbmFuIHdpc2F0YSBrZWx1YXJnYSBhdGF1IHJvbWJvbmdhbiBkZW5nYW4ga2VuZGFyYWFuIGRhbiBsYXlhbmFuIHlhbmcgdGVyc2VkaWEgZGFsYW0gc2F0dSB0ZW1wYXQuJyxcclxuICAgIGhlcm9EZXNjcmlwdGlvbjpcclxuICAgICAgJ0tvbnN1bHRhc2lrYW4gdHVqdWFuLCBkdXJhc2ksIGRhbiBrZWJ1dHVoYW4gcm9tYm9uZ2FuIEFuZGEgYmVyc2FtYSB0aW0gUmVudCAmIEdvLicsXHJcbiAgICBoZXJvSW1hZ2U6IGdldFNlcnZpY2VIZXJvSW1hZ2UoJ3Bha2V0LXRvdXInKSxcclxuICAgIGltYWdlOiBnZXRTZXJ2aWNlSGVyb0ltYWdlKCdwYWtldC10b3VyJyksXHJcbiAgICBpbWFnZUFsdDogJ0xheWFuYW4gcGFrZXQgdG91ciB3aXNhdGEgUmVudCAmIEdvJyxcclxuICAgIGljb246ICdtYXAnLFxyXG4gICAgYmVuZWZpdHM6IFtcclxuICAgICAge1xyXG4gICAgICAgIGljb246ICdtYXAnLFxyXG4gICAgICAgIHRpdGxlOiAnUnV0ZSBGbGVrc2liZWwnLFxyXG4gICAgICAgIGRlc2NyaXB0aW9uOiAnRGVzdGluYXNpIGRhbiBqYWR3YWwgZGFwYXQgZGlzZXN1YWlrYW4gZGVuZ2FuIHJlbmNhbmEgcGVyamFsYW5hbi4nLFxyXG4gICAgICB9LFxyXG4gICAgICB7XHJcbiAgICAgICAgaWNvbjogJ25hdmlnYXRpb24nLFxyXG4gICAgICAgIHRpdGxlOiAnUGVuZGFtcGluZyBQZXJqYWxhbmFuJyxcclxuICAgICAgICBkZXNjcmlwdGlvbjogJ1BlbmdlbXVkaSBtZW1iYW50dSBwZXJqYWxhbmFuIHdpc2F0YSB0ZXRhcCBueWFtYW4gZGFuIHRlcmFyYWguJyxcclxuICAgICAgfSxcclxuICAgICAge1xyXG4gICAgICAgIGljb246ICd0YWcnLFxyXG4gICAgICAgIHRpdGxlOiAnSGFyZ2EgVHJhbnNwYXJhbicsXHJcbiAgICAgICAgZGVzY3JpcHRpb246ICdSaW5jaWFuIGxheWFuYW4gZGlqZWxhc2thbiBzZWJlbHVtIHBlcmphbGFuYW4gZGltdWxhaS4nLFxyXG4gICAgICB9LFxyXG4gICAgXSxcclxuICAgIHZlaGljbGVTbHVnczogWyd0b3lvdGEtYXZhbnphJywgJ2lubm92YS16ZW5peCcsICd0b3lvdGEtaGlhY2UnXSxcclxuICAgIHZlaGljbGVIZWFkaW5nOiAnUGlsaWhhbiBBcm1hZGEgUGFrZXQgVG91cicsXHJcbiAgICB2ZWhpY2xlRGVzY3JpcHRpb246XHJcbiAgICAgICdBcm1hZGEgdGVyc2VkaWEgdW50dWsgcGVyamFsYW5hbiBwcmliYWRpLCBrZWx1YXJnYSwgaGluZ2dhIHJvbWJvbmdhbi4nLFxyXG4gICAgY3RhTGFiZWw6ICdLb25zdWx0YXNpIFBha2V0IFRvdXInLFxyXG4gICAgd2hhdHNhcHBNZXNzYWdlOlxyXG4gICAgICAnSGFsbyBSZW50ICYgR28sIHNheWEgaW5naW4gYmVya29uc3VsdGFzaSB0ZW50YW5nIGxheWFuYW4gcGFrZXQgdG91ciB3aXNhdGEuJyxcclxuICB9LFxyXG4gIHtcclxuICAgIHNsdWc6ICdiYW5kYXJhJyxcclxuICAgIHRpdGxlOiAnTGF5YW5hbiBBbnRhci1KZW1wdXQgQmFuZGFyYScsXHJcbiAgICBzaG9ydFRpdGxlOiAnQW50YXItSmVtcHV0IEJhbmRhcmEgVGFucGEgUmliZXQnLFxyXG4gICAgZGVzY3JpcHRpb246XHJcbiAgICAgICdBdHVyIHBlcmphbGFuYW4gZGFyaSBhdGF1IG1lbnVqdSBiYW5kYXJhIGRlbmdhbiBrZW5kYXJhYW4geWFuZyBueWFtYW4gZGFuIGphZHdhbCBwZW5qZW1wdXRhbiB5YW5nIGplbGFzLicsXHJcbiAgICBoZXJvRGVzY3JpcHRpb246XHJcbiAgICAgICdQcm9zZXMgY2VwYXQsIGhhcmdhIHRyYW5zcGFyYW4sIGRhbiBsYXlhbmFuIHRlcGF0IHdha3R1IHVudHVrIHBlcmphbGFuYW4gZGFyaSBhdGF1IG1lbnVqdSBiYW5kYXJhLicsXHJcbiAgICBoZXJvSW1hZ2U6IGdldFNlcnZpY2VIZXJvSW1hZ2UoJ2JhbmRhcmEnKSxcclxuICAgIGltYWdlOiBnZXRTZXJ2aWNlSGVyb0ltYWdlKCdiYW5kYXJhJyksXHJcbiAgICBpbWFnZUFsdDogJ0xheWFuYW4gYW50YXItamVtcHV0IGJhbmRhcmEgUmVudCAmIEdvJyxcclxuICAgIGljb246ICdwbGFuZScsXHJcbiAgICBiZW5lZml0czogW1xyXG4gICAgICB7XHJcbiAgICAgICAgaWNvbjogJ2Nsb2NrJyxcclxuICAgICAgICB0aXRsZTogJ1BlbmplbXB1dGFuIFRlcGF0IFdha3R1JyxcclxuICAgICAgICBkZXNjcmlwdGlvbjogJ0phZHdhbCBwZW5qZW1wdXRhbiBkaXNlc3VhaWthbiBkZW5nYW4ga2VidXR1aGFuIHBlcmphbGFuYW4gQW5kYS4nLFxyXG4gICAgICB9LFxyXG4gICAgICB7XHJcbiAgICAgICAgaWNvbjogJ2JyaWVmY2FzZScsXHJcbiAgICAgICAgdGl0bGU6ICdCYW50dWFuIEJhZ2FzaScsXHJcbiAgICAgICAgZGVzY3JpcHRpb246ICdQZXJqYWxhbmFuIGxlYmloIHByYWt0aXMgZGVuZ2FuIHJ1YW5nIGJhZ2FzaSBzZXN1YWkga2VidXR1aGFuLicsXHJcbiAgICAgIH0sXHJcbiAgICAgIHtcclxuICAgICAgICBpY29uOiAncGxhbmUnLFxyXG4gICAgICAgIHRpdGxlOiAnSmFkd2FsIEZsZWtzaWJlbCcsXHJcbiAgICAgICAgZGVzY3JpcHRpb246ICdUaW0ga2FtaSBtZW1iYW50dSBtZW55ZXN1YWlrYW4gcGVydWJhaGFuIGphZHdhbCBwZW5lcmJhbmdhbi4nLFxyXG4gICAgICB9LFxyXG4gICAgXSxcclxuICAgIHZlaGljbGVTbHVnczogWyd0b3lvdGEtYXZhbnphJywgJ2lubm92YS16ZW5peCcsICd0b3lvdGEtaGlhY2UnXSxcclxuICAgIHZlaGljbGVIZWFkaW5nOiAnUGlsaWhhbiBBcm1hZGEgQmFuZGFyYScsXHJcbiAgICB2ZWhpY2xlRGVzY3JpcHRpb246XHJcbiAgICAgICdQaWxpaCBhcm1hZGEgdW50dWsgcGVyamFsYW5hbiBwcmliYWRpLCBrZWx1YXJnYSwgYXRhdSByb21ib25nYW4uJyxcclxuICAgIGN0YUxhYmVsOiAnUmVzZXJ2YXNpIEFudGFyLUplbXB1dCBCYW5kYXJhJyxcclxuICAgIHdoYXRzYXBwTWVzc2FnZTpcclxuICAgICAgJ0hhbG8gUmVudCAmIEdvLCBzYXlhIGluZ2luIGJlcmtvbnN1bHRhc2kgdGVudGFuZyBsYXlhbmFuIGFudGFyLWplbXB1dCBiYW5kYXJhLicsXHJcbiAgfSxcclxuXTtcclxuXHJcbmNvbnN0IHNlcnZpY2VTbHVnQWxpYXNlcyA9IHtcclxuICBkcml2ZXI6ICdkZW5nYW4tcGVuZ2VtdWRpJyxcclxufTtcclxuXHJcbmV4cG9ydCBjb25zdCBnZXRTZXJ2aWNlQnlTbHVnID0gKHNsdWcpID0+IHtcclxuICBjb25zdCByZXNvbHZlZFNsdWcgPSBzZXJ2aWNlU2x1Z0FsaWFzZXNbc2x1Z10gfHwgc2x1ZztcclxuXHJcbiAgcmV0dXJuIHNlcnZpY2VzLmZpbmQoKHNlcnZpY2UpID0+IHNlcnZpY2Uuc2x1ZyA9PT0gcmVzb2x2ZWRTbHVnKTtcclxufTtcclxuIl19
