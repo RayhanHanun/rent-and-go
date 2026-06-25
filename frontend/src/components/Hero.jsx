@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight, ArrowUp } from 'lucide-react';
-import heroImage from '../assets/hero-mobil.jpeg';
+import heroHomeDesktop from '../assets/hero-home-desktop.jpeg';
+import heroHomeMobile from '../assets/hero-home-mobile.jpeg';
 import Button from './ui/Button';
 import { getWhatsAppUrl } from '../utils/whatsapp';
 
@@ -45,20 +46,24 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative flex min-h-[clamp(44rem,calc(100svh-4rem),47.5rem)] items-start overflow-hidden bg-slate-950 sm:min-h-[calc(100svh-4rem)] lg:min-h-[90vh] lg:items-center">
-      {/* Background Image memanggil variabel heroImage */}
-      <div 
-        className="absolute inset-0 bg-[length:auto_114%] bg-[position:62%_bottom] bg-no-repeat sm:bg-cover sm:bg-[position:60%_bottom] md:bg-center"
-        style={{
-          backgroundImage: `url(${heroImage})`,
-        }}
-      />
+    <section className="relative flex h-[32rem] min-h-0 items-start overflow-hidden bg-slate-950 md:h-auto md:min-h-[calc(100svh-4rem)] lg:min-h-[90vh] lg:items-center">
+      <picture className="absolute inset-0 block">
+        <source media="(max-width: 767px)" srcSet={heroHomeMobile} />
+        <img
+          src={heroHomeDesktop}
+          alt="Rent & Go - Satu Tempat untuk Semua Kebutuhan Perjalananmu"
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
+          className="h-full w-full object-cover object-center"
+        />
+      </picture>
       
       {/* Gradient Overlay for Text Readability */}
       <div className="absolute inset-0 z-10 bg-linear-to-b from-slate-950/95 via-slate-900/70 to-slate-950/15 md:bg-linear-to-r md:from-slate-950/95 md:via-slate-900/80 md:to-transparent/10" />
 
       {/* Content Container */}
-      <div className="relative z-20 mx-auto w-full max-w-7xl px-5 pt-[4.25rem] pb-6 sm:px-6 sm:pt-12 sm:pb-10 md:px-6 md:pt-20 md:pb-12 lg:px-8 lg:py-0">
+      <div className="relative z-20 mx-auto w-full max-w-7xl px-5 pt-8 pb-4 md:px-6 md:pt-20 md:pb-12 lg:px-8 lg:py-0">
         <motion.div 
           className="max-w-2xl"
           variants={containerVariants}
@@ -66,8 +71,8 @@ const Hero = () => {
           animate="show"
         >
           {/* Kicker */}
-          <motion.div variants={itemVariants} className="mb-3.5 sm:mb-6">
-            <span className="inline-block rounded-full bg-white px-3 py-1 text-xs font-bold tracking-widest text-slate-900 uppercase shadow-sm sm:px-4 sm:py-1.5 sm:text-sm">
+          <motion.div variants={itemVariants} className="mb-2.5 md:mb-6">
+            <span className="inline-block rounded-full bg-white px-3 py-1 text-[0.6875rem] font-bold tracking-widest text-slate-900 uppercase shadow-sm md:px-4 md:py-1.5 md:text-sm">
               Rent & Go
             </span>
           </motion.div>
@@ -75,7 +80,7 @@ const Hero = () => {
           {/* Main Headline */}
           <motion.h1 
             variants={itemVariants} 
-            className="mb-3.5 text-[clamp(2.125rem,8.5vw,2.5rem)] leading-[1.08] font-extrabold text-white sm:mb-6 sm:text-5xl sm:leading-tight lg:text-6xl"
+            className="mb-2.5 text-[clamp(1.875rem,8.3vw,2.25rem)] leading-[1.06] font-extrabold text-white md:mb-6 md:text-5xl md:leading-tight lg:text-6xl"
           >
             Satu Tempat untuk Semua Kebutuhan Perjalananmu.
           </motion.h1>
@@ -83,30 +88,30 @@ const Hero = () => {
           {/* Subtitle */}
           <motion.p 
             variants={itemVariants} 
-            className="mb-5 max-w-[22rem] text-[0.9375rem] leading-relaxed font-light text-slate-300 sm:mb-10 sm:max-w-xl sm:text-xl"
+            className="mb-4 max-w-[21rem] text-sm leading-[1.45] font-light text-slate-300 md:mb-10 md:max-w-xl md:text-xl md:leading-relaxed"
           >
             Nikmati perjalanan lebih nyaman dengan pilihan armada mobil premium terbaru.
             Proses cepat, harga transparan, dan layanan terbaik untuk setiap perjalanan Anda.
           </motion.p>
           
           {/* Action Buttons */}
-          <motion.div variants={itemVariants} className="grid w-full max-w-[25rem] grid-cols-2 gap-3 sm:flex sm:max-w-none sm:flex-row sm:gap-4">
+          <motion.div variants={itemVariants} className="grid w-full max-w-[25rem] grid-cols-2 gap-3 md:flex md:max-w-none md:flex-row md:gap-4">
             <Button
               href={heroWhatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
               variant="secondary"
-              size="md"
-              className="group min-w-0 text-sm sm:min-h-12 sm:px-8 sm:py-3.5 sm:text-lg"
+              size="sm"
+              className="group min-w-0 md:min-h-12 md:px-8 md:py-3.5 md:text-lg"
             >
               <span className="whitespace-nowrap">Sewa Sekarang</span>
-              <ArrowRight size={18} className="shrink-0 transition-transform group-hover:translate-x-1 sm:h-5 sm:w-5" />
+              <ArrowRight size={16} className="shrink-0 transition-transform group-hover:translate-x-1 md:h-5 md:w-5" />
             </Button>
             <Button
               to="/armada"
               variant="outline"
-              size="md"
-              className="min-w-0 border-white/30 text-sm text-white backdrop-blur-sm hover:border-white hover:bg-white/10 sm:min-h-12 sm:px-8 sm:py-3.5 sm:text-lg"
+              size="sm"
+              className="min-w-0 border-white/30 text-white backdrop-blur-sm hover:border-white hover:bg-white/10 md:min-h-12 md:px-8 md:py-3.5 md:text-lg"
             >
               Lihat Armada
             </Button>

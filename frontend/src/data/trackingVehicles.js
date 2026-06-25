@@ -1,5 +1,5 @@
 import carPlaceholder from '../assets/car-placeholder.svg';
-import heroCarImage from '../assets/hero-mobil.jpeg';
+import heroCarImage from '../assets/hero-home-desktop.jpeg';
 
 export const trackingVehicles = [
   {

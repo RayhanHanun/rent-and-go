@@ -1,7 +1,7 @@
 import heroBandara from '../assets/hero-bandara.jpeg';
 import heroDriver from '../assets/hero-driver.jpeg';
 import heroLepasKunci from '../assets/hero-lepas-kunci.jpeg';
-import heroMobil from '../assets/hero-mobil.jpeg';
+import heroMobil from '../assets/hero-home-desktop.jpeg';
 import heroTour from '../assets/hero-tour.jpeg';
 
 export const defaultServiceHeroImage = heroMobil;
