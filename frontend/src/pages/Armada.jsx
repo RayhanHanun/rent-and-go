@@ -4,6 +4,7 @@ import { carCategories } from '../data/cars';
 import { carsApi } from '../api/carsApi';
 import { categoriesApi } from '../api/categoriesApi';
 import { normalizeCar } from '../api/normalizers';
+import heroArmadaImage from '../assets/hero-armada.jpeg';
 import CarCard from '../components/CarCard';
 import CarCardSkeleton from '../components/CarCardSkeleton';
 
@@ -64,28 +65,34 @@ const Armada = () => {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <section className="relative flex min-h-[40vh] items-center justify-center overflow-hidden bg-slate-950 px-4 py-20 text-center">
-        <div className="absolute inset-0 bg-linear-to-br from-slate-950 via-slate-900 to-slate-700" />
-        <div className="relative z-10 mx-auto mt-6 max-w-3xl">
-          <motion.h1
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: shouldReduceMotion ? 0 : 0.6 }}
-            className="mb-6 text-4xl font-extrabold text-white drop-shadow-lg md:text-5xl lg:text-6xl"
-          >
-            Armada untuk Setiap Perjalanan
-          </motion.h1>
-          <motion.p
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: shouldReduceMotion ? 0 : 0.6,
-              delay: shouldReduceMotion ? 0 : 0.1,
-            }}
-            className="text-lg font-light leading-relaxed text-slate-300 md:text-xl"
-          >
-            Pilih kendaraan terawat dengan informasi harga dan fasilitas yang jelas.
-          </motion.p>
+      <section className="relative h-[70vh] min-h-[32rem] w-full overflow-hidden bg-slate-950">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${heroArmadaImage})` }}
+        />
+        <div className="absolute inset-0 z-10 bg-linear-to-b from-slate-950/45 via-slate-900/65 to-slate-950/95" />
+        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center px-4 pt-12 text-center sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <motion.h1
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: shouldReduceMotion ? 0 : 0.6 }}
+              className="mb-6 text-4xl font-extrabold text-white drop-shadow-lg md:text-5xl lg:text-6xl"
+            >
+              Armada untuk Setiap Perjalanan
+            </motion.h1>
+            <motion.p
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: shouldReduceMotion ? 0 : 0.6,
+                delay: shouldReduceMotion ? 0 : 0.1,
+              }}
+              className="text-lg font-light leading-relaxed text-slate-300 md:text-xl"
+            >
+              Pilih kendaraan terawat dengan informasi harga dan fasilitas yang jelas.
+            </motion.p>
+          </div>
         </div>
       </section>
 

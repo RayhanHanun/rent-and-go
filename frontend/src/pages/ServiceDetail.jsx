@@ -22,6 +22,7 @@ import { carsApi } from '../api/carsApi';
 import { normalizeCar, normalizeService } from '../api/normalizers';
 import { getServiceBySlug } from '../data/services';
 import { servicesApi } from '../api/servicesApi';
+import { getRelatedCarsByServiceSlug } from '../utils/relatedCars';
 import { getWhatsAppUrl } from '../utils/whatsapp';
 
 const icons = {
@@ -108,16 +109,14 @@ const ServiceDetail = () => {
     );
   }
 
-  const serviceCars = service.vehicleSlugs
-    .map((carSlug) => cars.find((car) => car.slug === carSlug))
-    .filter(Boolean);
+  const serviceCars = getRelatedCarsByServiceSlug(slug, cars);
 
   return (
     <div className="min-h-screen bg-slate-50">
       <section className="relative flex min-h-[50vh] items-center justify-center overflow-hidden bg-slate-950">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${service.image})` }}
+          style={{ backgroundImage: `url(${service.heroImage || service.image})` }}
         />
         <div className="absolute inset-0 bg-linear-to-b from-slate-950/65 via-slate-900/75 to-slate-950/95" />
         <div className="relative z-10 mx-auto mt-6 max-w-3xl px-4 text-center">

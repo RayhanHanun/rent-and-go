@@ -1,4 +1,4 @@
-import heroImage from '../assets/hero-mobil.jpeg';
+import { getServiceHeroImage } from '../utils/serviceHeroImages';
 
 export const services = [
   {
@@ -9,7 +9,8 @@ export const services = [
       'Pilih kendaraan sesuai kebutuhan Anda dan nikmati perjalanan dengan lebih leluasa. Proses pemesanan cepat dan harga transparan.',
     heroDescription:
       'Nikmati perjalanan lebih nyaman dengan armada terawat, proses cepat, dan harga transparan untuk setiap perjalanan Anda.',
-    image: heroImage,
+    heroImage: getServiceHeroImage('lepas-kunci'),
+    image: getServiceHeroImage('lepas-kunci'),
     imageAlt: 'Layanan sewa mobil lepas kunci Rent & Go',
     icon: 'key',
     benefits: [
@@ -45,7 +46,8 @@ export const services = [
       'Nikmati perjalanan yang lebih tenang bersama pengemudi berpengalaman untuk kebutuhan dalam maupun luar kota.',
     heroDescription:
       'Layanan kendaraan dan pengemudi berpengalaman untuk perjalanan yang nyaman, aman, dan tepat waktu.',
-    image: heroImage,
+    heroImage: getServiceHeroImage('driver'),
+    image: getServiceHeroImage('driver'),
     imageAlt: 'Layanan sewa mobil dengan pengemudi Rent & Go',
     icon: 'userCheck',
     benefits: [
@@ -81,7 +83,8 @@ export const services = [
       'Rencanakan perjalanan wisata keluarga atau rombongan dengan kendaraan dan layanan yang tersedia dalam satu tempat.',
     heroDescription:
       'Konsultasikan tujuan, durasi, dan kebutuhan rombongan Anda bersama tim Rent & Go.',
-    image: heroImage,
+    heroImage: getServiceHeroImage('paket-tour'),
+    image: getServiceHeroImage('paket-tour'),
     imageAlt: 'Layanan paket tour wisata Rent & Go',
     icon: 'map',
     benefits: [
@@ -117,7 +120,8 @@ export const services = [
       'Atur perjalanan dari atau menuju bandara dengan kendaraan yang nyaman dan jadwal penjemputan yang jelas.',
     heroDescription:
       'Proses cepat, harga transparan, dan layanan tepat waktu untuk perjalanan dari atau menuju bandara.',
-    image: heroImage,
+    heroImage: getServiceHeroImage('bandara'),
+    image: getServiceHeroImage('bandara'),
     imageAlt: 'Layanan antar-jemput bandara Rent & Go',
     icon: 'plane',
     benefits: [
@@ -147,5 +151,12 @@ export const services = [
   },
 ];
 
-export const getServiceBySlug = (slug) =>
-  services.find((service) => service.slug === slug);
+const serviceSlugAliases = {
+  driver: 'dengan-pengemudi',
+};
+
+export const getServiceBySlug = (slug) => {
+  const resolvedSlug = serviceSlugAliases[slug] || slug;
+
+  return services.find((service) => service.slug === resolvedSlug);
+};

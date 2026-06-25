@@ -65,7 +65,7 @@ const Layanan = () => {
             exit={shouldReduceMotion ? undefined : { opacity: 0 }}
             transition={{ duration: shouldReduceMotion ? 0 : 0.6 }}
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${currentService.image})` }}
+            style={{ backgroundImage: `url(${currentService.heroImage || currentService.image})` }}
           />
         </AnimatePresence>
         <div className="absolute inset-0 z-10 bg-linear-to-b from-slate-950/45 via-slate-900/65 to-slate-950/95" />

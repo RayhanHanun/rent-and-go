@@ -1,6 +1,6 @@
 import carPlaceholder from '../assets/car-placeholder.svg';
-import heroImage from '../assets/hero-mobil.jpeg';
 import { resolveImageUrl } from './imageUrls';
+import { getServiceHeroImage } from '../utils/serviceHeroImages';
 
 export const formatRupiah = (value) =>
   new Intl.NumberFormat('id-ID', {
@@ -87,36 +87,41 @@ export const normalizeCategory = (category) => {
   return category;
 };
 
-export const normalizeService = (service) => ({
-  ...service,
-  title: service.title,
-  shortTitle: service.shortTitle || service.title,
-  description: service.description || service.short_description || '',
-  heroDescription: service.heroDescription || service.description || service.short_description || '',
-  image: service.image || service.image_url || heroImage,
-  imageAlt: service.imageAlt || `${service.title} Rent & Go`,
-  benefits: service.benefits || [
-    {
-      icon: service.icon || 'shield',
-      title: 'Layanan Terarah',
-      description: service.short_description || 'Tim Rent & Go membantu menyesuaikan layanan dengan kebutuhan perjalanan Anda.',
-    },
-    {
-      icon: 'clock',
-      title: 'Proses Praktis',
-      description: 'Konsultasi dan pemesanan dapat dilakukan dengan cepat melalui WhatsApp.',
-    },
-    {
-      icon: 'sparkles',
-      title: 'Armada Terawat',
-      description: 'Kendaraan diperiksa sebelum digunakan agar perjalanan tetap nyaman.',
-    },
-  ],
-  vehicleSlugs: service.vehicleSlugs || ['toyota-avanza', 'honda-hrv', 'innova-zenix'],
-  vehicleHeading: service.vehicleHeading || 'Pilihan Armada Terkait',
-  vehicleDescription: service.vehicleDescription || 'Pilih armada yang sesuai dengan kebutuhan perjalanan Anda.',
-  ctaLabel: service.ctaLabel || 'Konsultasi Layanan',
-  whatsappMessage:
-    service.whatsappMessage ||
-    `Halo Rent & Go, saya ingin berkonsultasi tentang ${service.title}.`,
-});
+export const normalizeService = (service) => {
+  const serviceImage = getServiceHeroImage(service.slug || service.title);
+
+  return {
+    ...service,
+    title: service.title,
+    shortTitle: service.shortTitle || service.title,
+    description: service.description || service.short_description || '',
+    heroDescription: service.heroDescription || service.description || service.short_description || '',
+    heroImage: serviceImage,
+    image: serviceImage,
+    imageAlt: service.imageAlt || `${service.title} Rent & Go`,
+    benefits: service.benefits || [
+      {
+        icon: service.icon || 'shield',
+        title: 'Layanan Terarah',
+        description: service.short_description || 'Tim Rent & Go membantu menyesuaikan layanan dengan kebutuhan perjalanan Anda.',
+      },
+      {
+        icon: 'clock',
+        title: 'Proses Praktis',
+        description: 'Konsultasi dan pemesanan dapat dilakukan dengan cepat melalui WhatsApp.',
+      },
+      {
+        icon: 'sparkles',
+        title: 'Armada Terawat',
+        description: 'Kendaraan diperiksa sebelum digunakan agar perjalanan tetap nyaman.',
+      },
+    ],
+    vehicleSlugs: service.vehicleSlugs || ['toyota-avanza', 'honda-hrv', 'innova-zenix'],
+    vehicleHeading: service.vehicleHeading || 'Pilihan Armada Terkait',
+    vehicleDescription: service.vehicleDescription || 'Pilih armada yang sesuai dengan kebutuhan perjalanan Anda.',
+    ctaLabel: service.ctaLabel || 'Konsultasi Layanan',
+    whatsappMessage:
+      service.whatsappMessage ||
+      `Halo Rent & Go, saya ingin berkonsultasi tentang ${service.title}.`,
+  };
+};
