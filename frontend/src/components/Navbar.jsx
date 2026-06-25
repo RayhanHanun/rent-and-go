@@ -42,9 +42,23 @@ const WhatsAppIcon = () => (
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(() => window.scrollY > 40);
   const { pathname } = useLocation();
   const mobileNavigationRef = useRef(null);
   const whatsappUrl = getWhatsAppUrl(GENERAL_WHATSAPP_MESSAGE);
+  const isHomePage = pathname === '/';
+  const isTransparent = isHomePage && !isScrolled && !isOpen;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 40);
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     if (!isOpen) return undefined;
@@ -76,7 +90,11 @@ const Navbar = () => {
   return (
     <nav
       ref={mobileNavigationRef}
-      className="sticky top-0 z-50 border-b border-slate-100 bg-white/80 shadow-sm backdrop-blur-md"
+      className={`${isHomePage ? 'fixed' : 'sticky'} top-0 z-50 w-full transition-all duration-300 ${
+        isTransparent
+          ? 'border-b border-transparent bg-transparent shadow-none'
+          : 'border-b border-slate-100 bg-white/90 shadow-sm backdrop-blur-md'
+      }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 w-full">
@@ -85,9 +103,14 @@ const Navbar = () => {
           <div className="flex-1 flex justify-start">
             <Link
               to="/"
-              className="rounded-sm text-xl font-bold text-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900"
+              onClick={() => setIsOpen(false)}
+              className={`rounded-sm text-xl font-bold transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 ${
+                isTransparent
+                  ? 'text-white focus-visible:ring-white'
+                  : 'text-slate-950 focus-visible:ring-slate-900'
+              }`}
             >
-              Rent <span className="text-slate-900">&</span> Go
+              Rent <span className={isTransparent ? 'text-white' : 'text-slate-900'}>&</span> Go
             </Link>
           </div>
           
@@ -101,13 +124,21 @@ const Navbar = () => {
                   key={item.label}
                   to={item.to}
                   aria-current={active ? 'page' : undefined}
-                  className={`group relative rounded-sm transition-colors duration-200 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-4 ${
-                    active ? 'font-semibold text-slate-900' : 'font-medium text-slate-600'
+                  className={`group relative rounded-sm transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-4 ${
+                    isTransparent
+                      ? 'hover:text-white focus-visible:ring-white focus-visible:ring-offset-slate-900'
+                      : 'hover:text-slate-900 focus-visible:ring-slate-900 focus-visible:ring-offset-white'
+                  } ${
+                    active
+                      ? `font-semibold ${isTransparent ? 'text-white' : 'text-slate-900'}`
+                      : `font-medium ${isTransparent ? 'text-white/80' : 'text-slate-600'}`
                   }`}
                 >
                   {item.label}
                   <span
-                    className={`absolute -bottom-1 left-0 h-0.5 bg-slate-900 transition-all duration-300 ${
+                    className={`absolute -bottom-1 left-0 h-0.5 transition-all duration-300 ${
+                      isTransparent ? 'bg-white' : 'bg-slate-900'
+                    } ${
                       active ? 'w-full' : 'w-0 group-hover:w-full'
                     }`}
                   />
@@ -123,7 +154,7 @@ const Navbar = () => {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                variant="whatsapp"
+                variant={isTransparent ? 'secondary' : 'whatsapp'}
                 size="md"
               >
                 <WhatsAppIcon />
@@ -139,7 +170,11 @@ const Navbar = () => {
                 aria-label={isOpen ? 'Tutup menu navigasi' : 'Buka menu navigasi'}
                 aria-expanded={isOpen}
                 aria-controls="mobile-navigation"
-                className="rounded-lg p-2 text-slate-600 transition-colors duration-200 hover:bg-slate-50 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900"
+                className={`rounded-lg p-2 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 ${
+                  isTransparent
+                    ? 'text-white hover:bg-white/10 focus-visible:ring-white'
+                    : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900 focus-visible:ring-slate-900'
+                }`}
               >
                 {isOpen ? <X size={24} /> : <Menu size={24} />}
               </button>

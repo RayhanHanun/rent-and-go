@@ -46,7 +46,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative flex h-[32rem] min-h-0 items-start overflow-hidden bg-slate-950 md:h-auto md:min-h-[calc(100svh-4rem)] lg:min-h-[90vh] lg:items-center">
+    <section className="relative flex min-h-[100svh] items-start overflow-hidden bg-slate-950 lg:items-center">
       <picture className="absolute inset-0 block">
         <source media="(max-width: 767px)" srcSet={heroHomeMobile} />
         <img
@@ -63,7 +63,7 @@ const Hero = () => {
       <div className="absolute inset-0 z-10 bg-linear-to-b from-slate-950/95 via-slate-900/70 to-slate-950/15 md:bg-linear-to-r md:from-slate-950/95 md:via-slate-900/80 md:to-transparent/10" />
 
       {/* Content Container */}
-      <div className="relative z-20 mx-auto w-full max-w-7xl px-5 pt-8 pb-4 md:px-6 md:pt-20 md:pb-12 lg:px-8 lg:py-0">
+      <div className="relative z-20 mx-auto w-full max-w-7xl px-5 pt-[clamp(7.75rem,16svh,9rem)] pb-10 md:px-6 md:pt-28 md:pb-12 lg:px-8 lg:py-20">
         <motion.div 
           className="max-w-2xl"
           variants={containerVariants}
@@ -71,7 +71,7 @@ const Hero = () => {
           animate="show"
         >
           {/* Kicker */}
-          <motion.div variants={itemVariants} className="mb-2.5 md:mb-6">
+          <motion.div variants={itemVariants} className="mb-8 md:mb-6">
             <span className="inline-block rounded-full bg-white px-3 py-1 text-[0.6875rem] font-bold tracking-widest text-slate-900 uppercase shadow-sm md:px-4 md:py-1.5 md:text-sm">
               Rent & Go
             </span>
@@ -80,22 +80,22 @@ const Hero = () => {
           {/* Main Headline */}
           <motion.h1 
             variants={itemVariants} 
-            className="mb-2.5 text-[clamp(1.875rem,8.3vw,2.25rem)] leading-[1.06] font-extrabold text-white md:mb-6 md:text-5xl md:leading-tight lg:text-6xl"
+            className="mb-7 text-[clamp(1.875rem,8.3vw,2.25rem)] leading-[1.1] font-extrabold text-white md:mb-6 md:text-5xl md:leading-tight lg:text-6xl"
           >
-            Satu Tempat untuk Semua Kebutuhan Perjalananmu.
+            Satu Tempat untuk Semua Kebutuhan Perjalananmu
           </motion.h1>
           
           {/* Subtitle */}
           <motion.p 
             variants={itemVariants} 
-            className="mb-4 max-w-[21rem] text-sm leading-[1.45] font-light text-slate-300 md:mb-10 md:max-w-xl md:text-xl md:leading-relaxed"
+            className="mb-10 max-w-[21rem] text-sm leading-7 font-light text-slate-300 md:mb-10 md:max-w-xl md:text-xl md:leading-relaxed"
           >
             Nikmati perjalanan lebih nyaman dengan pilihan armada mobil premium terbaru.
             Proses cepat, harga transparan, dan layanan terbaik untuk setiap perjalanan Anda.
           </motion.p>
           
           {/* Action Buttons */}
-          <motion.div variants={itemVariants} className="grid w-full max-w-[25rem] grid-cols-2 gap-3 md:flex md:max-w-none md:flex-row md:gap-4">
+          <motion.div variants={itemVariants} className="mb-10 grid w-full max-w-[25rem] grid-cols-2 gap-3 md:mb-0 md:flex md:max-w-none md:flex-row md:gap-4">
             <Button
               href={heroWhatsappUrl}
               target="_blank"
